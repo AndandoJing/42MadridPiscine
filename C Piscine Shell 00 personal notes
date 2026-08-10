@@ -51,3 +51,216 @@ git commt -m "added hi.txt"
 git push
   push the recent modified thing to the repository
 
+==========================
+From here let's do some exercises.
+Exercise 00: Z ---------- display
+Turn-in directory: ex00/
+Files to turn in: z
+Allowed functions: None
+
+Create a file called z that returns "Z", followed by a new line, whenever the cat command is used on it
+  ?>cat z
+  Z
+  ?>
+
+>>>>>>>
+mkdir
+  make directory
+cat 
+  concatenate
+So as the Exercise 00 indicates: 
+Turn-in directory: ex00
+Files to turn in: z
+Allowed functions: None
+Create a file called z that returns "Z", followed by a new line, whenever the cat command is used on it. We may do the following:
+
+1. mkdir ex00 --------- so we create a folder called ex00
+2. cd ex00 ---------- so we enter the ex00 folder
+3. echo "Z" > z ---------- so we create a file called z, and let it print "Z"
+4. cat z --------- so we read and display the content of z, which will show Z to us
+
+====================================
+
+Exercise 01 ----------- attributes
+Turn-in directory: ex01/
+Files to turn in: testShell00.tar
+Allowed functions: None
+Create a file called testShell00 in your submission directory.
+Figure out a way to make the output look like this (except for the "total 1" line):
+  %> ls -l
+  total 1
+  -r--r-xr-x 1 XX XX 40 Jun 1 23:42 testShell00
+  %>
+Once you’ve achieved the previous steps, execute the following command to create the file to be submitted
+  %> tar -cf testShell00.tar testShell00
+
+>>>>>>>>>
+So I did the first errror, I wrote: mkdir testShell00
+  and I tried to use ls -l directly, it showed:
+  "drwxr-xr-x 2 jinjin 2026_madrid 6 Aug 10 17:39 testShell00", very interesting result.
+
+According to the norm, it will appear something like:
+  -rw-r--r-- 1 jinjin jinjin 2 Aug 10 14:32 z
+  Here's what each part means, left to right:
+  Part	        Meaning
+  -rw-r--r--	  File type + permissions (explained below)
+  1	            Number of hard links
+  jinjin	      Owner (user) of the file
+  jinjin	      Group owner of the file
+  2	            File size in bytes
+  Aug 10 14:32	Last modified date/time
+  z	            File name
+
+the permissions string -rw-r--r--:
+first character: file type, - means regular file, d means directory (that's also why I was wrong since I created a directory at first), l means symbilic link
+next 9 characters are split into 3 groups of 3: owner / group / others, each showing read, write, execute permissions:
+  rw-: owner can read and write, but not execute
+  r--: group can only read
+  r--: others can ony read
+
+Comparing with the correct results that the task indicates, "-r--r-xr-x":
+  -: regular file, not a directory
+  r--: owner: read only, no write, no execute
+  r-x: group: read + execute
+  r-x: others: read + execute
+
+And comparing with my wrong output "drwxr-xr-x":
+  d: it's a directory, not a regular file
+  rwx: owner: read, write, execute
+  r-x: group: read, execute, no write
+  r-x: others: read, execute, no write
+
+
+  it's wrong because "mkdir" will create a directory, but the task is to create a file, so I need to remove the directory first
+rmdir testShell00 -------- remove directory
+  If it had files inside, rmdir would refuse — you'd need rm -r for that instead.
+touch ------- update a file's timestamp without changing its content. If the file doesn't exist yet, "touch" will create it as an empty (0 byte) file.
+  So "touch" can be used for the function create as well, just empty file.
+So for me, it will be:
+rmdir testShell00
+touch testShell00
+
+Let's return to the task instruction, it shows like "-r--r-xr-x 1 XX XX 40 Jun 1 23:42 testShell00",
+so the instruction also indicates that "Don't worry about what appears instead of "XX"". 
+So XX XX doesn't matter, but here the "40" means something, it means the file size in bytes.
+Meanwhile, here the "1" should mean the number of hard links.
+So we need to add exactly 40 bytes, could be text, spaces, anything.
+if we write as previously did, for example:
+  echo "hi"      # outputs: hi\n   (2 chars + 1 newline = 3 bytes)
+  echo -n "hi"   # outputs: hi     (2 chars, no newline = 2 bytes)
+  so here \n means a new line
+so we can do it as:
+  echo -n "Hi there, here is Jing, it's a pleasure." > testShell00
+  wc -c testShell00
+    and we will get the results:
+      40 testShell00
+
+wc -c
+  wc means word count, by default (no flags) it prints 3 numbers:
+    line count, word count, byte count
+  when we add the -c flag, it switches to showing only the byte count
+  so wc -c testShell00, will print just a number, the total bytes in that file
+
+Now we have 40 bytes, if we try again the command ls -l, it will give us:
+  -rw-r--r-- 1 jinjin 2026_madrid 40 Aug 10 18:24 testShell00
+  so there is 1 file, 40 bytes, all correct, we need to correct the permission parts now.
+chmod, change mode, the command for setting file/directory permissions. 2 common ways to use it: octal (numbers) and symbols (letters).
+  1. chmod 555 testShell00 ----------- octal notation
+      read (r) = 4
+      write (w) = 2
+      execute (x) = 1
+      add them up for each of the three categories (owner, group, others):
+        5 = 4+1 = read + execute (no write) ------ r-x
+      so if we use 555, it assigns -r-xr-xr-x for all 3 categories
+  2. chmod u-x testShell00 --------------- symbolic notation
+      structured as: who + operations + permission
+      who: u (user/owner), g(group), o(others), a(all)
+      operation: +(add), -(remove), =(set exactly)
+      permission: r, w, x
+      so u-x means: for user(owner), remove the execute permission.
+      so from -r-xr-xr-x, we will get -r--r-xr-x
+  But yes, there are more ways to reach the same results that we want.
+  For example:
+    chmod g+w testShell00     # add write permission for group
+    chmod o-r testShell00     # remove read permission for others
+    chmod a+x testShell00     # add execute for everyone (user, group, others)
+    chmod u=rwx,g=rx,o=rx testShell00   # set exact permissions for each category in one command
+
+Ok, now we can done the previous part, assinged the permissions, add bytes, etc. Now with the next step, the instruction indicates:
+  %> tar -cf testShell00.tar testShell00
+  tar: tape archive, a tool for bundling multiple files/directories into a single archive file (originally designed for tape backups, name stuck around).
+  -c: create a new archive
+  -f: specifies the archive filename that follows (testShell00.tar)
+  So the full command means: "create a new archive named testShell00.tar that contains the file testShell00."
+
+After that, we can check if it's done:
+  ls -l testShell00.tar
+    it will show the ls -l of the testShell00.tar file
+  -tvf testShell00.tar
+    -t: list (table of) contents
+    -v: verbose (show details like permissions, size)
+    -f: specify the filename
+    so it shouls show something like: 
+      -r--r-xr-x jinjin/2026_madrid 40 2026-08-10 18:00 testShell00
+
+====================
+
+Exercise 02: 
+Turn-in directory: ex02/
+Files to turn in: exo2.tar
+Allowed functions: None
+Create the following files and directories. Adjust their properties so that when you run the ls -l command in your directory, the output looks like this:
+  %> ls -l
+  total XX
+  drwx--xr-x 2 XX XX XX Jun 1 20:47 test0
+  -rwx--xr-- 1 XX XX 4 Jun 1 21:46 test1
+  dr-x---r-- 2 XX XX XX Jun 1 22:45 test2
+  -r-----r-- 2 XX XX 1 Jun 1 23:44 test3
+  -rw-r----x 1 XX XX 2 Jun 1 23:43 test4
+  -r-----r-- 2 XX XX 1 Jun 1 23:44 test5
+  lrwxrwxrwx 1 XX XX 5 Jun 1 22:20 test6 -> test0
+  %>
+Once you’ve completed this, run the following command to create the file to be submitted:
+  %> tar -cf exo2.tar *
+
+>>>>>
+I tried to create the first 5 ones, since I already konw what does "d" and "-" mean, and I add bytes well to each of them (regular files), and assign well all permissions to the first 5 ones.
+Now, what does the "l" mean for the 6th?
+l: it's a symbolic link, not a regular file or directory. A symlink is like a shortcut/pointer to another file. Create it with ln -s (link, symbolic)
+ln -s test0 test6  
+  this creates test6 as a symlink pointing to test0 ------------ matching test6 -> test0
+ln: link, create a link between files. There are 2 types:
+  1. hard link. ln without -s, creates another name that points directly to the same underlying data on disk. Both names are equally "real"; there's no concept of one being the "original" and one being a "copy."
+  2. symbolic link / symlink. ln -s, This creates a special small file whose only content is a path pointing to another file or directory. Think of it like a shortcut on Windows, or an alias on Mac.
+so ln -s, create a link, make it symbolic (not hard)
+test0, the target, what the link points to
+test6, the name of the link itself, what i'm creating
+
+
+symlinks always show rwxrwxrwx permissions (the permissions that actually matter are the target's, not the link's), so don't need to chmod it.
+its size (5 in the example) is automatic ------- it's just the length of the string "test0" (5 characters), not something i set manually
+
+tips:
+  I wanted to try echo -n "1234" > test0, but since it's a directory, I didn't do it at first. Turns out that it won't work neither.
+  It will be:
+    bash: test0: Is a directory
+  So the > redirection only works on regular files.
+  Directory sizes aren't something I control directly like file content, and they typically depend on filesystem block size.
+
+The task asks me to do the following:
+  %> tar -cf exo2.tar *
+So why there is a * here:
+  * is a wildcard (also called a "glob pattern") that the shell expands before the command even runs.
+The shell itself looks at your current directory and replaces * with all the files and folders in the current directory (except hidden ones starting with a dot). 
+So if your ex02 folder contains test0 through test6, the shell actually turns your command into:
+  tar -cf exo2.tar test0 test1 test2 test3 test4 test5 test6
+* is a wildcard that matches all files and directories in the current location (except hidden ones — anything starting with a ., like .git or .bashrc, is excluded by default).
+
+A couple of related wildcards worth knowing, since they follow the same idea:
+
+* → matches any number of characters (matches everything)
+test* → matches anything starting with "test" (e.g. test0, test1, testXYZ)
+*.txt → matches anything ending in .txt
+? → matches exactly one character (e.g. test? matches test0, test1, but not test10)
+
+So in your case, since ex02 should only contain test0 through test6, running ls first to confirm exactly that — nothing more, nothing less — before you run tar -cf exo2.tar * is a good habit, since * will happily scoop up anything else sitting there too.
