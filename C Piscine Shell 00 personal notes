@@ -1,0 +1,53 @@
+2026.08.10 First day
+Video 1
+Video guide: https://www.youtube.com/playlist?list=PLxeKVrYoZO6B64HVamfG1d8Jb2XIrNuRO
+
+pwd, print working directory
+ls, list files, list contents in the current directory
+ls -la
+cd, change directory
+  cd ..
+    it means back to the upper folder
+man, manual for a command
+  for example, man ls: manual for the command ls
+
+######so many yabi in the guide video omg :) the seconde video for example
+
+Video 2
+git clone *git direction* git_vid
+  here the git_vid at last is the description of where you want to put the cloned contents
+  here git clone means you will clone the contents followed
+
+ssh-keygen
+  for security reason need to create, and there will be two keys
+  ssh-keygen, it will generate keys, you can enter three times and there will be a randomart image
+  then 
+    cd ~/.ssh
+    ls
+  there will be two keys
+    id_rsa id_rsa.pub
+  the id_rsa is private that don't share with anyone ant id_ras.pub yes, you can share with others
+  so use the following command:
+    cat id_rsa.pub
+  you can see the public key, and then you can copy it and paste it in your 42 profile-setting-ssh keys, name it as you want.
+
+appears that the guide video owns different contents, when I want to clone the repository, there are nothing, it's empty, got confused a little bit and lost for a while.
+finally figured out that ok, it's empty
+so we are here:
+cd git_vid
+ls
+echo hello_world > hi.txt
+  it means I write something inside a document hi.txt
+  then we can check the status of it
+git status
+  it shows the status of the current one
+  hi.txt is still not added
+git add hi.txt
+  the document will be added
+git status 
+  to double check if indeed it's added
+git commt -m "added hi.txt"
+  add a message as note to this movement
+git push
+  push the recent modified thing to the repository
+
