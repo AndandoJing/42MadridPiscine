@@ -1,3 +1,86 @@
 Sure I lost the register because I didn't click the commit changes buton...
 Start agin. With Exercise 01, print_groups.sh, Shell 01
+=============
+Exercise 01
+print_groups.sh
+Turn-in directory: ex01/
+Files to turn in: print_groups.sh
+Allowed functions: None
+Write a command line that displays the list of groups the user (defined in the
+environment variable FT_USER) belongs to.
+• The output should be comma-separated, without spaces.
+• Examples:
+◦ for FT_USER=bocal:
+  $>./print_groups.sh
+  bocal,adm,cdrom,sudo,dip,plugdev,lxd,lpadmin,libvirt$>
+◦ for FT_USER=daemon:
+  $>./print_groups.sh
+  daemon,bin$>
+Tips:
+man id
+
+**********************
+
+So I did the homework, understand the followings:
+id -G: print all groups IDs
+   -g: print only effective group ID
+   -n: print names instead of number
+echo $variable: expand (read) the variable and then print it
+
+then, with command tr ' ' ',' we can remove the spaces and let the output be comma-separated
+I tried with:
+  echo "id -Gn $FT_USER | tr ' ' ','" > print_groups.sh
+wrong, because the shell substitutes variables right away. 
+So if FT_USER happens to be set to bocal on your machine right now, your script would end up literally containing:
+  id -Gn bocal | tr ' ' ','
+— hardcoded to bocal forever, regardless of what FT_USER is set to when the grader runs your script later. 
+That defeats the whole purpose of using an environment variable.
+
+so
+id -Gn $FT_USER
+echo 'id -Gn $FT_USER | tr " " ","' > print_groups.sh
+
+then check with:
+cat print_groups.sh
+
+turns out:
+id -Gn $FT_USER | tr " " ","
+
+I wanted to test with daemon, but it comes out:
+  c2r8s5% echo 'id -Gn $FT_USER | tr " " ","' > print_groups.sh
+  c2r8s5% cat print_groups.sh
+  id -Gn $FT_USER | tr " " ","
+  c2r8s5% FT_USER=aemon ./print_groups.sh | cat -e
+  zsh: permission denied: ./print_groups.sh
+
+Denied because we don't really have the access, so let's check the permissions first:
+  ls -l print_groups.sh
+Here I found out that indeed this script has no x anywhere, so I need to assign the execute access to all groups:
+  chmod +x print_groups.sh
+And test it:
+  ls -l print_groups.sh
+  -rwxr-xr-x 1 myusername 2026_madrid 29 Aug 11 14:06 print_groups.sh
+
+Try the task again:
+  FT_USER=myusername ./print_groups.sh | cat -e
+
+
+Oops, I found out that I created a print_groups.sh outside of the folder (pulled repository folder), so now there is a separate file print_groups.sh and a folder called C_Shell_01_tasks.
+And inside C_Shell_01_tasks, there are nothing.
+So I need to create a folder named ex01 inside C_Shell_01_tasks, and then move the print_groups.sh to the ex01 folder.
+
+mkdir -p C_Shell_01_tasks/ex01 
+here with the -p, Linux creates any missing parent folders automatically along the path:
+  # WITH -p:
+  mkdir -p C_Shell_01_tasks/ex01
+  # ✅ Works! Creates "C_Shell_01_tasks" if missing, AND creates "ex01" inside it.
+
+  # WITHOUT -p (If "ex01" folder doesn't exist yet):
+  mkdir C_Shell_01_tasks/ex01
+  # ❌ Error: No such file or directory
+
+mv print_groups.sh C_Shell_01_tasks/ex01/
+
+then can check it with cd and ls
+
 
