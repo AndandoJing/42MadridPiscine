@@ -180,4 +180,35 @@ rm -rf test*
     # can also be done one by one, rm -rf test0, or rm test0 (need asking)
 
 *************** ex03 ***************
+mkdir ../ex03
+    # if we are inside ex02 folder for example
+cd ~
+    # enter the home folder let's say
+ssh-keygen -t ed25519
+    # since the instructions indicate, create SSH key using the ed25519 algorithm, since with ssh-keygen, by default it will generate in type RSA
+    # -t: Type
+    # the key will be restored in ~/.ssh by default if we enter 3 times directly
+cd ~/.ssh
+ls -la
+    # we will see all key documents here, one of them named like id_ed25519.pub
+cat id_ed25519.pub
+    # we see the public key directly
+
+    # from now I tried to copy it and then remove it, but we can also just create the file that we need to submit
+cp id_ed25519.pub ~/Shell00_2/ex03/id_ed25519.pub
+    # command cp for copy
+    # cp file1.txt file2.txt: copy file1.txt, name it as file2.txt
+    # cp file1.txt ~/.ssh/ : copy file1.txt to the following folder
+    # cp -r folder1 folder2 : -r is to copy and include all things inside folder1 to folder2
+
+    # but what we want to submit is id_ed25519_pub, so we still need to write the content of the key to the new file and remove the id_ed25519.pub inside ex03 folder.
+echo -n "thepublickey" > id_ed25519_pub
+rm -f id_ed25519.pub
+
+    # or, as I said, we can just create the correct file with correct name and the public key directly
+cp ~/.ssh/id_ed25519.pub ~/Shell00_2/ex03/id_ed25519_pub
+
+    # then just follow the instruction to update the SSH key in intranet.
+
+**************** ex04 ****************
 
