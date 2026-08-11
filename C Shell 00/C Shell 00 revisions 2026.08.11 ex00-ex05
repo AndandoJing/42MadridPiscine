@@ -1,0 +1,100 @@
+So uploaded to finish the first 5 exercises and turns out they are not ok!!! : (
+Here are some of the errors I did:
+ex00: OK | ex01: KO | ex02: KO | ex03: KO | ex04: OK | ex05: OK
+ex06, ex07, ex08, ex09, nothging turned in
+Let's review them one by one:
+ex00: OK
+ex01: KO
+  Better to have only one archive, the .tar one
+  The tar archive needs to be opened, then to see if the permissions are correct.
+  Need to change the date and time as they are required.
+ex02: KO
+  Even doesn't exist test0 and test2
+  Outside the .tar archive, test6 has nothing to link, it should be linked with test0
+  Better to have only one archive, the .tar one
+  Need to change the date and time as they are required.
+ex03: KO
+  This one has been corrected by the staff team, so don't mind, just do it again with the new document guide.
+ex04: OK
+  Although there is a doubt about double points, does it mean : or ..
+  Surely that files starts with .. won't show, but with : yes, so maybe we can avoid it later in the 3r try.
+ex05: OK
+  
+=============
+Now let's do again the first 5 exercises in Shell 00.
+
+*********ex00*********
+
+git clone myrepositorydirection Shell00_2
+turns out there is an error, so I tried again with:
+  cd ~
+  rm -rf Shell00_2
+  git clone myrepositorydirection Shell00_2
+Here explains:
+  rm: remove
+  -r: revursive, needed to delete a directory and everything inside it, without -r, rm refueses to touch directories at all
+  -f: suppresses all of that and just deletes silently, without asking
+  combined: rm -rf Shell00_2 means "delete the Shell00_2 folder and everything inside it, no questions asked, no confirmation, no errors shown even if something's oddly protected."
+Now we get the empty repository in the local computer.
+Although I created the z file and ex00 separately, I moved the z file inside of ex00 later. So nothing happened :)
+  cd Shell00_2
+  ls
+  echo "Z" > z #my bad, should create ex00 first
+  cat z #should show Z
+  mkdir ex00 #my bad, should do it before, since now, with ls, there are ex00 and z inside Shell00_2, so I need to move the z file again.
+  mv z ex00/ #here ok, and checked, also good
+  cd ex00 #enter ex00 folder
+  cat -e z #to see if there is a "Z" followed by a new line, because it should be "Z$" with this command
+
+*********ex01*********
+mkdir ex01
+ls #show ex00 and ex01
+cd ex01
+touch testShell00
+wc -c testShell00 #to know the word counts of this file testShell00
+echo -n "Hi there it's a pleasure to see you." > testShell00
+wc -c testShell00 #to check if the word bytes are sufficient
+  shows "36 testShell00", ok, not sufficient
+echo -n "Hi there it's a pleasure to see you. 123" > testShell00
+wc -c testShell00 #to check again, and it's ok
+cat testShell00
+  shows "Hi there it's a pleasure to see you. 123%
+ls -l
+  shows:
+    "total 4
+     -rw-r--r-- 1 myusername 2026_madrid 40 Aug 11 19:45 testShell00"
+  which I need to correct the date and time, and for sure the permissions
+chmod 455 testShell00 #to change the permissions to -r--r-xr-x
+ls -l
+  shows:
+    "total 4
+     -r--r-xr-x 1 myusername 2026_madrid 40 Aug 11 19:45 testShell00" #now need to change the date and time
+touch -t 202606012342 testShell00 #touch -t [[CC]YY]MMDDhhmm[.ss] filename
+ls -l
+  shows:
+    "total 4
+     -r--r-xr-x 1 myusername 2026_madrid 40 Jun  1 23:42 testShell00"
+
+Now with the instruction, we continue with this:
+tar -cf testShell00.tar testShell00 #to create the file to be submitted
+  #tar: (Tape ARchive) utility 
+  #-c: create
+  #-f: file
+  #-t: table of contents, list all files stored inside the archive.
+  #-v: verbose, shows detailed metadata, like ls -l
+  #-f: file
+  #tar -cf <archive_name.tar> <file_or_folder_to_pack>
+ls
+  shows: testShell00 testShell00.tar #now need to remove the file testShell00
+rm testShell00
+  #need to confirm by the system, or can use rm -f testShell00, because -f means force
+ls
+  shows: testShell.tar #now it's ok, just need to check the content inside.
+tar -tvf testShell00.tar
+  shows: "-r--r-xr-x myusername/2026_madrid 40 2026-06-01 23:42 testShell00"
+
+OK, finished.
+
+
+
+    
