@@ -211,4 +211,37 @@ cp ~/.ssh/id_ed25519.pub ~/Shell00_2/ex03/id_ed25519_pub
     # then just follow the instruction to update the SSH key in intranet.
 
 **************** ex04 ****************
+mkdir ../ex04 
+    # create and enter ex04
+    # can also be done with a combined command:
+       mkdir -p ~/Shell00_2/ex04 && cd ~/Shell00_2/ex04
+       -p : parent, means if the parent folder doesn't exist, it can be silently created
+cd ../ex04
+echo "ls -mtp" > midLS
+    # ls -mtp is correct, no doubts
+    # -m: formats output as a comma-and-space separeted list (file1, file2, dir1/)
+          stmream format, make the default format as a horizental comma-and-space separated list
+    # -t: from newest to oldest
+    # -r: reverse, from the oldest to the newest
+    # -p: make directory name with /, path/pathname indicator
+    # -a: automatically ignores hidden files and directories starting with dot.
+    # write the command WITH a trailing newline (do NOT use -n)
+      in Unix/Linux, shell scripts and command files are expected to terminate with a newline character. When Moulinette evaluates your submission by executing sh midLS or bash midLS, a file missing a trailing newline can cause execution error or POSIX compliance failures.
+
+chmod +x midLS
+    # give execution permissions (standard practice at 42)
+
+************** ex05 *****************
+mkdir -p ~/Shell00_2/ex05 && cd ~/Shell00_2/ex05
+echo 'git log -n 5 --format="%H"' >git_commit.sh
+
+
+************** git add, git commit, git push, git status *************
+always remember to do the git push with frequency
+
+git add foldername 
+or
+git add .
+    # will include all recent created folders and files
+
 
