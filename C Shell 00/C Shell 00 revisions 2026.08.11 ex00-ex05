@@ -23,7 +23,7 @@ ex05: OK
 =============
 Now let's do again the first 5 exercises in Shell 00.
 
-*********ex00*********
+********* ex00 *********
 
 git clone myrepositorydirection Shell00_2
 turns out there is an error, so I tried again with:
@@ -46,7 +46,7 @@ Although I created the z file and ex00 separately, I moved the z file inside of 
   cd ex00 #enter ex00 folder
   cat -e z #to see if there is a "Z" followed by a new line, because it should be "Z$" with this command
 
-*********ex01*********
+********* ex01 *********
 mkdir ex01
 ls #show ex00 and ex01
 cd ex01
@@ -95,6 +95,89 @@ tar -tvf testShell00.tar
 
 OK, finished.
 
+************* ex02 ****************
+mkdir ex02
+cd ex02
+mkdir test0 test2     #create test0 test2 as directories
+touch test1 test3 test4 test5     # create the regular files
+ln -s test0 test6     # create test6 as a symlink pointing to test0
+    # add bytes to each one
+echo -n "1234" > test1
+echo -n "1" > test3
+echo -n "12" > test4
+echo -n "0" > test5
+    # can create all in one command, using ; to separate:
+      echo -n "1234" > test1; echo -n "1" > test3
+      or
+      using && to execute the next if the previous one is done successfully:
+      echo -n "1234" > test1 && echo -n "1" > test3
+    # change date for each one
+touch -t 202606012047 test0
+touch -t 202606012146 test1
+touch -t 202606012245 test2
+touch -t 202606012344 test3
+touch -t 202606012343 test4
+touch -t 202606012344 test5 
+touch -t 202606012220 test6
+    # to change the permission
+chmod 715 test0
+chmod 714 test1
+chmod 504 test2
+chmod 404 test3
+chmod 641 test4
+chmod 404 test5
+    # the link test6 -> test0 can't be changed
 
+    # to check
+ls -l
+total 16
+drwx--xr-x 2 myusername 2026_madrid 6 Jun  1 22:20 test0
+-rwx--xr-- 1 myusername 2026_madrid 4 Jun  1 21:46 test1
+dr-x---r-- 2 myusername 2026_madrid 6 Jun  1 22:45 test2
+-r-----r-- 1 myusername 2026_madrid 1 Jun  1 23:44 test3
+-rw-r----x 1 myusername 2026_madrid 2 Jun  1 23:43 test4
+-r-----r-- 1 myusername 2026_madrid 1 Jun  1 23:44 test5
+lrwxrwxrwx 1 myusername 2026_madrid 5 Aug 11 20:31 test6 -> test0
 
-    
+    # can see that the date of the link is still wrong, because to change timestamp of a symbolic link itself, must add -h flag to touch.
+touch -h -t 202606012220 test6
+
+    #then can restore test0 timestamp
+touch -t 202606012047 test0
+
+    # can see that test3 and test5 have the same hard link number (which should be 2), attention, it's only for regular files, for directories it's not the same logic.
+    # so it means that test3 and test5 are linked as well, but when we tried to link test3 and test5 (test5 already exist)
+
+ln test3 test5
+    # it will fail, because with an exist file, we can not link them, so we nened to delete/remove it first
+rm test5
+    # or with rm -f test5, by force
+ln test3 test5
+    # again we link them
+
+touch -t 202606012344 test3
+    # now check with ls -l we can see test3 and test5 are sharing the same hard link number, 2
+ls -l
+drwx--xr-x 2 jinjin 2026_madrid 6 Jun  1 20:47 test0
+-rwx--xr-- 1 jinjin 2026_madrid 4 Jun  1 21:46 test1
+dr-x---r-- 2 jinjin 2026_madrid 6 Jun  1 22:45 test2
+-r-----r-- 2 jinjin 2026_madrid 1 Jun  1 23:44 test3
+-rw-r----x 1 jinjin 2026_madrid 2 Jun  1 23:43 test4
+-r-----r-- 2 jinjin 2026_madrid 1 Jun  1 23:44 test5
+lrwxrwxrwx 1 jinjin 2026_madrid 5 Jun  1 22:20 test6 -> test0
+
+    # now as the instructions indicete, we need to pack all files here into exo2.tar
+tar -cf exo2.tar *
+    # -c: create a new archive
+    # -f exo2.tar: specifies the output file name (exo2.tar).
+    # *: a shell wildecard that expands to match every file and directory in your current location (excluding hidden files that start with .).
+
+    # since we only submit exo2.tar, need to remove all other files and directories
+rm -rf test*
+    # -r: if there are something inside, it must add -r
+    # -f: force
+    # test*: with * it means all files start with test
+    # can also be done one by one, rm -rf test0, or rm test0 (need asking)
+
+*************** ex03 ***************
+
