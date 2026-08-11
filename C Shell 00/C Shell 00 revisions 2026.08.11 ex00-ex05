@@ -233,8 +233,25 @@ chmod +x midLS
 
 ************** ex05 *****************
 mkdir -p ~/Shell00_2/ex05 && cd ~/Shell00_2/ex05
+    # here nothing wrong
+echo '#!/bin/bash' > git_commit.sh
 echo 'git log -n 5 --format="%H"' >git_commit.sh
+    # here need to add #!/bin/bash, add the shebang line, because every executable shell script should start with a shebang (#!/bin/bash or #!/bin/sh) on line 1 so the system knows which interpreter to use
+    # git log: read git commit history log
+    # -n 5: can modify the number
+    # --format: what format to use/show
+    # %H: complete Hash
+    # %h: first 7 digits Hash
+chmod +x git_commit.sh
+    # standard practice at 42
 
+## because git_commit.sh reads git history, it must be run inside a git repository, like Shell00_2 repo.
+## then use bash git_commit.sh | cat -e
+## but why do we need to add '#!/bin/bash' here, not other exercises:
+## ex05 needs to create a shell script, and the file with .sh
+## shebang line is for the system, not for the bash command, when we run ./git_commit.sh the script, the system gets the file, it doesn't know if it's a script of python, perl or bash, here with #!/bin/bash, it tells the system, please use /bin/bash to explain and execute this file.
+## when we run directly bash git_commit.sh or sh midLS, we are telling the system to use bash to execute, then bash will skip the first line's #!
+## so in 42 and Unix, if the file is defined as a shell script (.sh), better to include #!/bin/bash, professional and good habit
 
 ************** git add, git commit, git push, git status *************
 always remember to do the git push with frequency
@@ -243,5 +260,12 @@ git add foldername
 or
 git add .
     # will include all recent created folders and files
+    # maybe risky to include private key or other trash file risk
+    # safe habit: run git status and then git add .
+    # as well, location matters for git add . 
+      for example, if you are inside ~/Shell00_2/ex03 and run git add ., it will not add files in ex04
+      to stage everything in your entire repository at once, make sure you are at the root of your repository (cd ~/Shell00_2)
+
+
 
 
