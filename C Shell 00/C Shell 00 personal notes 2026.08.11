@@ -1,0 +1,149 @@
+2026.08.11 second day
+Reviewing what have been done yesterday, yesterday when I wanted to leave, I would like to save what I have done with the git push but I were not sure it's ok or not.
+Today reviewing...
+pwd, to know where I am
+ls, to list all the contents 
+cd + folder name, go into it
+ls, to see what's there
+git status, how the status
+  So here I see that yesterday I didn't do the "commit"
+git commit -m "added ex00 ex01 ex02 exercises done", so here only with the git commit, I do commited it to git.
+git push, and then with the push I updated it to the repository.
+git status, again check the status
+
+So here when I asked Claude what's more I need to do, Claude suggested me to do the following:
+  git add hi.txt
+  git commit -m "remove hi.txt test file"
+  git push
+Confused, because I didn't want to add hi.txt. 
+Configured out: 
+  git add, doesn't mean "add the file", in git, git add really menas "stage this change", whatever that change is, creation, modification, or deletion.
+  so here git add hi.txt, since hi.txt has been deleted, running git add hi.txt tells git "yes, stage this deletion, I want it recorded."
+  another way to do the same:
+    git rm hi.txt, this will do 2 things at once: deletes the file from disk (if it's still there), and stage ths deletion for commit.
+Ok, now I have finished the unfinished part from yesterday. Continue with today's part.
+
+==================
+Exercise 03: SSH
+SSH Key
+Turn-in directory: ex03/
+Files to turn in: id_rsa_pub
+Allowed functions: None
+Create your own SSH key. Once done:
+◦ Add your public key to your repository in a file named id_rsa_pub
+◦ Update your SSH key on the intranet. This will allow you to push the repository to our git server
+
+************
+Ok, it comes back to yesterday's video 2, creation of SSH code
+ssh-keygen
+cd ~/.ssh
+ls
+
+So yesterday I have done the ssh-keygen once, and saved the public key in the intra network, so the private key should be saved as well in my computer, ~/.ssh/
+I can look it up with:
+  ls -la ~/.ssh
+  id_rsa and id_rsa.pub are in pair, the one with "pub" is public and without "pub" is the private key.
+If i run ssh-keygen again, it will generate a new pair of keys.
+
+I planed to copy and paste the public key and do it with:
+  echo -n "paste here the public key" > id_rsa_pub
+But Claude suggested me to do it with "cp" or "cat >>" instead because copy and paste is risky to lose some characters. Agree.
+
+I did it wrong, as I wanted to copy the public key in id_rsa.pub to a new file called id_rsa_pub, but I named it id_rsa.pub again, so now I need to rename it.
+mv (move) is the command for it
+  mv id_rsa.pub id_rsa_pub
+  then use ls -la to check it
+or if not in the current folder, use:
+  mv ~/.ssh/id_rsa.pub ~/.ssh/id_rsa_pub
+
+If I want to save it and commit it, push it with frequency, I always need to follow the steps:
+cd (into the folder)
+git add
+git commit -m "  "
+git push
+git status
+
+=====================
+Exercise 04: midLS
+Turn-in directory: ex04/
+Files to turn in: midLS
+Allowed functions: None
+In a file named midLS, write the command that lists all files and directories in your
+current directory (excluding hidden files or any file starting with a dot, including
+double dots).
+• The output should be sorted by modification date, with entries separated by a
+comma and a space.
+• Directory names should end with a slash (/).
+
+**************
+So there are few commands in the family of ls:
+ls: show all NOT HIDDEN files, by default
+ls -a: show all files, including hidden ones
+ls -A: show all hidden files
+ls -p: show / after the directory name
+  here the p means path/pathname indicator
+ls -t: order by time, from newest to oldest
+ls -r: order by time, but reverse, from oldest to newest
+ls -m: with entries separated by acomma and a space.
+  here m means stmream format
+
+and with bash command, we can check it.
+bash: 
+  bash: only bash means open a new subshell
+  bash + file name: read and execute the file or script
+
+then do the git push regularly.
+
+======================
+Exercise 05: git commit
+Turn-in directory: ex05/
+Files to turn in: git_commit.sh
+Allowed functions: None
+
+Create a shell script that displays the ids of the last 5 commits in your git repository.
+%> bash git_commit.sh | cat -e
+baa23b54f0adb7bf42623d6d0a6ed4587e11412a$
+2f52d74b1387fa80eea844969e8dc5483b531ac1$
+905f53d98656771334f53f59bb984fc29774701f$
+5ddc8474f4f15b3fcb72d08fcb333e19c3a27078$
+e94d0b448c03ec633f16d84d63beaef9ae7e7be8$
+%>
+Your script will be tested in our own environment.
+
+****************
+Ok, let's separete the task into some parts, we need to display the logs, indicate the specific number of recent ids, save the command in a script, save the script in a folder.
+git log -n 5 --format="%H", or git log -n 5 --format="%h"
+  git log: to check the commit history
+  -n 5: can also be -5 directly, limit to show 5 recent commit only, can modify the number if we want more recent commit history
+  --format="%H": format, get the complete commit ID Hash, if it's "%h", then ony the first 7 digits of the Hash commit ID.
+
+cat -e, what does it mean?
+  in Linux/Unix, all - usually means a Flag/Option
+  in cat, -e comes from Show End of Line, prints $ in each line end, means the line ends there, is where \n is. can also show invisible characters, like Tab or Enter.
+important, because it can show the line has ended.
+  For example, 
+    Hello World$
+    (there is a $, so the line ends normally)
+
+    Hello World $
+    (wrong, there is a space extra)
+
+    Hello World 
+    (wrong, without $ to end, missing \n)
+
+I wanted to write like this:
+  echo "git log -n 5 --format="%H"" > git_commit.sh
+  but Linux will understand it wrong, with separate segments,"git log -n 5 --format=" + %H + ""
+  so Claude suggested me to do it with '...' only:
+  
+echo 'git log -n 5 --format=%H' > git_commit.sh
+
+and I don't understand the codes in the task:  bash git_commit.sh | cat -e, there is a | in the middle
+|, pipe, takes the output of the command on the left and feeds it as input to the command on the right
+cat -e → displays the input with line endings made visible as $ at the end of each line, and shows tabs as ^I
+
+So with all these, I have done the mandatory exercises for C Shell 00, submitted by 12:00, 2026.08.11
+Booked evaluation x2 and my slot. Registerd C Shell 01 to continue. Try to finish Shell 01 today, maybe parts of it.
+The timelins is pretty strict:
+Each module only can take 1.3 days to finish, or within 4 weeks, if we consider that the last week is for revision and preparation for the exam, won't be sufficient time to finish all modules.
+So with mandatory exercises first, maybe later back at home we can continue the extra exercises.
