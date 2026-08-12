@@ -88,7 +88,14 @@ So we may do the following:
 touch print_groups.sh
 vim print_groups.sh
 #!/bin/sh
-
+  #### in vim: 
+      press i to enter insert mode
+      will see -- INSERT -- at the bottom
+      press esc
+      type :wq and press Enter
+          : opens the command line at the bottom
+          w: write
+          p: quit
 More details:
   tr ' ' ',' can be seen as tr SET1 SET2
   tr: translate
