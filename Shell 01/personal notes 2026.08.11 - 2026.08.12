@@ -95,7 +95,7 @@ vim print_groups.sh
       type :wq and press Enter
           : opens the command line at the bottom
           w: write
-          p: quit
+          q: quit
 More details:
   tr ' ' ',' can be seen as tr SET1 SET2
   tr: translate
@@ -141,3 +141,30 @@ find .
 
 basename NAME [SUFFIX]
 basename OPTION... NAME...
+
+if we write it this way:
+find . -name '*.sh'
+    #don't use *.sh directly, because in this way, Shell will expand it first, before the find command
+    #for example, if in the folder we have find_sh.sh and hello.sh, if we use *.sh directly, Shell may expand both .sh files before executing find command.
+    #so, since we want to pass the complete pattern to the find command, we use '*.sh' instead of *.sh
+    #there are more tests of find family let's see it this way
+      -name: find by name
+      -type: find by type
+      -size: find by size
+      -user: find by owner
+we can also understand the command find as:
+find [WHERE] [CONDITION] [WHAT IS THE CONDITION]
+    #for example
+    find . -name '*.sh'
+      #where: .
+      #condition: name
+      #what is the condition: *.sh
+
+a little trick:
+  find . -name '*.sh'
+      #do not search files whose name ends in .sh
+      #but to search entries whose name matches *.sh
+      #because -name only check name
+      #so if there is a directory named hello.sh/ , it will be found as well
+      #if we only want regular files, then need to add another test (here it means conditions maybe)
+      #-type f
