@@ -234,17 +234,17 @@ chmod +x midLS
 ************** ex05 *****************
 mkdir -p ~/Shell00_2/ex05 && cd ~/Shell00_2/ex05
     # here nothing wrong
-echo '#!/bin/bash' > git_commit.sh
+echo '#!/bin/sh' > git_commit.sh
     # it is a 42 standard, very recommended, but single quotes ' around #!/bin/bash inside echo can cause shell expansion issues, so better to use cat << 'EOF' maybe.
     # option 1 for example:
       cat << 'EOF' > git_commit.sh
-      #!/bin/bash
+      #!/bin/sh
       git log -n 5 --format="%H"
       EOF
     # option 2:
       open the file in vim or nano
         vim git_commit.sh
-        #!/bin/bash
+        #!/bin/sh
         git log -n 5 --format="%H"
       then save and exit
 echo 'git log -n 5 --format="%H"' > git_commit.sh
