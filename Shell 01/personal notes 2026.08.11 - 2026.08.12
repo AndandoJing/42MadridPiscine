@@ -134,6 +134,24 @@ sh print_groups.sh
 since in the 42 computer daemon only has daemon, output "daemon" as well
 
 ==================== ex02 ===================
+find_sh.sh
+Turn-in directory: ex02/
+Files to turn in: find_sh.sh
+Allowed functions: None
+
+Write a command line that searches for all files ending with .sh in the current
+directory and all subdirectories.
+• The output should display only the file names without the .sh extension.
+• Example output:
+$>./find_sh.sh | cat -e
+find_sh$
+file1$
+file2$
+file3$
+$>
+
+******************
+
 find [WHERE] [CONDITION]
 current directory is .
 so find all files in current directory and all subdirectories means that we need to 
@@ -157,8 +175,16 @@ find [WHERE] [CONDITION] [WHAT IS THE CONDITION]
     #for example
     find . -name '*.sh'
       #where: .
+          it means from the current directory and on, recursive search
       #condition: name
       #what is the condition: *.sh
+
+find [where] [condition] -exec COMMAND {} \;
+    # -exec: execute a command to the found result
+    # COMMAND: what we want to execute, for example basename
+    # {}: the result found
+    # \; : tell find: the -exec command ends here
+
 
 a little trick:
   find . -name '*.sh'
@@ -168,3 +194,35 @@ a little trick:
       #so if there is a directory named hello.sh/ , it will be found as well
       #if we only want regular files, then need to add another test (here it means conditions maybe)
       #-type f
+
+basename won't work like tr, what basename needs is argument
+|: passes standard output (stdin/stdout), pass stdout to a command's stdin
+-exec: use the result of find to execute another command 
+
+so to combine all things up:
+  find . -name '*.sh' -exec [COMMAND] [CURRENT RESULT] [REMOVE SUFFIX] \;
+    # now we can replace them with [COMMAND] - basename, [CURRENT RESULT] - {}, [REMOVE SUFFIX] - .sh
+  find . -name '*.sh' -exec basename {} .sh \;
+    # when we test this in terminal, we get:
+        find_sh
+        hello
+        world
+      so it didn't show the .sh file inside a directory folder
+
+Since . means current directory, when we do ./find_sh.sh | cat -e , we are asking Shell to run find_sh.sh in the current directory.
+with find_sh.sh | cat -e, Shell will go to PATH to look for it
+echo $PATH , normally include like /usr/local/bin:/usr/locl/bin:/bin:...
+so Shell will look the find_sh.sh inside of:
+  /usr/locl/bin/find_sh.sh
+  /usr/bin/find_sh.sh
+  /bin/find_sh.sh
+and they don't exist
+will come back to me as: command not found: find_sh.sh
+
+attention, with ./fin_sh.sh | cat -e , we also need to give it permission of execution
+chmod +x find_sh.sh
+if not, with ./fin_sh.sh | cat -e , it will be deneied as well
+
+we can also use sh find_sh.sh | cat -e
+since with sh, actually sh is the command, sh will read the find_sh.sh, and find_sh.sh just need to be read
+
