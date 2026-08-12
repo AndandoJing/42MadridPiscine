@@ -235,7 +235,19 @@ chmod +x midLS
 mkdir -p ~/Shell00_2/ex05 && cd ~/Shell00_2/ex05
     # here nothing wrong
 echo '#!/bin/bash' > git_commit.sh
-echo 'git log -n 5 --format="%H"' >git_commit.sh
+    # it is a 42 standard, very recommended, but single quotes ' around #!/bin/bash inside echo can cause shell expansion issues, so better to use cat << 'EOF' maybe.
+    # option 1 for example:
+      cat << 'EOF' > git_commit.sh
+      #!/bin/bash
+      git log -n 5 --format="%H"
+      EOF
+    # option 2:
+      open the file in vim or nano
+        vim git_commit.sh
+        #!/bin/bash
+        git log -n 5 --format="%H"
+      then save and exit
+echo 'git log -n 5 --format="%H"' > git_commit.sh
     # here need to add #!/bin/bash, add the shebang line, because every executable shell script should start with a shebang (#!/bin/bash or #!/bin/sh) on line 1 so the system knows which interpreter to use
     # git log: read git commit history log
     # -n 5: can modify the number
