@@ -1,6 +1,6 @@
 Sure I lost the register because I didn't click the commit changes buton...
 Start agin. With Exercise 01, print_groups.sh, Shell 01
-=============
+============= ex01 ==============
 Exercise 01
 print_groups.sh
 Turn-in directory: ex01/
@@ -83,4 +83,54 @@ mv print_groups.sh C_Shell_01_tasks/ex01/
 
 then can check it with cd and ls
 
+Learnt from Shell 00 ex05 that for script file, better to always include #!/bin/sh as it's recommended by 42 standard
+So we may do the following:
+touch print_groups.sh
+vim print_groups.sh
+#!/bin/sh
 
+More details:
+  tr ' ' ',' can be seen as tr SET1 SET2
+  tr: translate
+  'SET1': what we are looking for, the original
+  'SET2': what we want to change to, the result
+
+  if we do it like: id -Gn FT_USER
+  Shell will see it as usual letters FT_USER, look for the user who called FT_USER
+
+  the symbol $ here is the variable
+  example:
+    FT_USER=daemon (attention, no space before or after =)
+    echo FT_USER
+    the output will be: FR_USER
+    but if we write it as:
+    echo $FT_USER
+    the output will be: daemon
+
+About variable
+  the structure FT_USER=daemon, Shell will see it as NAME=value, so it's variablename=value to be insert in the variable
+
+So finally with ex01:
+#!/bin/sh
+id -Gn $FT_USER | tr ' ' ','
+
+then when we evaluate, we can check it like this:
+FT_USER=bocal
+sh print_groups.sh
+it shouls output 
+  bocal,adm,cdrom,sudo,dip,plugdev,lxd,lpadmin,libvirt
+or with | cat -e
+  bocal,adm,cdrom,sudo,dip,plugdev,lxd,lpadmin,libvirt$
+
+if we try FT_USER=daemon
+sh print_groups.sh
+since in the 42 computer daemon only has daemon, output "daemon" as well
+
+==================== ex02 ===================
+find [WHERE] [CONDITION]
+current directory is .
+so find all files in current directory and all subdirectories means that we need to 
+find .
+
+basename NAME [SUFFIX]
+basename OPTION... NAME...
