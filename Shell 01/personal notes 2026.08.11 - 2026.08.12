@@ -226,3 +226,109 @@ if not, with ./fin_sh.sh | cat -e , it will be deneied as well
 we can also use sh find_sh.sh | cat -e
 since with sh, actually sh is the command, sh will read the find_sh.sh, and find_sh.sh just need to be read
 
+=========== ex03 =============
+
+count_files.sh
+Turn-in directory: ex03/
+Files to turn in: count_files.sh
+Allowed functions: None
+• Write a command line that counts and displays the total number of regular files
+and directories in the current directory and all its subdirectories.
+• The count should include "." (the starting directory).
+• Example output:
+$>./count_files.sh | cat -e
+42$
+$>
+
+********************
+mkdir ex03 
+cd ex03 
+touch count_files.sh 
+vim count_files.sh 
+write inside count_files.sh the content : 
+#!/bin/sh then 
+:wq to save and exit
+
+untill now everything fine
+now let's figure out the following:
+1. find total number of regular files and directories in the current directory and all its subdirectories
+2. display them
+3. count them
+4. the count should include "." (the starting directory)
+5. check it with the output example
+
+1. we can do it with find .
+if we try find . now we will get:
+. 
+./count_files.sh #which is the file we just created and edited
+#good to know that . is also here, since it's the requirement point 4
+
+2. remember the command wc? for count, we used it to count the bytes, wc -c
+wc: word count
+it can also count lines, words, bytes/characters
+  # -c, bytes
+  # -l, lines
+  # -m, character
+  # -w, words
+  # -L, maximum display width
+so we want to count the total number of regular files and directories (including subdirectories)
+when we used find .
+the results are in line, each directory and file is placed in a line
+but we only want regular files and directories, not other types
+find -type
+    # f: regular file
+    # d: directory
+
+I tried:
+
+find . -type f&d -exec wc -l
+get the following:
+./count_files.sh
+[1] 327725
+[1]  + done       find . -type f
+zsh: command not found: d
+
+normal, because it's wrong
+here I tried "&", but in Shell, "&" means run the previous command in the background, so what I tried, for Shell it's like:
+find . -type f &
+another command:
+d -exec wc -l
+
+so I see: [1] 327725, it's a background job
+the I see: zsh: command not found: d
+because Shell tried a command which is d
+sure Shell cant'd find it
+meanwhile, we don't need -exec wc -l here, because in ex00, we needed -exec since we need to execute basename command for each result of find
+ex03 is different, we only need to count the number, so with | is better
+receive the output of left and put it into right
+
+it should be:
+find . -type f -o -type d
+  # find files and directories, both of them
+then with | wc -l
+we will get the number
+
+attention:
+  here the directory ex03 itself is also included, is the starting directory
+
+I tried to create some more files and directories to check:
+mkdir test1
+touch test2.txt
+
+then with the command: find . -type f -o -type d | wc -l
+output: 
+.
+./count_files.sh
+./test1
+./test2.txt
+
+which is correct, because it includes . as well
+so we open vim count_files.sh
+then write the command in the second line:
+  find . -type f -o -type d | wc -l
+save and quit
+
+then in the ex03 we can check it with:
+./count_files.sh -------- attention, need to run it inside of ex03, it's the current directory
+or
+sh count_files.sh
