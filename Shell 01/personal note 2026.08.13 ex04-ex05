@@ -1,0 +1,156 @@
+============= ex04 ==========
+Exercise 04
+MAC.sh
+Turn-in directory: ex04/
+Files to turn in: MAC.sh
+Allowed functions: None
+Write a command line that displays your machine’s MAC addresses, with each
+address followed by a line break.
+tips: man ifconfig
+
+**********
+ifconfig -v, -a, -s, [interface]
+  -v: be more verbose for some error conditions
+  -a: display all interfaces which are currently available, even if down
+  -s: display a short list (like netstat -i)
+
+ifconfig -v interface [aftype] options | address...
+
+with ifconfig we can see IP address, but the task requires MAC address, they are not the same
+for example, we try ifconfig directly
+  shows:
+    some network information, may include inet xxxxxxxx, netmask xxxxxxx
+    inet usually comes with IPv4 address, like 192.168.1.53, 10.0.0.12, 172.16.0.5
+MAC address is the address of hardware interface, something like:
+  aa:bb:cc:dd:ee:ff
+  xx:xx:xx:xx:xx:xx
+  6 sets, each set of 2 digits 
+  like:
+  00:1a:2b:3c:4d:5c
+
+carefully attention, we found in the output of ifconfig something like:
+  ether 6e:c6:a0:8f:af:90
+  here ether is the flag information
+  MAC_ADDRESS is what I really need for this task
+  and there are some different lines including ether info
+
+OK, now the thing should be:
+1. ifconfig
+2. get all the network information
+3. get the lines with MAC addresses
+4. get only the info of something like "ether xx:xx:xx:xx:xx:xx"
+5. display only the MAC address and one for each line
+
+Now let's know grep family:
+
+grep [OPTION...] PATTERNS [FILE...]
+grep [OPTION...] -e PATTERNS ... [FILE...]
+grep [OPTION...] -f PATTERN_FILE ... [FILE...]
+
+here PATTERNS means meeting some specific conditions
+grep means search and display only the lines that matches some PATTERNS
+
+for example:
+  touch testfiles.txt
+  vim testfiles.txt
+    let's write these inside testfiles.txt:
+      apple
+      banana
+      green apple
+      orange
+  cat testfiles.txt
+    we can see all the contents here
+  grep 'apple' testfiles.txt
+    shows:
+      apple
+      green apple
+
+grep can get "ether" or something, may not be a complete word
+
+find -name ' ' vs. grep PATTERN
+  find -name PATTERN : search filenames
+  grep PATTERN : search test lines
+
+If we try:
+ifconfig | grep 'ether'
+  shows:
+    ether 6e:c6:a0:8f:af:90  txqueuelen 0  (Ethernet)
+    ether 38:f9:d3:11:d7:49  txqueuelen 1000  (Ethernet)
+    ether 52:54:00:74:42:91  txqueuelen 1000  (Ethernet)
+but it includes the complete lines with keywords 'ether'
+
+now we just need the field 2, not other information
+comes to awk
+  gawk - pattern scanning and processing language
+  gawk  [  POSIX or GNU style options ] -f program-file [
+       -- ] file ...
+  gawk [ POSIX or GNU style options ] [ -- ] program-text
+       file ...
+       
+awk is good at separeting a line into fileds and select one of them
+  -F 
+    fs: field-separator 
+    use fs for the input filed separator, the value of the FS predefined variable
+for example:
+  echo "apple banana orange" | awk '{print $2}'
+    shows:
+      banana
+
+So we can get the final command for ex02 task as:
+ifconfig | grep 'ether' | awk '{pring $2}'
+  shows:
+    6e:c6:a0:8f:af:90
+    38:f9:d3:11:d7:49
+    52:54:00:74:42:91
+
+  the -F is to indicate with what we want to separate
+      example:
+        apple:banana:orange
+      separated by :
+      so we can do it like:
+        echo "apple:banana:orrange" | awk -F ':' '{pring $2}'
+          shows: banana
+          
+
+Some QAs:
+1. why man awk shows gawk?
+  awk a language/tool to process texts, GNU awk (gawk) is a implementation of awk
+  awk is a standard, it has different implementations, gawk (GNU awk), mawk, BSD awk, etc.
+  in 42, it may be using GNU
+  by awk --version, we can check the version
+2. awk comes from?
+  first letter of three contributors
+3. why i don't need to include -F in the awk command?
+  because by default, it's separated by whitespace
+4. differences ' ' vs " "
+  ' ' = single quotes: keep the same inside ' ' , means tell Shell don't explain inside content with Shell variables
+  " " = double quotes: inside we allow $variables etc to be expanded by Shell
+  so here awk '{print $2}' can not be replaced with " ", because in that way, Shell may understand that $2 is a variable of Shell, and expand it
+5. what does {} mean?
+  it's by default of awk, not Shell
+  PATTERN {ACTION}
+  
+
+To take away:
+generate -> filter -> extract
+we use ifconfig to generate the textlines (not with find because find can only generate files)
+then filter with grep, with the keywords
+then extract with awk, define well the field
+
+========== ex05 =========
+Exercise 05
+Can you create it ?
+Turn-in directory: ex05/
+Files to turn in: "\?$*'MaRViN'*$?\"
+Allowed functions: None
+• Create a file containing only "42", and nothing else.
+• The file name must be:
+"\?$*'MaRViN'*$?\"
+• Example output:
+$>ls -lRa *MaRV* | cat -e
+-rw---xr-- 1 75355 32015 2 Oct 2 12:21 "\?$*'MaRViN'*$?\"$
+$>
+
+*************
+
+
