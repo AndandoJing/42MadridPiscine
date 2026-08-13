@@ -99,4 +99,99 @@ cc: command to use C compiler
 1. why use write, we need #include <unistd.h>?
 because write is not a function created by me, it's a function offered by the system itself
 how a compiler know what write is?
+with this: #include <unistd.h>
+unistd.h -> a header file, which include some statement that the compiler needs to know, including the statement of write
+#include <unistd.h> this is saying: hey Compiler, next I will use something defiend in unistd.h, which include write.
+
+2. why missing ; in 
+  void ft_putchar(char c) 
+  {
+    ...
+  }
+because it is defining function definition
+{ } is telling C that funciton body starts here and ends here
+
+and void ft_putchar(char c); this is a function prototype, telling that: hey, here is a function
+
+3. int main(void)
+int here is integer type
+main is a function as well, main is the entry function when C programme starts executing
+when I run a C program, the system starts from main()
+so here:
+  int main(void)
+  int: return int
+  main: function name
+  void: do not receive parameter
+here the meaning of void is different from the previous void
+in the previous void, it means: function returns nothing
+  example: void ft_putchar(char c);
+and inside int main(void), it means function takes no parameters
+  example: int main(void)
+    main is a function, this function does not receive parameter, and it will return a integer
+    in main, 0 usually means the program ends normally/successfully
+
+summary:
+  void function(...) : do not return value
+  function(void) : do not receive parameter
+
+So in total:
+1. we need to create a function ft_putchar(char c) and use write funciton to display the character
+2. to use write, we need to add the header
+3. but ex00 only needs to turn in the function, not the program, so don't turn the program in
+
+So we also separete ex00 in severl parts:
+1. we create the function itself
+void ft_putchar(char c)
+{
+  write(1, &c, 1);
+}
+
+2. then add the header to C source code so that we can use write, because write is a function by default in C
 #include <unistd.h>
+void ft_putchar(char c)
+{
+  write(1, &c, 1);
+}
+
+3. then we check the function with a program and let it run, to see if the function runs well
+int main(void)
+{
+  ft_putchar('K');
+  return(0);
+}
+
+we compile the C source code into an executable so the computer can run it.
+main() is let the test code to be a entry of a complete program; compiler itself is not used to add main function
+
+although with ex00, we don't need to turn in something compiled, to check it, we need to compile it and test it
+to check the funciton, there's a another way without using main 
+
+to compile, we use
+cc -Wall -Wextra -Werror ft_putcharcheck.c
+
+cc: C compiler
+-Wall: open common warnings
+-Wextra: open more warnings
+-Werror: take warning as error
+ft_putcharcheck.c: the C source file that needs compile
+
+if it returns nothing and comes back to the home, good thing
+
+ls
+we can see something like a.out
+why a.out?
+  since I didn't tell cc what is the executable called, by default, it generates a.out
+  if we want to name the output, we can use:
+    cc -Wall -Wextra -Werror ft_putcharcheck.c -o check
+  the output will be named as check
+then ./a.out
+we can see K%
+or check it with ./a.out | cat -e
+K% again
+
+we can also check it with:
+cc -Wall -Wextra -Werror -c ft_putchar.c
+here -c is new, means compile source code, but not to link it as a complete executable
+if there is no error, it will generate ft_putchar.o, this is an object file, just for test, need to be deleted later
+
+
