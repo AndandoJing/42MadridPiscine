@@ -36,3 +36,57 @@ parameter:
   the type of the character: a parameter named as c
   so ft_putchar('A'); can be understood as:
     'A' -> entered as parameter c 
+    now what c saved is 'A'
+    and ft_putchar can run
+char c here is not a value, it's a parameter, it says that the function need to receive a value in type char, and inside this function we call this value as c
+
+definition:
+  ft_putchar(char c)
+  here char c is the parameter
+use:
+  ft_putchar('A')
+  here 'A' is the argument/value
+
+we can separete the example here in 3 parts
+  example in ex00: void ft_putchar(char c);
+part 1: void
+  void: what to return
+part 2: ft_putchar
+  ft_putchar: the function name
+part 3: (char c)
+  (char c): what to receive
+
+void: when the function finished its work, don't return a value
+void returns nothing
+
+write itself is a function
+write(part1, part2, part3);
+example:
+write(1, &c, 1);
+
+part1: write it to where -> standard output, which is terminal
+  in the example, the first 1 here means file descriptor 1=standard output(stdout)
+  0 -> standard input (stdin)
+  1 -> standard output (stdout)
+  2 -> standard error (stderr)
+  stdout and stderr usually show in terminal as well, just two different output streams
+part2: where is the data -> the memory address where character c is
+part3: how many to write -> 1 byte in the example
+
+what does & mean here?
+  c = value
+  &c = address of c
+why write needs &c?
+  write needs to know, where is the data that you wants me to output
+  &c means, go to the memory address of c to find the data
+
+'K' -> character -> char -> what we need in this ex00
+"K" -> string -> don't need it now
+
+function prototype vs. function definition vs. function body
+----------
+{
+  ...
+}
+----------
+the thing between ---- is the function body
