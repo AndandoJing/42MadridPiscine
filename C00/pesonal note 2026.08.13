@@ -90,3 +90,13 @@ function prototype vs. function definition vs. function body
 }
 ----------
 the thing between ---- is the function body
+
+CPU can't execute the C source code directly, since C source code is more readable for human beings, not for the computer
+so we need a compiler to make the C source code readable for the computer, turn the C source code to readable machine code
+in 42 Moulinette will use cc -Wall -Wextra -Werror to compile my codes
+cc: command to use C compiler
+
+1. why use write, we need #include <unistd.h>?
+because write is not a function created by me, it's a function offered by the system itself
+how a compiler know what write is?
+#include <unistd.h>
