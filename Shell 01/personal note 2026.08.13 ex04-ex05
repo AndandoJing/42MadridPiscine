@@ -153,4 +153,57 @@ $>
 
 *************
 
+trouble with the file name that we want to create, knew it, 42 won't give such stupid and easy task to finish
+also, in the example, the bytes is 2, if we write "42" inside the file, it comes with a newline after the letters 42, so 3 bytes
+
+in Shell, backslash escaping: \ can make the following special characters lose their speacial meaning
+for example
+touch hello\ world
+  can create hello world
+  because \ is telling Shell to ignor the special character space here, it's not a argument separator
+
+command printf
+  printf - format and print data
+  printf FORMAT [ARGUMENT]...
+  printf OPTION
+
+Difference echo, printf, cat:
+  echo: tell echo the output is xxx
+    for example:
+      echo "hello"
+  cat: open something, output what's inside
+  printf: generate something, and then put redirect it to a file
+    for example:
+      printf '42' > testfile
+        generate 42 to the file testfile
+      cat testfile
+        output as 42
+
+so since the task asks us to create a file named "\?$*'MaRViN'*$?\", full of special characters with special meanings in Shell, we need to use \ before each special character.
+from the first one "
+\": "
+\\: \
+\?: ?
+\$: $
+\*: *
+\': '
+MaRViN: common letters, not special ones, so we can keep them here
+\': '
+\*: *
+\$: $
+\?: ?
+\\: \
+\": "
+
+combine all of them: \"\\\?\$\*\'MaRViN\'\*\$\?\\\"
+then we combine it as:
+printf '42' > \"\\\?\$\*\'MaRViN\'\*\$\?\\\"
+
+it's ok now
+when we test with ls -lRa *MaRV*
+ls: list files/directories
+-l: long format
+-R: recursive, if there are directories, show the content inside
+-a: all, including hidden ones
+*MaRV*: Shell wildcard/glob pattern, all that names include MaRV
 
