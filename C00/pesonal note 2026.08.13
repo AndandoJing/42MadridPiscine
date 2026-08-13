@@ -1,0 +1,38 @@
+With video https://www.youtube.com/watch?v=zPK1idZuVlM&list=PLxeKVrYoZO6DNJxUBWIiTO-B6X62SMHVo&index=1
+memory - processor - input/output
+chart
+int
+  the content inside () after functionname, is what we want to use for the function
+compile
+loop
+important thing with {} to always close the function maybe
+
+============ ex00 ===========
+
+Exercise 00
+ft_putchar
+Turn-in directory: ex00/
+Files to turn in: ft_putchar.c
+Allowed functions: write
+• Write a function that displays the character passed as a parameter.
+• The function should be prototyped as follows:
+  void ft_putchar(char c);
+To display the character, you must use the write function as follows:
+  write(1, &c, 1);
+
+*************
+in C, a character usually use 'A', attention, single quote
+char, is a data type, is to save a character
+for example:
+  char c
+    create a thing named c, to save a character
+    if c = 'A'
+
+parameter:
+  with the example given in ex00, void ft_putchar(char c)
+  here the part char c is a parameter
+  can understand it as: use char c to run ft_putchar
+  here char: type, c: name
+  the type of the character: a parameter named as c
+  so ft_putchar('A'); can be understood as:
+    'A' -> entered as parameter c 
