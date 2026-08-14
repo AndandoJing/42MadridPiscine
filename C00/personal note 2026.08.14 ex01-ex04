@@ -269,4 +269,18 @@ void ft_is_negative(int n);
 **************
 
 I think it's about if and else, even I don't know anything, let me try with this one first:
+#include <unistd.h>
+void  ft_is_negative(int n)
+{
+  int  n;
+
+  if n < 0
+  {
+    write(1, "N", 1);
+  }
+  else
+  {
+    write(1, "P", 1);
+  }
+}
 
