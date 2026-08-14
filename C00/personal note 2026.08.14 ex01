@@ -1,0 +1,161 @@
+Reviewing ex00, why is #include <unistd.h>
+  # : it's for C preprocessor, not a common C statement.
+    file .c -> preprocessor (using #...) -> compiler (to recode C source codes) -> codes can be executed
+  include : include the contents/information from the following header file
+    quote the statements offered by the header unistd.h
+  <> : it's a header offered by the system, please find it in system's header
+        we can create our own header, local headers: "..."
+        system headers: <...>
+  unistd : UNIX standard
+  .h : header file
+    other examples:
+      .c = C source file
+
+Attention, norme 42:
+1. use TAB
+void[TAB]ft_putchar(char c);
+so here don't use spaces
+same for:
+int  main(void);
+
+2. return value should be inside parentheses
+return (0)
+NO: return 0
+
+learn to autocheck with the Compiler:
+cc -Wall -Wextra -Werror file.c
+if there is only function, no main, we can check like this:
+cc -Wall -Wextra -Werror -c file.c
+  -> will generate file.o
+  here -c means compile only, compile the source file, but no linking, don't try to generate a complete executable
+  it's to check the process of compiler
+
+Attention:
+for each one, we need to check 3 parts:
+1. compiler
+  cc -Wall -Wextra -Werror -c filename.c
+    -> this will generate something named as filename.o
+  cc -Wall -Wextra -Werror filename.c
+    -> this will generate something named?
+2. norminette
+  (normin ette, ette in French is something small, so small tool to check the norm)
+  norminette filename.c
+  remember:
+    :F1 or :Stdheader
+  it can't check if the function action is correct
+3. test
+  use main to let function work
+  to check the real output/behavior
+  this is to check the logic itself
+
+=========== ex01 =========
+Exercise 01
+ft_print_alphabet
+Turn-in directory: ex01/
+Files to turn in: ft_print_alphabet.c
+Allowed functions: write
+• Create a function that displays the alphabet in lowercase, on a single line, in ascending order, starting from the letter ’a’.
+• The function should be prototyped as follows:
+void ft_print_alphabet(void);
+
+***********
+
+I wanted to try something like:
+void  ft_print_alphabet(letter)
+{
+  while $letter < z;
+  letter++
+}
+Wrong.
+
+difference:
+  ex00
+    void fr_putchar(char c)
+    here char c: to receive a parameter
+    ft_putchar needs someone tell it, what character you wan to show, so it needs char c
+  ex01
+    void fr_print_alphabet(void)
+    here void: don't need to receive anything
+    because it's defined that it will show abcd...z, don't need any input
+    so here we won't do it like:
+      void ft_print_alphabet(letter);
+
+while (condition)
+{
+}
+  don't add ; after while (condition)
+
+abcd...z they are all characters, then 'z', instead of z
+with < 'z', it won't show z itself neither, should be <=
+letter++ needs ;
+we didn't tell C what type is letter, they should be char, so we need to create a variable in the function first
+char  letter;
+  attention: according to the 42 norm, the variable definition and the content should be separated by a space line.
+
+since letter starts from 'a'
+since write needs the header
+
+my 2nd try:
+
+in Vim first add :Stdheader
+#include <unistd.h>
+
+void  ft_print_alphabet(void)
+{
+  char letter;
+
+  letter = 'a';
+  while (letter <= 'z')
+  {
+    write(1, $letter, 1);
+    letter++
+  }
+}
+
+still wrong:
+$letter: should be &letter
+letter++ should add ; after
+
+in short:
+while (condition)
+{
+  statement;
+  statement;
+}
+
+3rd try:
+in Vim first add :Stdheader
+#include <unistd.h>
+
+void  ft_print_alphabet(void)
+{
+  char  letter;
+
+  letter = 'a';
+  while (letter <= 'z')
+  {
+    write(1, &letter, 1);
+    letter++;
+  }
+}
+
+And pass it with 123 test: 
+1. compiler, with cc -Wall -Wextra -Werror -c ft_print_alphabet.c
+it generate ft_print_alphabet.o correctly, ok
+2. norminette, with norminette ft_print_alphabet.c
+ok
+3. logic, i need to create a program with main to test it
+tried with:
+(the content of the .c file)
+int main(void)
+{
+  ft_print_alphabet();
+  return(0);
+}
+
+and tried in the terminal:
+c2r9s6% cc -Wall -Wextra -Werror ft_print_alphabet.c
+c2r9s6% ls
+a.out  ft_print_alphabet.c
+c2r9s6% ./a.out
+abcdefghijklmnopqrstuvwxyz% 
