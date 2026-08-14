@@ -159,3 +159,114 @@ c2r9s6% ls
 a.out  ft_print_alphabet.c
 c2r9s6% ./a.out
 abcdefghijklmnopqrstuvwxyz% 
+
+========== ex02 =========
+Exercise 02
+ft_print_reverse_alphabet
+Turn-in directory: ex02/
+Files to turn in: ft_print_reverse_alphabet.c
+Allowed functions: write
+• Create a function that displays the alphabet in lowercase, on a single line, in descending order, starting from the letter ’z’.
+• The function should be prototyped as follows:
+void ft_print_reverse_alphabet(void);
+
+************
+
+I tried this first:
+mkdir ../ex02
+cd ../ex02
+touch ft_print_reverse_alphabet.c
+vim ft_print_reverse_alphabet.c
+:Stdheader
+#include <unistd.h>
+
+void    ft_print_reverse_alphabet(void)
+{
+        char    letter;
+
+        letter = 'z';
+        while (letter >= 'a')
+        {       
+                write(1, &letter, 1);
+                letter--;
+        }
+}  
+
+Then with 3 steps test:
+1. compiler
+2. norminette
+3. logic
+
+All goes well, finished
+
+========= ex03 ========
+Exercise 03
+ft_print_numbers
+Turn-in directory: ex03/
+Files to turn in: ft_print_numbers.c
+Allowed functions: write
+• Create a function that displays all digits on a single line, in ascending order.
+• The function should be prototyped as follows:
+void ft_print_numbers(void);
+
+***********
+
+digit are only 10: 0 1 2 3 4 5 6 7 8 9
+so they are limited
+
+I would try with:
+mkdir ex03
+cd ex03
+touch ft_print_numbers.c
+vim ft_print_numbers.c
+:Stdheader
+#include <unistd.h>
+
+void  ft_print_numbers(void)
+{
+  chart  digit;
+
+  digit = '0';
+  while (digit >= '0')
+  {
+    write(1, &digit, 1);
+    digit++;
+  }
+}
+
+Wrong. 2 things:
+1. it's char, not chart
+2. digit >= '0', the logic is wrong, should be digit < '9'
+
+try again:
+void  ft_print_numbers(void)
+{
+  char  digit;
+
+  digit = '0';
+  while (digit <= '9')
+  {
+    write(1, &digit, 1);
+    digit++;
+  }
+}
+
+3 steps test again
+
+============ ex04 ===========
+Exercise 04
+ft_is_negative
+Turn-in directory: ex04/
+Files to turn in: ft_is_negative.c
+Allowed functions: write
+• Create a function that displays ’N’ or ’P’ depending on the sign of the integer passed
+as a parameter.
+◦ If n is negative, display ’N’.
+◦ If n is positive or zero, display ’P’.
+• The function should be prototyped as follows:
+void ft_is_negative(int n);
+
+**************
+
+I think it's about if and else, even I don't know anything, let me try with this one first:
+
