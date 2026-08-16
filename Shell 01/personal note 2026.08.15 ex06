@@ -1,0 +1,35 @@
+========= ex06 =======
+skip.sh
+Turn-in directory: ex06/
+Files to turn in: skip.sh
+Allowed functions: None
+• Write a command line that executes ls -l but displays only every second line,
+starting from the first line.
+• Example output:
+$>ls -l | cat -e
+total 4$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:46 skip.sh$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:41 tata$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:41 titi$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:41 toto$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:41 tutu$
+$>
+$>./skip.sh | cat -e
+total 4$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:41 tata$
+-rw-rw-r-- 1 eagle eagle ** ** 15 15:41 toto$
+$>
+
+************
+
+So we still use ls -l and awk
+the only thing is that remember when we run something like ls -l, it will show something like:
+total xx$
+-rwxxxxxxxxxxx 1 eagle eagle xx xx 15 10:10 skip.sh$
+....
+
+it means total xx$ is always the first line, and then the files we created
+
+so when we want to count the lines with awk
+for example
+awk NR %2 !=0
