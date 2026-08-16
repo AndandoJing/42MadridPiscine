@@ -1,0 +1,13 @@
+===== ex00 =====
+Exercise 00
+ft_ft
+Turn-in directory: ex00/
+Files to turn in: ft_ft.c
+Allowed functions: None
+• Create a function that takes a pointer to an int as a parameter and sets the value
+of that int to "42".
+• The function should be prototyped as follows:
+void ft_ft(int *nbr);
+
+*******
+
