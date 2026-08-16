@@ -1,0 +1,89 @@
+======= ex07 ======
+Exercise 07
+ft_putnbr
+Turn-in directory: ex07/
+Files to turn in: ft_putnbr.c
+Allowed functions: write
+• Create a function that displays the number passed as a parameter. The function
+must be able to display all possible values of an int type variable.
+• The function should be prototyped as follows:
+void ft_putnbr(int nb);
+• Example:
+◦ ft_putnbr(42); should display 42.
+
+**********
+My idea was:
+#include <unistd.h>
+
+void  ft_putnbr(int nb)
+{
+  write(1, &nb, 1);
+}
+
+it won't work, since number is not character, so we need to turn the integer 42 into characters.
+For example, nb = 42, we need to turn it into characters
+1. from 42, we get the 4
+  // 42 / 10 = 4, we get the 4
+2. turn 4 into '4' -> 4 + '0' = 52 = '4'
+3. write '4'
+4. get 2 in 42
+  // 42 % 10 = 2
+5. turn to '2'
+6. write '2'
+
+small test, to write in number 7 into character
+I wanted to try:
+nb = 7
+s = &nb / 10 + '0'
+write(1, &s, 1)
+t = &nb % 10 + '2'
+write(1, &t, 1)
+
+Wrong.
+1. &nb is a memory address
+should be nb / 10 and nb % 10
+2. '2' is written 
+'2' in ASCII is 50, it means the result will be added 50, if the result of % 10 is 5, 5 + 50 = 55 = '7', is wrong
+should be nb % 10 + '0', should alwasy + '0'
+3. no defined what type they are
+char s
+char t
+
+So after the modification, it should be:
+char c;
+c = nb + '0'
+write(1, &c, 1);
+
+Back to numbers between 0-99, let's try my idea:
+char nb;
+char n10;
+char n1;
+n10 = nb / 10 + '0;
+write(1, &n10, 1);
+n1 = nb % 10 + '0';
+write(1, &n1, 1);
+
+Wrong.
+1. The function needs to be int, not char, char can only restore 1 character, too limited to restore something bigger.
+2. missing a ' for '0'
+3. only words for 10-99
+  // if it's 7 for example, it will print 07, adding a 0
+
+void  ft_putnbr(int nb)
+{
+  char n10;
+  char n1;
+
+  if (nb >= 10)
+  {
+  n10 = nb / 10 + '0';
+  write(1, &n10, 1);
+  }
+  
+  n1 = nb % 10 + '0';
+  write(1, &n1, 1);
+}
+This one works for 0-99 only.
+
+try again with another one:
+#include <unistd.h>
