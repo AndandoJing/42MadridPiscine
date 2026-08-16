@@ -11,3 +11,89 @@ void ft_ft(int *nbr);
 
 *******
 
+*nbr itself is a pointer, restores an direction of a variable int.
+examples:
+int a = 10: there is a box, inside of the box, number 10 is there
+&a: the address of the box
+int *nbr: there is a paper, written 301
+*nbr: with the paper, you walk to room 301, and see the things inside
+
+so:
+int a = 10;
+ft_ft(&a); // pass the direction of a to the function
+
+So:
+void  ft_ft(int *nbr)
+{
+  *nbr = 42; // *nbr means go the the direction pointing nbr, change the value to 42"
+}
+after this, a is 42
+
+we can create a test to run:
+#include <stdio.h>
+
+void  ft_ft(int *nbr);
+
+int main(void)
+{
+  int  x = -42;
+  printf("x before = %d\n", x);
+  ft_ft(&x);
+  printf("x before = %d\n", x);
+  return(0);
+}
+here %d tells the printf: by following I will give a int type thing, show it in decimal number\
+meanwhile, \n means a new line
+why is int x is linked with int *nbr?
+because we are linking them throught the statement of ft_ft(&x), before this statement, truely they are not linked
+
+====== ex01 ======
+Exercise 01
+ft_ultimate_ft
+Turn-in directory: ex01/
+Files to turn in: ft_ultimate_ft.c
+Allowed functions: None
+• Create a function that takes a pointer to a pointer to a pointer to a pointer to a
+pointer to a pointer to a pointer to a pointer to a pointer to an int as a parameter
+and sets the value of that int to “42”.
+• The function should be prototyped as follows:
+void ft_ultimate_ft(int *********nbr);
+
+***********
+
+my idea was:
+void  ft_ultimate_ft(int *********nbr)
+{
+  *********nbr = 42;
+}
+
+Wrong.
+because it should be ********nbr( 8* not 9*)
+why?
+Let's do it with examples:
+1. with 1*
+void ft_ft(int *nbr)
+  when we use it, it's 
+    int x = 0;
+    ft_ft(&x)
+so here:
+  nbr is the pointer itself(without *), the value is &x
+  *nbr is quoted once, the value is the value of x
+  so:
+    nbr = &x
+    *nbr = x
+  when we say *nbr = 42, we are changing the value of x, *nbr = x = 42
+
+So with 9* (*********), nbr is still a pointer, in total 9 levels 
+with each *, we are getting 1 level deeper:
+written | how many levels we moved on | what level we have reached
+nbr     | 0                     | pointer at level 1 (restored the address of level 2)
+*nbr    | 1                     | pointer at level 2 (restored the address of level 3)
+...
+*******nbr| 7                   | pointer at level 8 (resotred the address of level 9)
+*******nbr | 8                  | pointer at level 9 (the final int)
+there is no level 9
+
+nbr(pointer1) | pointer2 | pointer3 | pointer 4 | pointer 5 | pointer 6 | pointer 7 | pointer 8 | pointer 9
+          ----->       ----->      --->        ---->       --->        --->        --->        ---->
+        jump 1 time  jump 2 times                                                              jump 8 times
