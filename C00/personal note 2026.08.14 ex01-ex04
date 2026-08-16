@@ -310,3 +310,33 @@ int main(void)
   ft_is_negative(3);
   return(0);
 }
+but I don't want to do it several times with different numbers, so I asked if I can just test them inside terminal
+
+Learning some points new:
+argc, argument count
+argv, argument vector
+
+write(int fileds, const void *buf, size_t nbyte);
+
+test it with another .c file:
+#include <unistd.h>
+
+void    ft_is_negative(int n);
+
+int     main(void)
+{       
+        ft_is_negative(-42);
+        write(1, "\n", 1);
+        ft_is_negative(0);
+        write(1, "\n", 1);
+        ft_is_negative(5);
+        write(1, "\n", 1);
+        return(0);
+}  
+
+cc -Wall -Wextra -Werror ft_is_negative.c main.c -o test
+here -o means output to a file named xxx, here named test
+compile the two .c files, link them, and output a program named test
+if i don't add -o test, the compiler will give it a name by default as a.out
+
+another way to do it
