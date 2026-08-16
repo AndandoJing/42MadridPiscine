@@ -87,3 +87,97 @@ This one works for 0-99 only.
 
 try again with another one:
 #include <unistd.h>
+
+void  ft_putnbr(int nb)
+{
+  char nb10;
+  char nb1;
+
+  if nb >= 10
+  {
+    nb10 = nb / 10 + '0';
+    write(1, &nb10, 1);
+  }
+  if nb <= -10
+  {
+    nb10 = nb / 10 + '0';
+    write(1, &nb10, 1);
+  }
+  if -9 <= nb <= 9
+  {
+    nb1 = nb % 10 + '0';
+    write(1, &nb1, 1);
+  }
+  while ...
+-----------can't continue---------
+Wrong.
+1. if nb >= 10
+missing ()
+2. -9 <= nb <= 9
+in C it can't be like this, should be:
+  if (nb >= -9 && nb <=9)
+  here && means "and"
+3. the if for positive and negative is the same
+4. it's only for two-digit number
+
+Let's use recursion.
+1. If it's negative, print '-', turn nb to positive
+2. if nb >= 10, recurse, turn in nb / 10
+3. print nb % 10 + '0'-------- the current 1 digit location
+
+ft_putnbr(nb):
+  if nb < 0:
+    print '-'
+    nb = -nb
+  if nb >= 10:
+    use ft_putnbr(nb / 10) <----recurve
+  print (nb % 10 +'0')
+
+Try:
+#include <unistd.h>
+void  ft_putnbr(int nb)
+{
+  char  c;
+
+  if  (nb < 0)
+  {
+    write(1, "-", 1);
+    nb = -nb;
+  }
+  if  (nb >=10)
+  {
+    ft_putnbr(nb / 10);
+  }
+  c = nb % 10 + '0';
+  write(1, &c, 1);
+}
+
+test file can be:
+
+cat > main.c << 'EOF'
+#include <unistd.h>
+void ft_putnbr(int nb);
+int main(void)
+{
+    ft_putnbr(-2147483648);
+    write(1, "\n", 1);
+    ft_putnbr(-42);
+    write(1, "\n", 1);
+    ft_putnbr(0);
+    write(1, "\n", 1);
+    ft_putnbr(42);
+    write(1, "\n", 1);
+    ft_putnbr(2147483647);
+    write(1, "\n", 1);
+    return (0);
+}
+EOF
+
+here cat > main.c << 'EOF'
+in Shell
+cat: read the file and show it on the screen
+>: put the output to somewhere, instead of the screen
+main.c: write inside this file
+<<: here-document: telling Shell that by following there are some text, accept them all
+'EOF': the mark of end, EOF=End of File
+
