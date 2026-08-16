@@ -67,33 +67,42 @@ void  ft_ultimate_ft(int *********nbr)
   *********nbr = 42;
 }
 
+nbr is the pointer
+*nbr is the thing that the pointer is pointing to
+
+Attention:
+nbr = &x , what is stored in nbr is the address of x
+*nbr = x, go to the address where nbr is pointing to, and set the value as same as x, i'm just understing it as giving value
+if x is 0, *nbr = x is saying: write 0 to that address
+
+// is single line comment
+/* is multi line comment
+can write multi line comments */
+
+According to the norm, comments cannot be inside function bodies
+So outside function bodies yes it can be, both // and /* */
+
+===== ex02 ====
+Exercise 02
+ft_swap
+Turn-in directory: ex02/
+Files to turn in: ft_swap.c
+Allowed functions: None
+• Create a function that swaps the values of two integers using their addresses received
+as parameters.
+• The function should be prototyped as follows:
+void ft_swap(int *a, int *b);
+
+*******
+
+My idea was:
+void ft_swap(int *a, int *b)
+{
+ *a = A
+ *b = B
+ *a = B
+ *b = A
+}
+
 Wrong.
-because it should be ********nbr( 8* not 9*)
-why?
-Let's do it with examples:
-1. with 1*
-void ft_ft(int *nbr)
-  when we use it, it's 
-    int x = 0;
-    ft_ft(&x)
-so here:
-  nbr is the pointer itself(without *), the value is &x
-  *nbr is quoted once, the value is the value of x
-  so:
-    nbr = &x
-    *nbr = x
-  when we say *nbr = 42, we are changing the value of x, *nbr = x = 42
-
-So with 9* (*********), nbr is still a pointer, in total 9 levels 
-with each *, we are getting 1 level deeper:
-written | how many levels we moved on | what level we have reached
-nbr     | 0                     | pointer at level 1 (restored the address of level 2)
-*nbr    | 1                     | pointer at level 2 (restored the address of level 3)
-...
-*******nbr| 7                   | pointer at level 8 (resotred the address of level 9)
-*******nbr | 8                  | pointer at level 9 (the final int)
-there is no level 9
-
-nbr(pointer1) | pointer2 | pointer3 | pointer 4 | pointer 5 | pointer 6 | pointer 7 | pointer 8 | pointer 9
-          ----->       ----->      --->        ---->       --->        --->        --->        ---->
-        jump 1 time  jump 2 times                                                              jump 8 times
+the system doesn't know A and B,
