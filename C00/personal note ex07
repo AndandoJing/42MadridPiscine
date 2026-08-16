@@ -128,7 +128,7 @@ Let's use recursion.
 ft_putnbr(nb):
   if nb < 0:
     print '-'
-    nb = -nb
+    nb = -nb;
   if nb >= 10:
     use ft_putnbr(nb / 10) <----recurve
   print (nb % 10 +'0')
