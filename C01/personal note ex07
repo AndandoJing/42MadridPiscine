@@ -11,4 +11,135 @@ in the array.
 void ft_rev_int_tab(int *tab, int size);
 
 *************
+My idea was:
 
+void  ft_rev_int_tab(int *tab, int size)
+{
+  int  temp;
+  int  tab_left;
+  int  tab_right;
+
+  while(tab_left < tab_right)
+  {
+    temp = tab_left;
+    tab_left = tab_right;
+    tab_right = temp
+    return(0)
+  }
+}
+
+#include <stdio.h>
+
+int  main(void)
+{
+  tab[5] = "Hello";
+
+  printf("before: %d\n", tab[5]);
+  printf("after: %d\n", ft_rev_int_tab("Hello", 5));
+}
+
+Wrong.
+1. No sense for int  tab_left, int  tab_right, should be tab[left] and tab[right], we are comparing the element value inside the array tab.
+2. while should compare the value of variables, not index, comparing index is correct
+3. return(0) is inside a function void
+4. tab is a array of int, not char, with "Hello" no. tab[5] is visiting the 6th element
+5. the tab_left and tab_right doesn't have inicial value
+
+
+Modifition version 1:
+void  ft_rev_int_tab(int *tab, int size)
+{
+  int  temp;
+  int  left;
+  int  right;
+
+  left = 0;
+  right = size - 1;
+  while (left < right)
+  {
+    temp = tab[left];
+    tab[left] = tab[right];
+    tab[right] = temp;
+    left++;
+    right--;
+  }
+}
+
+#include <stdio.h>
+int  main(void)
+{
+  int  tab[5] = {1, 2, 3, 4, 5};
+  int  i = 0;
+
+  printf("before: ");
+  while (i < 5)
+  {
+    printf("%d\n", tab[i]);
+    i++;
+  }
+  printf("\n");
+
+  ft_rev_int_tab(tab, 5);
+
+  printf("after: ");
+  i = 0;
+  while (i < 5)
+  {
+    printf("%d ", tab[i]);
+    i++;
+  }
+  printf("\n");
+  return (0);
+}
+
+still some wrong, specially the format is not ok, the finally:
+void    ft_rev_int_tab(int *tab, int size)
+{
+        int     temp;
+        int     left;
+        int     right;
+
+        left = 0;
+        right = size - 1;
+        while (left < right)
+        {
+                temp = tab[left];
+                tab[left] = tab[right];
+                tab[right] = temp;
+                left++;
+                right--;
+        }
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        int     tab[5];
+        int     i;
+
+        i = 0;
+        tab[0] = 1;
+        tab[1] = 2;
+        tab[2] = 3;
+        tab[3] = 4;
+        tab[4] = 5;
+        printf("before:");
+        while (i < 5)
+        {
+                printf("%d, ", tab[i]);
+                i++;
+        }
+        printf("\n");
+        ft_rev_int_tab(tab, 5);
+        i = 0;
+        printf("after:");
+        while (i < 5)
+        {
+                printf("%d,", tab[i]);
+                i++;
+        }
+        printf("\n");
+        return (0);
+}
+*/
