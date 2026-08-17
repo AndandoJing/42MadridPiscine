@@ -1,0 +1,77 @@
+====== ex05 =====
+ft_putstr
+Turn-in directory: ex05/
+Files to turn in: ft_putstr.c
+Allowed functions: write
+• Create a function that displays a string of characters on the standard output.
+• The function should be prototyped as follows:
+void ft_putstr(char *str);
+
+********
+common error:
+didn't define the variable at first.
+
+For example, I wanted to try:
+#include <unistd.h>
+
+void    ft_putstr(char *str)
+{       
+        i = 0;------------------here missing the definition of i
+        stri[i] = 'a';-----------------error input str[i], and doesn't make sense because we don't need to create a new thing
+        while ('a' != '\0';------------- directly str[i] != '\0', and where is the other )?
+        {
+                write(1, str, 1);---------- is always opening the sanme thing, the first character, should be variable, &str[i]
+                i++;
+        }
+}       
+
+#include <stdio.h>
+
+int     main(void)
+{       
+        char    str[5]; -------- but we have 6 elements in deed, it means the las one is out
+
+        str[0] = 'H';
+        str[1] = 'e';
+        str[2] = 'l';
+        str[3] = 'l';
+        str[4] = 'o';
+        str[5] = '\0';
+        
+        ft_putstr(str)-------------missing ;
+}
+
+After the modification:
+#include <unistd.h>
+
+void    ft_putstr(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                write(1, &str[i], 1);
+                i++;
+        }
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char    str[6];
+
+        str[0] = 'H';
+        str[1] = 'e';
+        str[2] = 'l';
+        str[3] = 'l';
+        str[4] = 'o';
+        str[5] = '\0';
+        ft_putstr(str);
+        return (0);
+}
+*/
+
+
+  
