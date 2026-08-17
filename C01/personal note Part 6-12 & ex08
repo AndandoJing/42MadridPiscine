@@ -1,0 +1,65 @@
+Part 6 - sorting + nested loops
+void  ft_sort_int_tab(int *tab, int size);
+
+bubble sort
+outside: loop 1
+inside: loop 2
+
+===== ex08 =====
+
+ft_sort_int_tab
+Turn-in directory: ex08/
+Files to turn in: ft_sort_int_tab.c
+Allowed functions: None
+• Create a function that sorts an array of integers in ascending order.
+• The function takes two arguments: a pointer to an int and the number of elements
+in the array.
+• The function should be prototyped as follows:
+void ft_sort_int_tab(int *tab, int size);
+
+*************
+
+My idea:
+void    ft_sort_int_tab(int *tab, int size)
+{
+        int     i;
+        int     j;
+        int     temp;
+
+        j = 0;
+        i = 0;
+        while (j <= size -1) ------------ missing j++ to loop
+        {
+                while (tab[i] > tab[i + 1])----------but if starts with i <= i + 1? it will skip, so should use if
+                {
+                        temp = tab[i];
+                        tab[i] = tab[i + 1];
+                        tab[i + 1] = temp; ---------------- missing i++, no loop here
+                }
+        }
+}
+
+#include <stdio.h>
+
+int     main(void)
+{
+        int     tab;-------------should be array, like int  tab[3]
+
+        tab[0] = 3;
+        tab[1] = 1;
+        tab[2] = 2;
+        printf("before: ", tab);-----------no %d, tab is not used
+        ft_sort_int_tab(tab, 3);
+        printf("after: ", tab);-----------no %d, tab is not used
+        return (0);
+}
+
+Wrong.
+
+Attention for nominette:
+1. while (...)
+2. new line between definition of varibles and assignment of their values
+3. operation always with space, 1space+space2
+
+Let me do it again:
+
