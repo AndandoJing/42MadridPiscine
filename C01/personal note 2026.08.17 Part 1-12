@@ -211,7 +211,7 @@ int  *p; ------- declaration context, stating a variable
   only after p = &n; when we write something like *p, here is dereference p
   
 *p = 30;
-both if them has the symbol *
+both of them has the symbol *
 
 int  *p;
 C needs to know this address is pointing to what type of data
@@ -259,7 +259,27 @@ now
 
 *************
 
+C is pass by value
+void  functionname(int *p)
+{
+  *p = givennewvalue
+}
 
+int  main(void)
+{
+  int a;
+  int *q;
 
+  a = avalue;
+  q = &a;
+  functionname(q);
+}
 
+By standard is the formula, and in this way, q is the address of a, copying q's value to p, so p has the address of a
+with the function, we change the value itself of a
+
+what the variable saves is the current value, not an automatic math formula
+so if we know a = 17, b = 5, a / b = 3, a % b = 2
+we write a / b = 3 into the variable result_div, now result_div = 3, but when we change a and b to 100 and 20,
+the variable result_div is still 3, it won't change to 5 automaticlly, we must call the function again to calculate again
 
