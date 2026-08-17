@@ -1,0 +1,83 @@
+Part 3 double pointer
+*********p
+n = 42
+*p = n's value
+so there are 8 pointer direct to *p
+in total 9 pointers including p itself
+
+difference among:
+p, *p, &p
+**p, &**p
+
+p is an address, &p is its address
+*p is reading the value saved in the address p, which is the n
+**p is reading the value of the address of *p
+
+p , 0x1000, saves the direction of n, inside 0x1000 there is n = 42
+*p, reading what is inside 0x1000, which is n, and n = 42
+let's assume pp = *p, pp, 0x2000
+*pp is reading the value of the address of pp, 0x2000, it restores the address of p 0x1000, so reading the value 0x1000
+
+n = 42
+&n = 0x1000
+p = 0x1000
+*p = 42
+&p = 0x2000
+pp = 0x2000
+*pp = 0x1000
+**pp = 42
+&pp = 0x3000
+
+**********************************
+
+Part 4 Array
+int  a;
+to save just one int is easy, but if we want to save lots of int: array
+int numbers[5]; ------------- create an array named numbers, inside we can restore 5 int.
+Inside Array, each location is a element, so int numbers[5], there are 5 elements, each element is int
+
+If char letters[5]; --------- each element is char
+
+How to visit each element in an array: using index
+in C, the index starts from 0
+so int numbers[5]: 0, 1, 2, 3, 4, length = 5, las one is index 4
+length = N, valid index: 0 -> N-1
+
+to assign values for the elements:
+int  numbers[5];
+
+numbers[0] = 10;
+numbers[1] = 20;
+numbers[2] = 30;
+numbers[3] = 40;
+numbers[4] = 50;
+
+array is suitable for while
+if we want to change all numbers to 42
+using while:
+int  i;
+i = 0;
+while (i < 5)
+{
+  numbers[i] = 42;
+  i++;
+}
+
+formula:
+i = 0;
+while  (i < size)
+{
+  array[i] ...;
+  i++;
+}
+
+the array in C, in the memory is in order
+int usuallu ocupies 1 byte
+
+****************
+
+void  something(int *tab)
+here int *tab
+the first element in array is tab[0], itself is a int
+so the function can start from the begining of an array, opearte one by one all the elements
+
