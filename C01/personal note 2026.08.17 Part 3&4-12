@@ -81,3 +81,22 @@ here int *tab
 the first element in array is tab[0], itself is a int
 so the function can start from the begining of an array, opearte one by one all the elements
 
+*************
+
+the string always ends with '\0' (null terminator)
+'H' is a character
+"Hello" is a string
+'a' is a character
+"a" is a string
+
+char *p; --------- pointer to char
+char *str; -------------str is a pointer to char
+str is pointing to the first character of the string (address)
+so if the whole string is "Hello", str is the address of the first character, "H"
+
+to print a string, since there's always a \0 at the end, we can take it as the marker
+let the loop ends when it comes to \0
+for example:
+i = 0;
+str[i] = 'a'
+'a' != '\0'
