@@ -1,0 +1,265 @@
+Daily learning Part 1/12
+char  letter;
+
+letter = 'a';
+
+int  n;
+
+n = 42;
+
+memory address <-> content
+
+variable | address | value
+n        | 0x1000  | 42
+
+write(1, &c, 1)
+  here & means address of operator
+
+n = 42
+n lives at 0x1000
+&n is 0x1000 then
+
+********************
+
+char  c;
+
+c = 'K';
+
+variable | address | value
+c        | 0x5000  | 'K'
+
+&c is 0x5000
+
+read the byte from a address which is WHERE (&c, &n, etc.)
+
+*********************
+
+If
+int  n;
+
+n = 42;
+
+n
+address = 0x1000
+value = 42
+
+and we want a variable to save the address of n, a normal variable is not enough, we would need:
+int *p
+then 
+p = &n
+
+p itself is also a variable, so p is saved in some memory address as well
+If p lives at 0x2000
+
+variable | address | value
+n        | 0x1000  | 42
+p        | 0x2000  | 0x1000 
+                      ^
+                      |
+                    which is the address of n
+
+the pointer itself is a variable, just special because what it saves is an address
+
+So
+n:
+address = 0x1000
+value = 42
+
+p:
+address = 0x2000
+value = 0x1000
+
+n -> 42
+&n -> 0x1000
+p -> 0x1000
+&p -> 0x2000
+
+&n == p
+
+address    |  pointer/variable |  address      |     value
+&p (0x2000) ->  p (0x1000)     == &n (0x1000)  ->    n = 42
+
+Dereference
+int  *p: statement, p is a pointer to an int
+but if there exist:
+p = &n
+then *p here * is dereference operator, means go to the address where p saves, to see what's inside
+
+p -> 0x1000
+*p means: go to 0x1000 and see what's inside -> 42
+
+n -> 42
+&n -> 0x1000
+p -> 0x1000
+*p -> 42
+&p -> 0x2000
+
+*************************
+
+*p = 100;
+means go to the address where p is pointing to, change the value there to 100
+before: 
+p contains 0x1000, which is the address if n, and n contains 42
+
+after running *p = 100;
+after:
+p -> n (contains 100)
+
+we changed another variable through a pointer
+
+Summary:
+n: the value inside n
+&n: where n is
+int *p: create a pointer p, pointing to int
+p = &n: let p to save the address of n
+p: the address saved by p
+*p: go to where p is pointing to and get the value there
+*p = 10: go to where p is pointing to and change the value to 10
+&p: where is the pointer p itslef is (address)
+
+Quiz:
+int  n;
+int  *p;
+
+n = 42;
+p = &n;
+
+we assume:
+address of n: 0x1000
+address of p: 0x2000
+
+1. what is the value of n?
+value of n: 42
+
+2. what is &n?
+&n is the address of n: 0x1000
+
+3. what is the value of p?
+value of p: the address of n: 0x1000
+
+4. what is &p?
+&p: adress of p: 0x2000
+
+5. what is *p?
+value of the address of p: 42
+
+6. if run *p = 21; what is n?
+n is 21
+
+7. after 6. the value of p saved is changed? if so, what it is now? if not, what is it?
+no, p saves the address of n, is always 0x1000
+
+8. what's the difference between p and *p?
+p saves the address of n, *p is reading the value of the n is addressed
+p is &n is 0x1000, *p is reading n is 42 before and 21 after
+
+***************
+
+Checkpoint - point tracing
+int  a;
+int  b;
+int  *p;
+
+a = 10;
+b = 20;
+p = &a;
+
+assuming:
+&a = 0x1000
+&b = 0x2000
+&p - 0x3000
+
+running:
+1. *p = 30;
+after running:
+a = 30
+b = 20
+p = 0x1000
+*p = 30
+
+2. p = &b;
+after running:
+a = 30
+b = 20
+p = &b = 0x2000
+*p = 20
+
+3. *p = 40;
+after running:
+a = 30
+b = 40
+p = 0x2000
+*p = 40 = b
+
+Finally, what is the difference between *p = 30; and p = &b;
+*p is reading the value of the address saved by p and change it to 30; p = &b is to let p save the address of b
+
+if now p = &b; then run a = 99; then if *p changes to 99? why?
+won't change the value of *p, because we haved changed the address that p saves to the address of b, *p is reading the value of b, so no matter what value a is, has nothing to do with *p
+
+*************
+
+int  *p; ------- declaration context, stating a variable
+  p is a pointer to an int
+  i want to create a pointer named p, and it should point to a int
+  we are not dereference anything
+  then we need to let it point to a valid int, like:
+    int  n;
+    n = 42;
+    p = &n;
+  only if, we have the p = &n -> 42
+  only after p = &n; when we write something like *p, here is dereference p
+  
+*p = 30;
+both if them has the symbol *
+
+int  *p;
+C needs to know this address is pointing to what type of data
+
+the type of point needs to be reasonable
+example:
+int  n;
+int  *p;
+
+n = 42;
+p = &n;
+
+both of them are int, so it's ok.
+
+char  c;
+char  *p;
+
+c = 'K';
+p = &c;
+
+both of them are char, also ok.
+
+*******************
+
+write(1, &c, 1);
+
+if 
+char  c;
+
+c = 'K';
+
+then:
+c -> 'K';
+&c -> address of c;
+
+so write gest the memory address of 'K'
+char  c;
+char  *p;
+
+c = 'K';
+p = &c;
+
+now
+&c == p
+
+*************
+
+
+
+
+
