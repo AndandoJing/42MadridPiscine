@@ -1,0 +1,61 @@
+Pointer as function parameter
+void  ft_putchar(char c)
+{
+  write(1, &c, 1);
+}
+
+ft_putchar('K');
+
+function parameter -> char c
+argument -> 'K'
+
+when we use the function, pass the value of 'K' to parameter c
+so inside the function:
+c = 'K'
+
+**********
+
+void  change_number(int n)
+{
+  n = 100;
+}
+
+int  main(void)
+{
+  int  a;
+
+  a = 42;
+  change_number(a);
+  return(0);
+}
+
+Here is passing the value of a to the parameter n, so a = 42 and n will be 42 as well
+but they are still two variables
+
+But in this way, we will never be able to change the value of a since it's written, not a variable.
+So to facilitate the change later, we can pass the address of a, and let the function prepare a parameter to save the address.
+void  change_number(int *n);
+using:
+change_number(&a);
+If:
+&a = 0x1000
+using change_number(&a); is passing 0x1000 to the function, so the parameter int  *n saves the address of 0x1000
+
+Example:
+main              function
+a                  n
+0x1000            0x5000
+42                0x1000
+
+After this modification, we can change the value of a:
+void  change_number(int *n)
+{
+  *n = 100;
+}
+using: 
+change_number(&a);
+
+so inside the function: *n = 100
+n -> 0x1000 -> found a -> change the value to 100
+so after using the function, the value of a is 100
+
