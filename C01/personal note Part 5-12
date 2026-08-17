@@ -1,0 +1,63 @@
+void ft_rev_int_tab(int *tab, int size);
+int tab[5] = {1, 2, 3, 4, 5};
+ft_rev_int_tab(tab, 5);
+
+when we pass the value through ft_rev_int_tab(tab, 5);
+what are we passing?
+not the whole string, but the address of the first element of the string, the &tab[0]
+this tab, when passing the arguments, it decay to int * (this is a pointer), its value is &tab[0]
+the function receive int *tab, it's an address of 8 bytes, not 5 int.
+
+in the function, when visiting through *tab or tab[i], it's visiting the original array, not the copy
+passing argument = passing address = what is changed in the function is the original array
+
+void ft_rev_int_tab(int *tab, int size);
+we need to set the int size here, instead of a size0f(tab) inside the function
+
+because inside the function:
+void  ft_rev_int_tab(int *tab, int size)
+{
+  // sizeof(tab) here returns 8(the size of the pointer, not the array numbers of bytes (byte count)
+}
+inside the function, tab is int *, the pointer, sizeof(tab) is counting the bytes ocupied by the pointer itself, not the original array.
+
+another example:
+only inside the bloc of where we define the array, sizeof can calculate the byte count of the array
+int  main(void)
+{
+  int  tab[5];
+  siezof(tab); // = 5 * 4 = 20, here is ok
+}
+
+int tab[5] = {1, 2, 3, 4, 5};
+here tab is array, int tab[5] states that this is an array with 5 int
+tab is the name of this array
+int tab[5] = statement, means: define an array named tab, inside there are 5 int.
+
+
+char str[] = "Cat";
+here is string, original it's array of char, but in the end it has '\0'
+
+
+*****************
+Difference of *
+1. 
+int *p ---------here * is part of the statement of type
+* here means: p is a pointer, it's pointing to a int
+it's not reading the value
+ticketing p: you will store an address of a int
+2.
+*p = 42 ------------- go to the address saved by p, change the value to 42
+value = *p  
+int x = *p ----------  go to the address saved by p, read the value and pass it to x
+here the * is dereference operation symbol
+
+
+
+so if there is 
+int *p = *q
+if we say *p's address is 0x2000
+p's address is 0x1000
+n has the address 0x1000, value of n = 42
+
+
