@@ -1,0 +1,6 @@
+double pointer
+*********p
+n = 42
+*p = n's value
+so there are 8 pointer direct to *p
+in total 9 pointers including p itself
