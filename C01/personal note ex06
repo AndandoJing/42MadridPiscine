@@ -1,0 +1,43 @@
+======= ex06 =======
+ft_strlen
+Turn-in directory: ex06/
+Files to turn in: ft_strlen.c
+Allowed functions: None
+• Create a function that counts and returns the number of characters in a string.
+• The function should be prototyped as follows:
+int ft_strlen(char *str);
+
+********
+Here the parameter is str
+count with what variable?
+  int num
+when while stops?
+  when str[i] is on '\0' the fin mark
+what is the return?
+  return the final i number 
+
+
+int  ft_strlen(char *str)
+{
+  int  i;
+  
+  i = 0;
+  while (str[i] != '\0')
+    i++;
+  return (i);
+}
+
+/*
+#include <stdio.h>
+
+int  main(int)
+{
+  printf("Cat -> length=%d\n", ft_strlen("Cat"));
+  printf("Hello -> length=%d\n", ft_strlen("Hello"));
+  printf("Piscine -> length=%d\n", ft_strlen("Piscine));
+  return (0);
+}
+*/
+
+Careful, with the printf here.
+this task asks no function.
