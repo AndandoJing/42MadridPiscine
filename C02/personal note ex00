@@ -1,0 +1,90 @@
+src: source
+dest: destination
+strcpy: string copy
+
+📋 C02 ex00 — ft_strcpy 经验总结
+
+题目
+
+写一个函数 char *ft_strcpy(char *dest, char *src)，把 src 指向的字符串拷贝到 dest，包括终止符 '\0'，返回 dest。
+ft_strcpy
+Turn-in directory: ex00/
+Files to turn in: ft_strcpy.c
+Allowed functions: None
+• Reproduce the behavior of the function strcpy (man strcpy).
+• Here is how it should be prototyped:
+char *ft_strcpy(char *dest, char *src);
+
+一、逐轮错误记录
+
+轮次 错误描述 根因分类
+
+第1轮 函数返回类型写成 char，return(char) 返回了类型名 概念混淆
+
+第1轮 循环外写 dest[i+1] = '\0'，越界一字节 逻辑错误
+
+第2轮 ft_strcpy(&dest, &src) 调用时加了 & 概念退步（之前 ex07 已犯过）
+
+第3轮 char src[]; 不指定大小 + src[] = "Hello!"; 分开赋值 语法规则不清
+
+第3轮 src("Hello!") 把数组当函数调用 概念混淆
+
+第3轮 result = ft_strcpy(...) 但 result 没声明 粗心
+
+第4轮 返回类型又退步回 char（之前改对过又改错） 反复退步
+
+第4轮 src[0] = "H" 用双引号赋值给 char，且漏了 '\0' 概念混淆
+
+第4轮 数组大小声明为 [6] 但内容需要 7 字节（含 \0） 粗心
+
+二、反复出现的薄弱点（跨 exercise 多次犯）
+
+🔴 反复退步（最需要警惕）
+
+薄弱点 历史出现 本次又犯
+
+数组传参不加 & ex07 ft_rev_int_tab(&tab, 5) ❌ 本次 ft_strcpy(&dest, &src) ❌
+
+返回类型写错 ex00 ft_strlen 写成 void ❌ 本次先写对 char * 又退步回 char ❌
+
+swap/拷贝时没访问数组元素 ex07 temp = left 而不是 temp = tab[left] 本次 dest[i+1] 越界、整体逻辑摇摆
+🟡 新暴露的概念盲区
+薄弱点 说明
+
+双引号 "H" vs 单引号 'H' "H" 是字符串字面量（类型 char *，含 \0），'H' 是字符常量（类型 char）。给 char 变量或 char 数组元素赋值时必须用单引号
+
+逐个字符初始化数组后必须手动加 '\0' 用 src[0]='H' 这种方式时，编译器不会自动补 \0，必须 src[n] = '\0'
+
+printf("%s", src) 为什么 src 就指向整个字符串 src 是地址（指向第一个字符），%s 从那个地址开始一直读到 \0。不需要传 &src，不需要解引用
+
+数组声明必须指定大小（除非声明时直接初始化） char src[]; 不合法；char src[] = "Hello!"; 合法（编译器推断大小）
+
+三、给 ChatGPT 的教学调整建议
+
+用户在 C02 ex00 的表现暴露了一个严重问题：之前在 C01 里已经纠正过的错误，换一个 exercise 又原样犯回来。特别是：
+
+1. 数组传参加 & — ex07 问过、解释过、当时理解了，ex00 又犯
+
+2. 返回类型手滑退步 — 改对过又改错
+
+3. 不理解 'H' vs "H" 的本质区别
+
+> 建议：
+
+- 在继续推进 C02 之前，插入一个"退步检查"环节：让用户不查资料、从零默写 ft_strlen + ft_swap + ft_rev_int_tab + ft_strcpy，必须一次过编译+运行正确。如果任何一个退步，停下来重新讲，不要继续往前
+
+- 专门做一个 5 分钟的 drill：给 10 个赋值语句，让用户判断用 " " 还是 ' '，并解释类型
+
+- 强调考试场景：Exam 01 里没有 hint，这些退步 = 丢分。用户需要把"数组名传参不加 &"和"双引号 vs 单引号"变成不需要思考的条件反射
+
+- 每次用户贴代码时，assistant 第一眼先检查：返回类型对不对？参数传 & 了吗？ 这两个是用户最高频的退步点
+
+四、用户当前状态
+
+• ✅ 最终版本函数逻辑正确，Norm 通过
+
+• ✅ 理解了 %s + 数组名 = 自动读到 \0 的机制
+
+• ❌ 但退步频率高，说明知识没有固化
+
+
