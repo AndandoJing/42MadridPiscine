@@ -92,6 +92,10 @@ b → 12
 Wrong points:
 1. not necessary int a and int b, it will cause redeclaration, besides, a and b are int variables, not pointer, has nothing to do with the arguments.
 2. when we swtich, we should swtich the pointer themselves, the addresses.
+3. always forget to resert i = 0 after running the function and to print
+4. difference when choose tab or &tab for int *, tab is pointing to the address of tab[0], which is &tab[0], and &tab is pointing to the address of tab itself.
+5. missing left++ and right--
+6. so i didn't remember to reset the data or to move the location of the data that I want to read
 ---
 
 ## Exercise 02 — Reverse an Integer Array
