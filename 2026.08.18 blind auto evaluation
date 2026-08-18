@@ -1,0 +1,236 @@
+# Morning Blind-Retrieval Mini Exam
+
+**Purpose:** C01 consolidation and Exam01-style independent reconstruction  
+**Recommended time:** 55 minutes  
+**Language:** C  
+**Reference material:** Not allowed  
+**Existing code:** Do not inspect your previous C01 files  
+**Compiler flags:** `-Wall -Wextra -Werror`
+
+## Rules
+
+- Do not search online.
+- Do not open previous solutions.
+- Do not use `printf` inside submitted functions.
+- Write every function from an empty file.
+- Use only `write` when a task explicitly allows it.
+- Compile every exercise separately.
+- Test only after completing your first version.
+- Record the time spent on each exercise.
+- If stuck, write the intended algorithm in plain English before changing the code.
+
+---
+
+## Exercise 00 — String Length
+
+**Directory:** `ex00/`  
+**File:** `ft_strlen.c`
+
+Write the following function:
+
+```c
+int	ft_strlen(char *str);
+```
+
+The function must return the number of characters in `str`.
+
+The terminating null character `'\0'` must not be counted.
+
+### Expected behavior
+
+```text
+ft_strlen("")        → 0
+ft_strlen("A")       → 1
+ft_strlen("Piscine") → 7
+```
+
+**Allowed functions:** None  
+**Target time:** 8 minutes
+
+---
+
+## Exercise 01 — Swap Two Integers
+
+**Directory:** `ex01/`  
+**File:** `ft_swap.c`
+
+Write the following function:
+
+```c
+void	ft_swap(int *a, int *b);
+```
+
+The function must exchange the values of the two integers pointed to by `a` and `b`.
+
+### Example
+
+Before:
+
+```text
+a → 12
+b → 42
+```
+
+After:
+
+```text
+a → 42
+b → 12
+```
+
+**Allowed functions:** None  
+**Target time:** 7 minutes
+
+---
+
+## Exercise 02 — Reverse an Integer Array
+
+**Directory:** `ex02/`  
+**File:** `ft_rev_int_tab.c`
+
+Write the following function:
+
+```c
+void	ft_rev_int_tab(int *tab, int size);
+```
+
+The function must reverse the order of the elements in the array.
+
+### Expected behavior
+
+```text
+[1, 2, 3, 4, 5] → [5, 4, 3, 2, 1]
+[1, 2, 3, 4]    → [4, 3, 2, 1]
+[8]             → [8]
+```
+
+The function must safely handle:
+
+```text
+size == 0
+size == 1
+```
+
+**Allowed functions:** None  
+**Target time:** 12 minutes
+
+---
+
+## Exercise 03 — Sort an Integer Array
+
+**Directory:** `ex03/`  
+**File:** `ft_sort_int_tab.c`
+
+Write the following function:
+
+```c
+void	ft_sort_int_tab(int *tab, int size);
+```
+
+The function must sort the integer array in ascending order.
+
+### Expected behavior
+
+```text
+[3, 1, 2]       → [1, 2, 3]
+[3, 2, 1]       → [1, 2, 3]
+[1, 2, 3]       → [1, 2, 3]
+[2, 1, 2, 1]    → [1, 1, 2, 2]
+[-1, 4, 0, -3]  → [-3, -1, 0, 4]
+```
+
+The function must safely handle arrays containing zero or one element.
+
+**Allowed functions:** None  
+**Target time:** 18 minutes
+
+---
+
+## Exercise 04 — Explain the Boundary
+
+Do not run code for this exercise.
+
+Consider:
+
+```c
+while (i < size - 1)
+{
+	if (tab[i] > tab[i + 1])
+	{
+		/* swap */
+	}
+	i++;
+}
+```
+
+Answer in English:
+
+1. Why is the condition `i < size - 1`?
+2. What would happen if the condition were `i < size`?
+3. For an array of three elements, which values may `i` take?
+4. Why is `tab[size]` outside the array?
+5. What is the difference between passing `tab` and passing `tab[3]` to a function?
+
+**Target time:** 5 minutes
+
+---
+
+## Final Verification
+
+For every source file, run:
+
+```bash
+norminette
+```
+
+Then compile with:
+
+```bash
+cc -Wall -Wextra -Werror -c file_name.c
+```
+
+After the blind-retrieval phase, create separate test files and verify the required cases.
+
+Do not place the following in the final exercise files:
+
+```text
+main
+printf
+stdio.h
+test helper functions
+```
+
+## Self-Evaluation
+
+Record:
+
+```text
+Exercise 00 time:
+Exercise 01 time:
+Exercise 02 time:
+Exercise 03 time:
+Exercise 04 time:
+
+Functions completed without help:
+Compiler errors:
+Norminette errors:
+Boundary mistakes:
+Pointer mistakes:
+Total time:
+```
+
+### Result levels
+
+```text
+Level A:
+All four functions reconstructed, compiled and tested independently.
+
+Level B:
+Correct algorithms, but minor syntax or Norminette help was required.
+
+Level C:
+One or more algorithms could not be reconstructed without viewing old code.
+
+Level D:
+Previous files or solutions were opened before completing a first attempt.
+```
