@@ -48,6 +48,13 @@ ft_strlen("Piscine") → 7
 **Target time:** 8 minutes
 
 ---
+My wrong:
+1. str[i], not another variable to check
+2. i++ is not linked to the loop condition
+3. return(i) but the function itself was written as void ft_strelen(char *str), it's because I memorize the function always starts from void, which is wrong.
+4. printf without %d to reveive the return value
+5. 
+---
 
 ## Exercise 01 — Swap Two Integers
 
@@ -81,6 +88,10 @@ b → 12
 **Allowed functions:** None  
 **Target time:** 7 minutes
 
+---
+Wrong points:
+1. not necessary int a and int b, it will cause redeclaration, besides, a and b are int variables, not pointer, has nothing to do with the arguments.
+2. when we swtich, we should swtich the pointer themselves, the addresses.
 ---
 
 ## Exercise 02 — Reverse an Integer Array
