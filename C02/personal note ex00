@@ -7,13 +7,6 @@ strcpy: string copy
 题目
 
 写一个函数 char *ft_strcpy(char *dest, char *src)，把 src 指向的字符串拷贝到 dest，包括终止符 '\0'，返回 dest。
-ft_strcpy
-Turn-in directory: ex00/
-Files to turn in: ft_strcpy.c
-Allowed functions: None
-• Reproduce the behavior of the function strcpy (man strcpy).
-• Here is how it should be prototyped:
-char *ft_strcpy(char *dest, char *src);
 
 一、逐轮错误记录
 
@@ -87,4 +80,5 @@ printf("%s", src) 为什么 src 就指向整个字符串 src 是地址（指向�
 
 • ❌ 但退步频率高，说明知识没有固化
 
+• 🎯 下一步：继续 C02 blind test（ex01 预计是 ft_strncpy 或类似），同时需要强化上述薄弱点
 
