@@ -55,6 +55,17 @@ int     main(void)
 }
 
 Wrong.
+special attention:
+we need to avoid the tab[i + 1] is out of size
+when a array has size number of elements, its legal index is 0 to size -1;
+when the codes visit tab[i + 1], we need to ensure that i + 1 <= size -1, which is i < size - 1
+if else, when i == size -1, visiting tab[i + 1], turns tab[size], which is out of the index.
+
+attention:
+1. size is a int, not unsigned
+2. don't visit tab[0] or tab[1]
+3. if we don't write %d, printf don't know that we need to take tab as integer and print it
+
 
 Attention for nominette:
 1. while (...)
@@ -63,3 +74,44 @@ Attention for nominette:
 
 Let me do it again:
 
+void        ft_sort_int_tab(int *tab, int size)
+{
+        int        j;
+        int        i;
+        int        temp;
+
+        j = 0;
+        while (j < size - 1)
+        {
+                i = 0;
+                while (i < size - 1)
+                {
+                        if (tab[i] > tab[i + 1])
+                        {
+                                temp = tab[i];
+                                tab[i] = tab[i + 1];
+                                tab[i + 1] = temp;
+                        }
+                        i++;
+                }
+                j++;
+        }
+}
+
+#include <stdio.h>
+
+void        ft_sort_int_tab(int *tab, int size);
+
+int        main(void)
+{
+        int        tab[3];
+
+        tab[0] = 3;
+        tab[1] = 1;
+        tab[2] = 2;
+        printf("before: %d\n", tab[0], tab[1], tab[2]);
+        ft_sort_int_tab(tab, 3);
+        printf("after: %d", tab[0], tab[1], tab[2]);
+        return (0);
+}
+        
