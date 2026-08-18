@@ -1,0 +1,67 @@
+==== ex01 ====
+ft_strncpy
+Turn-in directory: ex01/
+Files to turn in: ft_strncpy.c
+Allowed functions: None
+• Reproduce the behavior of the function strncpy (man strncpy).
+• Here is how it should be prototyped:
+char *ft_strncpy(char *dest, char *src, unsigned int n);
+
+**********
+
+My try:
+char    *ft_strncpy(char *dest, char *src, unsigned int n)
+{       
+        int     i;
+        
+        i = 0;
+        while (src[i] != '\0')
+        {       
+                i++;
+        }
+        while (i + 1 < n)
+        {       
+                dest[i] = src[i];
+                i++;    
+        }
+        while (i + 1 >= n)
+        {
+                dest[i] = src[i];
+                i++;
+        }
+        dest[i + 1] = '\0';
+        return (dest);
+}       
+
+#include <stdio.h>
+
+int     main(void)
+{       
+        char    src[4];
+        
+        src[0] = 'C';
+        src[1] = 'a';
+        src[2] = 't';
+        src[3] = '\0';
+        
+        printf("Source: %s\n", src);
+        ft_strncpy(dest, src, 2);
+        printf("Destination: %s", dest);
+        return (0);
+} 
+
+Wrong.
+函数逻辑的问题
+❌ 问题 1：第一个 while 只是数 src 长度，完全没用
+while (src[i] != '\0')
+{
+    i++;
+}
+这相当于数了 src 有多长，然后 i 停在了 '\0' 的位置。但你后面根本没用到这个长度信息，而且 i 已经不是 0 了，后面两个 while 从错误的位置开始拷贝。
+❌ 问题 2：三个 while 的设计本身就是错的
+你的思路好像是"先数长度 → 再判断 n 和长度的关系分情况拷贝"。但实际上 ft_strncpy 的逻辑非常简单——只需要一个循环：
+从 i = 0 开始，只要 i < n 且​ src[i] != '\0'，就拷贝 src[i] 到 dest[i]。
+如果 src 比 n 短，剩下的 dest 位置全部填 '\0'。
+❌ 问题 3：dest[i+1] = '\0' 越界
+跟 ex00 一模一样的错误。应该是 dest[i] = '\0';（或者如果你用 i 追踪拷贝了多少字符，在正确位置补 \0）。
+
