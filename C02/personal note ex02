@@ -6,6 +6,7 @@ Allowed functions: None
 • Create a function that returns 1 if the given string contains only alphabetical characters and 0 if it contains any other character.
 • Here is how it should be prototyped:
 int ft_str_is_alpha(char *str);
+It should return 1 if str is empty.
 
 ***********
 My try:
