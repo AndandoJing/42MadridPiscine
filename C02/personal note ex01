@@ -174,7 +174,7 @@ int     main(void)
 {
         char    src[4];
         char    dest[3];
-        int     i;
+        int             i;------------------ here attention, should be tab twice!!!
 
         src[0] = 'C';
         src[1] = 'a';
