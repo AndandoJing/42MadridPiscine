@@ -76,7 +76,7 @@ char    *ft_strncpy(char *dest, char *src, unsigned int n)
                 dest[i] = src[i];
                 i++;
         }
-        while(src[i] == '\0')
+        while(src[i] == '\0')-------------- still wrong, should be while (i < n )
         {
                 dest[i] = '\0';
                 i++;
@@ -100,3 +100,52 @@ int     main(void)
         printf("Destination: %s", dest);
         return (0);
 }  
+
+-----------------
+char    *ft_strncpy(char *dest, char *src, unsigned int n)
+{
+        unsigned int    i;
+
+        i = 0;
+        while (src[i] != '\0' && i < n)
+        {
+                dest[i] = src[i];
+                i++;
+        }
+        while (i < n)
+        {
+                dest[i] = '\0';
+                i++;
+        }
+        return (dest);
+}
+
+#include <stdio.h>
+
+int     main(void)
+{
+        char    src[4];
+        char    dest[3];
+
+        src[0] = 'C';
+        src[1] = 'a';
+        src[2] = 't';
+        src[3] = '\0';
+        printf("Source: %s\n", src);
+        ft_strncpy(dest, src, 2);
+        printf("Destination: %s", dest);
+        return (0);
+}
+~  
+
+
+Take way:
+char src[4]
+char dest[3]
+etc.
+
+1. we need to ensure that dest[i], here i should be n + 1, so it's big enough to include at least n and 1 for '\0'.
+2. be careful that in main, when we define char, it should include the exact number inside [], like char src[4], char dest[3], here 3 is calculated by ourselves
+3. to call the function, we should use ft_strncpy(dest, src, 2), here the 2, which is n, is defined.
+4. to define the example, should expand the example like src[0] = x, src[1] = y, etc.
+5. attention, we go through all that is before the '\0' last one, which means src[i] != '\0' && i < n, then from the exact '\0', it should be i < n, since we delete one condition before
