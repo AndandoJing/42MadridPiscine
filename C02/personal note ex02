@@ -57,7 +57,7 @@ int     ft_str_is_alpha(char *str)
                 if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
                 {
                         return (0);
-                        i++;
+                        i++; ---------------- won't run if it's "Ab"
                 }
         }
         return (1);
@@ -86,3 +86,40 @@ int     main(void)
         return (0);
 }
 */
+
+
+-----------------
+int     ft_str_is_alpha(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
+                {
+                        return (0);
+                        i++;
+                }
+        }
+        return (1);
+}
+
+#include <stdio.h>
+
+int     main(void)
+{
+        char    str1[4];
+        char    str2[] = "AbCD";
+        char    str3[1];
+
+        str1[0] = '8';
+        str1[1] = 'A';
+        str1[2] = 'b';
+        str1[3] = '\0';
+        str2[0] = '\0';
+        printf("Given string1: %s only alphabetical characters? %d\n", str1, ft_str_is_alpha(str1));
+        printf("Given string2: %s only alphabetical characters? %d\n", str2, ft_str_is_alpha(str2));
+        printf("Given string3: %s only alphabetical characters? %d\n", str3, ft_str_is_alpha(str3));
+        return (0);
+}
