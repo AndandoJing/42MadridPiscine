@@ -1,1 +1,56 @@
+===== ex03 =====
+ft_str_is_numeric
+Turn-in directory: ex03/
+Files to turn in: ft_str_is_numeric.c
+Allowed functions: None
+• Create a function that returns 1 if the given string contains only digits and 0 if it
+contains any other character.
+• Here is how it should be prototyped:
+int ft_str_is_numeric(char *str);
+• It should return 1 if str is empty
+
+*********
+
+My try:
+int     ft_str_is_numeric(char *str)
+{       
+        int     i;
+        
+        i = 0;
+        if (str[i] == '\0')
+        {
+                return (1);
+        }
+        if (str[i] < '0' || str[i] > '9')
+        {       
+                i++
+                return (0);
+        }
+        else
+        {       
+                return (1);
+        }
+}       
+
+#include <unistd.h>
+
+int     main(void)
+{       
+        char    str1[1];
+        char    str2[3];
+        char    str3[4];
+        
+        str1[0] = '\0';
+        str2[0] = '1';
+        str2[1] = '2';
+        str2[2] = '\0';
+        str3[0] = 'a';
+        str3[1] = '4';
+        str3[2] = '6';
+        str3[3] = 'b';
+        printf("%s->%d\n", str1, ft_str_is_numeric(str1));
+        printf("%s->%d\n", str2, ft_str_is_numeric(str2));
+        printf("%s->%d\n", str3, ft_str_is_numeric(str3));
+        return (0);
+} 
 
