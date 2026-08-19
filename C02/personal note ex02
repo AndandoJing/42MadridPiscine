@@ -117,7 +117,7 @@ int     main(void)
         str1[1] = 'A';
         str1[2] = 'b';
         str1[3] = '\0';
-        str2[0] = '\0';
+        str3[0] = '\0';
         printf("Given string1: %s only alphabetical characters? %d\n", str1, ft_str_is_alpha(str1));
         printf("Given string2: %s only alphabetical characters? %d\n", str2, ft_str_is_alpha(str2));
         printf("Given string3: %s only alphabetical characters? %d\n", str3, ft_str_is_alpha(str3));
