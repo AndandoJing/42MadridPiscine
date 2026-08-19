@@ -1,3 +1,15 @@
+====== ex02 ========
+ft_str_is_alpha
+Turn-in directory: ex02/
+Files to turn in: ft_str_is_alpha.c
+Allowed functions: None
+• Create a function that returns 1 if the given string contains only alphabetical characters and 0 if it contains any other character.
+• Here is how it should be prototyped:
+int ft_str_is_alpha(char *str);
+
+***********
+My try:
+
 int     ft_str_is_alpha(char *str)
 {
         int     i;
@@ -5,7 +17,7 @@ int     ft_str_is_alpha(char *str)
         i = 0;
         while (str[i] != '\0')
         {       
-                if ((str[i] <= a | str[i] >= z) && (str[i] <= A || str[i] >= Z))
+                if ((str[i] <= a | str[i] >= z) && (str[i] <= A || str[i] >= Z)) -------------a/z/A/Z should be characters, ' '. and missing a |. and should be < and >, a/z/A/Z should not be included.
                 return (0);
                 i++;
         }       
@@ -16,17 +28,61 @@ int     ft_str_is_alpha(char *str)
 
 int     main(void)
 {
-        char    str[3];
+        char    str[3];----------missing counting '\0'
         int             i;
         
         str[0] = '8';
         str[1] = 'A';
-        str[2] = 'b';
+        str[2] = 'b';----------- missing '\0',str[4]
         printf("Given string: %s\n", str);
-        printf("Only alphabetical characters?\n")
+        printf("Only alphabetical characters?\n")---------------missing ;
         if (ft_str_is_alpha(str) == 1)
                 printf("Yes");
                 else
                 printf("No");   
         return (0);
 }    
+
+----------
+
+modified:
+
+int     ft_str_is_alpha(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
+                {
+                        return (0);
+                        i++;
+                }
+        }
+        return (1);
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char    str[4];
+
+        str[0] = '8';
+        str[1] = 'A';
+        str[2] = 'b';
+        str[3] = '\0';
+        printf("Given string: %s\n", str);
+        printf("Only alphabetical characters?\n");
+        if (ft_str_is_alpha(str) == 1)
+        {
+                printf("Yes");
+        }
+        else
+        {
+                printf("No");
+        }
+        return (0);
+}
+*/
