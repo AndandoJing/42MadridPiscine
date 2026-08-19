@@ -149,3 +149,47 @@ etc.
 3. to call the function, we should use ft_strncpy(dest, src, 2), here the 2, which is n, is defined.
 4. to define the example, should expand the example like src[0] = x, src[1] = y, etc.
 5. attention, we go through all that is before the '\0' last one, which means src[i] != '\0' && i < n, then from the exact '\0', it should be i < n, since we delete one condition before
+
+char    *ft_strncpy(char *dest, char *src, unsigned int n)
+{
+        unsigned int    i;
+
+        i = 0;
+        while (src[i] != '\0' && i < n)
+        {
+                dest[i] = src[i];
+                i++;
+        }
+        while (i < n)
+        {
+                dest[i] = '\0';
+                i++;
+        }
+        return (dest);
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char    src[4];
+        char    dest[3];
+        int     i;
+
+        src[0] = 'C';
+        src[1] = 'a';
+        src[2] = 't';
+        src[3] = '\0';
+        i = 0;
+        printf("Source: %s\n", src);
+        ft_strncpy(dest, src, 2);
+        printf("Destination: ");
+        while (i < 2)
+        {
+                printf("%c", dest[i]);
+                i++;
+        }
+        printf("\n");
+        return (0);
+}
+*/
