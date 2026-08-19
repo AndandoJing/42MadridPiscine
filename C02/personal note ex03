@@ -32,7 +32,7 @@ int     ft_str_is_numeric(char *str)
         }
 }       
 
-#include <unistd.h>
+#include <unistd.h> ---------- it's for write, not printf
 
 int     main(void)
 {       
@@ -47,7 +47,7 @@ int     main(void)
         str3[0] = 'a';
         str3[1] = '4';
         str3[2] = '6';
-        str3[3] = 'b';
+        str3[3] = 'b'; ----------- missing str3[0] again
         printf("%s->%d\n", str1, ft_str_is_numeric(str1));
         printf("%s->%d\n", str2, ft_str_is_numeric(str2));
         printf("%s->%d\n", str3, ft_str_is_numeric(str3));
@@ -73,7 +73,7 @@ int     ft_str_is_numeric(char *str)
                 }
 }
 
-#include <unistd.h>
+#include <stdio.h>
 
 int     main(void)
 {
@@ -88,7 +88,7 @@ int     main(void)
         str3[0] = 'a';
         str3[1] = '4';
         str3[2] = '6';
-        str3[3] = 'b';
+        str3[3] = '\0';
         printf("%s->%d\n", str1, ft_str_is_numeric(str1));
         printf("%s->%d\n", str2, ft_str_is_numeric(str2));
         printf("%s->%d\n", str3, ft_str_is_numeric(str3));
