@@ -1,0 +1,19 @@
+| 优先级 | Pattern / 知识 | 核心要学什么 | 对应 Task | 明天用途 |
+|---|---|---|---|---|
+| 🔴 P0 | **Validation Pattern** | traverse → invalid early return → 全部通过 return 1 | C02 ex04–06 | 明早最快拿下 |
+| 🔴 P0 | **Character ranges / ASCII思维** | `'a'-'z'`、`'A'-'Z'`、`'0'-'9'`、printable range | C02 ex04–06 | Exam基础题高频 |
+| 🔴 P0 | **Character transformation** | char本质可做数值运算；大小写转换 | C02 ex07–09 | Exam常见 |
+| 🔴 P0 | **Two-string parallel traversal** | `s1[i]`和`s2[i]`同时移动 | C03 ex00–01 | `strcmp` family |
+| 🔴 P0 | **Comparison → difference** | 找到first difference；不是简单return 0/1 | C03 ex00–01 | 很重要的新pattern |
+| 🔴 P0 | **Find end → append** | 先找到dest的`\0`，再从那里写src | C03 ex02–03 | `strcat` family |
+| 🔴 P0 | **Bounded traversal** | `i < n` / `i < nb`与`\0`双条件 | C02 ex01、C03 ex01/ex03 | 已见过，要固化 |
+| 🟠 P1 | **Nested string search** | 外层找candidate，内层验证substring | C03 ex04 `ft_strstr` | 第一次明显nested string loop |
+| 🟠 P1 | **Return pointer/address** | return的不是1/0，而是string中某个位置的address | C03 ex04 | pointer实战 |
+| 🔴 P0 | **Output pattern** | `write` + traversal | C04前部 | Exam program基础 |
+| 🔴 P0 | **Integer decomposition** | `% 10`取末位、`/ 10`去末位 | C04 number output | Exam高频 |
+| 🔴 P0 | **String → integer** | char digit → numeric value；sign；累积 | C04 `ft_atoi` | Exam非常值得提前掌握 |
+| 🟠 P1 | **Base conversion** | decimal不是唯一base；digit↔value | C04后部 | 为后续进阶铺路 |
+| 🟠 P1 | **Recursion** | base case + recursive case + call stack | C05核心方向* | Exam02/Final价值更高 |
+| 🟠 P1 | **Factorial / power** | iterative vs recursive | C05核心方向* | recursion训练 |
+| 🟡 P2 | **Fibonacci** | 多分支recursion | C05核心方向* | 比factorial难一级 |
+| 🟡 P2 | **sqrt / prime** | search + mathematical stopping condition | C05核心方向* | algorithm训练 |
