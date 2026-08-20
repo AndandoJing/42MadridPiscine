@@ -1,0 +1,38 @@
+==== ex00 ====
+
+ft_print_program_name
+Turn-in directory: ex00/
+Files to turn in: ft_print_program_name.c
+Allowed functions: write
+• Since this is a program, your .c file must contain a main function.
+• Write a program that displays its own name, followed by a new line.
+• Example:
+$>./a.out | cat -e
+./a.out$
+$>
+
+*********
+
+My try:
+#include <unistd.h>
+#include <stdio.h>
+
+char    ft_print_program_name(int argc, char **argv) ----------we don't use argc here, maybe not necessary; the thing to return should be void, our function uses just write to print, don't need to turn back anything
+{       
+        int     i;
+        
+        i = 0;
+        while (argv[0][i] != '\0')
+        {
+                write(1, &argv[0][i], 1);
+                i++;
+        }
+        return (char); -------------- char is a type name, not a value, like argv[0][0], or return (0). 
+}       
+
+int     main(char)------------should be int  main(int argc, char **argv)
+{       
+        ft_print_progam_name(0, argv); ----------- should pass the value argc and argv; missing a 'r'
+        return (str); ------- and return (0)
+}
+
