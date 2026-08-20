@@ -1,0 +1,18 @@
+==== ex06 ====
+ft_str_is_printable
+Turn-in directory: ex06/
+Files to turn in: ft_str_is_printable.c
+Allowed functions: None
+• Create a function that returns 1 if the given string contains only printable characters
+and 0 if it contains any other character.
+• Here is how it should be prototyped:
+int ft_str_is_printable(char *str);
+• It should return 1 if str is empty.
+
+*******
+
+Here the gap is: I didn't know what are printable characters.
+So, turns out:
+ASCII:
+printable characters: 32 - 126, range inside (both including) printable, outside invalid
+
