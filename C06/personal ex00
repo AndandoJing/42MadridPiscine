@@ -30,9 +30,35 @@ char    ft_print_program_name(int argc, char **argv) ----------we don't use argc
         return (char); -------------- char is a type name, not a value, like argv[0][0], or return (0). 
 }       
 
-int     main(char)------------should be int  main(int argc, char **argv)
+int     main(char)--------------what should be here inside? 
 {       
         ft_print_progam_name(0, argv); ----------- should pass the value argc and argv; missing a 'r'
         return (str); ------- and return (0)
 }
 
+-----------
+
+need (void)argc, because int        main(int argc, char **argv) is mandatory in 42 norm as a formula.
+but we actually are not using it, nowhere is defining it, so also mandatory to include (void)argc because we are not actually using it.
+
+#include <unistd.h>
+
+void    ft_print_program_name(char **argv)
+{       
+        int     i;
+        
+        i = 0;
+        while (argv[0][i] != '\0')
+        {
+                write(1, &argv[0][i], 1);
+                i++;
+        }
+        write(1, "\n", 1);
+}       
+
+int     main(int argc, char **argv)
+{       
+        (void)argc;
+        ft_print_program_name(argv);
+        return (0);
+}
