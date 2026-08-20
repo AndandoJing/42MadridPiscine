@@ -17,6 +17,65 @@ $>
 
 ***********
 
+#include <unistd.h>
 
-*************
+void    ft_print_params(int argc, char **argv)
+{
+        int     i;
+        int     j;
+
+        i = 0;
+        j = 1;
+        while (j < argc)
+        {
+                i = 0;
+                while (argv[j][i] != '\0')
+                {
+                        write(1, &argv[j][i], 1);
+                        i++;
+                }
+                write(1, "\n", 1);
+                j++;
+        }
+}
+
+int     main(int argc, char **argv)
+{
+        ft_print_params(argc, argv);
+        return (0);
+}
+
+
+here the very important thing is that:
+1. we have two loops
+  I always define i as the indicator inside each argument, and j as the indicator of each argument
+2. since a.out is [0], argument1 is [1], etc. so as maximum, we have argc - 1 arguments, which is the maximum j, since [j]
+3. so when j < argc (j can't be equal to argc), we need to reset the i, because each time we pass to a new argument, we need to start counting and writing from the new argument's [i]
+4. we can write the valid indicators' value, which means the last indicator, '\0', won't be written
+5. since we print excep argv[0], we set the j = 1 at first
+
+So now we have:
+void  ft_print_params(int argc, char **argv)
+{
+  int  i;
+  int  j;
+
+  i = 0;
+  j = 1;
+  while (j < argc)
+  {
+    i = 0;
+    while (argv[j][i] != '\0')
+    {
+      write(1, &argv[j][i], 1);
+      i++;
+    }
+    write(1, "\n", 1);
+    j++;
+  }
+}
+
+
+
+
 
