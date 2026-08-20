@@ -1,0 +1,12 @@
+==== es03 ====
+ft_sort_params
+Turn-in directory: ex03/
+Files to turn in: ft_sort_params.c
+Allowed functions: write
+• Since this is a program, your .c file must contain a main function.
+• Write a program that displays its given arguments sorted in ASCII order.
+• The program should display all arguments except argv[0].
+• Each argument should be printed on a new line.
+
+*************
+
