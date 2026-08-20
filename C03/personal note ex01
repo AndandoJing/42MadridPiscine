@@ -9,3 +9,122 @@ int ft_strncmp(char *s1, char *s2, unsigned int n);
 
 **********
 
+My try:
+int     ft_strncmp(char *s1, char *s2, unsigned int n)
+{       
+        unsigned int    i;
+        
+        i = 0;
+        if ((s1[i] && s2[i] != '\0') && i < n) ----------doesn't work this if, not necessary since even if either of them is '\0', we return 0
+        {
+                while (s1[i] && s2[i] && s1[i] == s2[i])
+                {
+                        i++;
+                }
+                return (s1[i] - s2[i]);
+        }
+        if (i < n) -------- will not pass to this if
+        {
+                return  (0);
+        }       
+}       -----------------missing final return
+
+#include <stdio.h>
+
+int     main(void)
+{
+        char    s1[] = "ABCD";
+        char    s2[] = "ABCd";
+        char    s3[] = "aBC";
+        char    s4[1];
+        
+        s4[0] = '\0';
+        printf("'%s', '%s', n=4, %d", s1, s2, ft_strncmp(s1, s2, 4)); -------- missing \n, may cause too many words in the same line
+        printf("'%s', '%s', n=4, %d", s1, s3, ft_strncmp(s1, s3, 4));
+        printf("'%s', '%s', n=4, %d", s1, s4, ft_strncmp(s1, s4, 4));
+        printf("'%s', '%s', n=4, %d", s4, s2, ft_strncmp(s4, s2, 4));
+        printf("'%s', '%s', n=4, %d", s3, s2, ft_strncmp(s3, s2, 4));
+        return (0);
+}   
+
+
+
+
+2nd try:
+int     ft_strncmp(char *s1, char *s2, unsigned int n)
+{       
+        unsigned int    i;
+        
+        i = 0;
+        if (i == n) ------------- when we start, i = 0, imposible to know if they are the same
+        {
+                return (0);
+        }
+        else
+        {       
+                while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+                {               
+                        i++;
+                }
+                return (s1[i] - s2[i]);
+        }
+}       
+
+#include <stdio.h>
+
+int     main(void)
+{
+        char    s1[] = "ABCD";
+        char    s2[] = "ABCd";
+        char    s3[] = "aBC";
+        char    s4[1];
+        
+        s4[0] = '\0';
+        printf("'%s', '%s', n=4, %d", s1, s2, ft_strncmp(s1, s2, 4));
+        printf("'%s', '%s', n=4, %d", s1, s3, ft_strncmp(s1, s3, 4));
+        printf("'%s', '%s', n=4, %d", s1, s4, ft_strncmp(s1, s4, 4));
+        printf("'%s', '%s', n=4, %d", s4, s2, ft_strncmp(s4, s2, 4));
+        printf("'%s', '%s', n=4, %d", s3, s2, ft_strncmp(s3, s2, 4));
+        return (0);
+} 
+
+
+3rd try:
+while (...) i++;
+if (i == n) return 0;
+return s1[i] - s2[i]
+
+int     ft_strncmp(char *s1, char *s2, unsigned int n)
+{
+        unsigned int    i;
+
+        i = 0;
+        while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+        {
+                i++;
+        }
+        if (i == n)
+        {
+                return (0);
+        }
+        return (s1[i] - s2[i]);
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char    s1[] = "ABCD";
+        char    s2[] = "ABCd";
+        char    s3[] = "aBC";
+        char    s4[1];
+
+        s4[0] = '\0';
+        printf("'%s', '%s', n=4, %d\n", s1, s2, ft_strncmp(s1, s2, 4));
+        printf("'%s', '%s', n=4, %d\n", s1, s3, ft_strncmp(s1, s3, 4));
+        printf("'%s', '%s', n=4, %d\n", s1, s4, ft_strncmp(s1, s4, 4));
+        printf("'%s', '%s', n=4, %d\n", s4, s2, ft_strncmp(s4, s2, 4));
+        printf("'%s', '%s', n=4, %d\n", s3, s2, ft_strncmp(s3, s2, 4));
+        return (0);
+}
+*/
