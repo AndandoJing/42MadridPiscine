@@ -1,0 +1,93 @@
+==== ex04 ====
+
+ft_str_is_lowercase
+Turn-in directory: ex04/
+Files to turn in: ft_str_is_lowercase.c
+Allowed functions: None
+• Create a function that returns 1 if the given string contains only lowercase alphabetical characters and 0 if it contains any other character.
+• Here is how it should be prototyped:
+int ft_str_is_lowercase(char *str);
+• It should return 1 if str is empty.
+
+******
+
+My try:
+int     ft_str_is_lowercase(char *str)
+{
+        int     i;
+
+        i = 0;
+        if (str[i] != '\0') -----------should be while
+        {
+                while (str[i] <= 'z' && str[i] >= 'a') ---------should be if
+                {       
+                        return (1);
+                }       
+                i++;
+        }       
+        return (0);
+}       
+
+#include <stdio.h>
+
+int     main(void)
+{       
+        char    str1[1];
+        char    str2[3];
+        char    str3[3];
+        
+        str1[0] = '\0';
+        str2[0] = 'a';
+        str2[1] = '1';
+        str2[2] = '\0';
+        str3[0] = '2';
+        str3[1] = 'b';
+        str3[2] = '\0';
+        printf("%s->%d\n", str1, ft_str_is_lowercase(str1)); ------when test, it will turn out nothing, to make it clear, maybe with '%d' is better
+        printf("%s->%d\n", str2, ft_str_is_lowercase(str2));
+        printf("%s->%d\n", str3, ft_str_is_lowercase(str3));
+        return (0);
+}   
+
+2nd try:
+int     ft_str_is_lowercase(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                if (str[i] < 'a' || str[i] > 'z')
+                {       
+                        return (0);
+                }       
+                i++;
+        }       
+        return (1);
+}       
+
+#include <stdio.h>
+
+int     main(void)
+{       
+        char    str1[1];
+        char    str2[3];
+        char    str3[3];
+        char    str4[3];
+        
+        str1[0] = '\0';
+        str2[0] = 'a';
+        str2[1] = '1';
+        str2[2] = '\0';
+        str3[0] = '2';
+        str3[1] = 'b';
+        str3[2] = '\0';
+        str4[0] = 'c';
+        str4[1] = 'd';
+        str4[2] = '\0';
+        printf("'%s'->%d\n", str1, ft_str_is_lowercase(str1));
+        printf("%s->%d\n", str2, ft_str_is_lowercase(str2));
+        printf("%s->%d\n", str3, ft_str_is_lowercase(str3));
+        printf("%s->%d\n", str4, ft_str_is_lowercase(str4));
+        return (0);
+}   
