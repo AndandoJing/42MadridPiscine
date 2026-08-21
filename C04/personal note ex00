@@ -37,3 +37,56 @@ int     ft_strlen(char *str)
         }       
         return (i);
 }     
+
+with test:
+int     ft_strlen(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                i++;
+        }
+        return (i);
+}
+
+#include <stdio.h>
+
+int     main(void)
+{
+        char    str[3];
+
+        str[0] = 'a';
+        str[1] = '1';
+        str[2] = '\0';
+        printf(ft_strlen(str)); ----------missing %d please!!!
+        return (0);
+}
+
+-------------
+int     ft_strlen(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                i++;
+        }
+        return (i);
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char    str[3];
+
+        str[0] = 'a';
+        str[1] = '1';
+        str[2] = '\0';
+        printf("%d\n", ft_strlen(str));
+        return (0);
+}
+*/
