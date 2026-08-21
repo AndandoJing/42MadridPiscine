@@ -1,0 +1,128 @@
+=== ex03 ===
+
+ft_atoi
+Turn-in directory: ex03/
+Files to turn in: ft_atoi.c
+Allowed functions: None
+• Write a function that converts the initial portion of the string pointed to by str into its
+integer representation.
+• The string may begin with an arbitrary amount of whitespace (as determined by isspace(3)).
+• The string may be preceded by an arbitrary number of ‘+’ and ‘-’ signs. A ‘-’ sign
+will invert the result depending on whether the number of ‘-’ signs is odd or even.
+• The function should then process any consecutive digits in base 10.
+• The function reads the string until a non-conforming character is encountered and returns
+the number obtained so far.
+• Overflow and underflow do not need to be handled; the function’s return value is undefined
+in such cases.
+• Example Program Output:
+$>./a.out " ---+--+1234ab567"
+-1234
+• The function should be prototyped as follows:
+int ft_atoi(char *str);
+
+*************
+
+version 1:
+int     ft_atoi(char *str)
+{
+        int     i;
+        int     sign;
+        int     result;
+
+        i = 0;
+        sign = 1;
+        result = 0;
+        while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+        {
+                i++;
+        }
+        while (str[i] == '+' || str[i] == '-')
+        {
+                sign = -sign;
+                i++;
+        }
+        while (str[i] >= '0' && str[i] <= '9')
+        {
+                result = result * 10 + (str[i] - '0');
+                i++;
+        }
+        return (sign * result);
+}
+
+#include <stdio.h>
+
+int     main(void)
+{
+        char    *str;
+
+        str = " ---+--+1234ab567";
+        printf("%d\n", ft_atoi(str));
+        str = "42";
+        printf("%d\n", ft_atoi(str));
+        str = "   ++---7";
+        printf("%d\n", ft_atoi(str));
+        str = " ";
+        printf("%d\n", ft_atoi(str));
+        return (0);
+}
+
+
+----------
+
+version 2:
+int     ft_atoi(char *str)
+{
+        int     i;
+        int     sign;
+        int     result;
+
+        i = 0;
+        sign = 1;
+        result = 0;
+        while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+        {
+                i++;
+        }
+        while (str[i] == '+' || str[i] == '-')
+        {
+                sign = -sign;
+                i++;
+        }
+        while (str[i] >= '0' && str[i] <= '9')
+        {
+                result = result * 10 + (str[i] - '0');
+                i++;
+        }
+        return (sign * result);
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char    *str;
+
+        str = " ---+--+1234ab567";
+        printf("%d\n", ft_atoi(str));
+        str = "42";
+        printf("%d\n", ft_atoi(str));
+        str = "   ++---7";
+        printf("%d\n", ft_atoi(str));
+        str = " ";
+        printf("%d\n", ft_atoi(str));
+        return (0);
+}
+*/
+/*
+#include <stdio.h>
+
+int     main(int argc, char **argv)
+{
+        if (argc > 1)
+        {
+                printf("%d\n", ft_atoi(argv[1]));
+        }
+        return (0);
+}
+*/
+
