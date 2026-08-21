@@ -1,0 +1,39 @@
+=== ex00 ===
+ft_strlen
+Turn-in directory: ex00/
+Files to turn in: ft_strlen.c
+Allowed functions: None
+• Create a function that counts and returns the number of characters in a string.
+• The function should be prototyped as follows:
+int ft_strlen(char *str);
+
+*******
+
+my idea:
+void    ft_strlen(char *str)
+{       
+        int     i;
+
+        i = 0;
+        while (i <
+        {               
+                i++;
+        }       
+        *str = i % 10 + '0';
+}       
+~  
+
+
+---------- 
+correction:
+int     ft_strlen(char *str)
+{
+        int     i;
+        
+        i = 0;
+        while (str[i] != '\0')
+        {       
+                i++;
+        }       
+        return (i);
+}     
