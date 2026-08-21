@@ -1,0 +1,53 @@
+==== ex01 ====
+ft_putstr
+Turn-in directory: ex01/
+Files to turn in: ft_putstr.c
+Allowed functions: write
+• Create a function that prints a string of characters to the standard output.
+• The function should be prototyped as follows:
+void ft_putstr(char *str);
+
+*******
+
+#include <unistd.h>
+
+void    ft_putstr(char *str)
+{       
+        int     i;
+        
+        i = 0;
+        while (str[i] != '\0')
+        {       
+                write(1, str[i], 1); --------------------the second field should be an address, &str[i]
+                i++;
+        }       
+}  
+
+----------------
+#include <unistd.h>
+
+void    ft_putstr(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                write(1, &str[i], 1);
+                i++;
+        }
+}
+/*
+int     main(void)
+{
+        char    str[] = "Hello";
+
+        ft_putstr(str);
+        return (0);
+}
+*/
+
+
+
+
+
