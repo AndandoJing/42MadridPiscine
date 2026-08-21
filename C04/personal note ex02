@@ -1,0 +1,79 @@
+==== ex02 ====
+ft_putnbr
+Turn-in directory: ex02/
+Files to turn in: ft_putnbr.c
+Allowed functions: write
+• Create a function that displays the number passed as a parameter. The function
+must be able to handle all possible values of the int type.
+• The function should be prototyped as follows:
+void ft_putnbr(int nb);
+• Example usage:
+◦ ft_putnbr(42) outputs "42".
+
+**********
+my try:
+
+#include <unistd.h>
+
+void    ft_putnbr(int nb)
+{
+        char    c;
+        
+        if (nb >= 10)
+        {       
+                ft_putnbr(nb / 10);
+        }       
+        c = nb % 10 + '0'; -----------should be in the last, to calculate the last number
+        write(1, &c, 1); -----------the last line to write it
+        if (nb < 0)
+        {
+                ft_putnbr(nb);  ------------- doesn't need this one
+                write(1, "-", 1); -------------- and then? nb = -nb
+        }
+        if (nb == -2147483648) ------------should be the first one
+        {
+                write(1, "2147483648", 1); -------------- 11!!! not 1!!!
+        }
+}   
+
+-------------
+
+#include <unistd.h>
+
+void    ft_putnbr(int nb)
+{
+        char    c;
+
+        if (nb == -2147483648)
+        {
+                write(1, "-2147483648", 11);
+                return ;
+        }
+        if (nb < 0)
+        {
+                write(1, "-", 1);
+                nb = -nb;
+        }
+        if (nb >= 10)
+        {
+                ft_putnbr(nb / 10);
+        }
+        c = nb % 10 + '0';
+        write(1, &c, 1);
+}
+/*
+int     main(void)
+{
+        ft_putnbr(42);
+        write(1, "\n", 1);
+        ft_putnbr(-2147483648);
+        write(1, "\n", 1);
+        ft_putnbr(0);
+        write(1, "\n", 1);
+        ft_putnbr(-3);
+        write(1, "\n", 1);
+        ft_putnbr(4);
+        write(1, "\n", 1);
+        return (0);
+}
+*/
