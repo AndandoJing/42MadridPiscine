@@ -183,3 +183,56 @@ int     main(int argc, char **argv)
         }
         return (0);
 }
+
+--------------
+missing:
+now when argc != 2, we didn't output "Error"
+when the string ends with space, we didn't output "Error", and we have the count number, but haven't check if it's 16.
+
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+        int     count;
+
+        i = 0;
+        count = 0;
+        if (argc == 2)
+        {
+                while (argv[1][i] != '\0')
+                {
+                        if (i % 2 == 0)
+                        {
+                                if (argv[1][i] < '1' || argv[1][i] > '4')
+                                {
+                                        write(1, "Error\n", 6);
+                                        return (0);
+                                }
+                                count++;
+                        }
+                        else
+                        {
+                                if (argv[1][i] != ' ')
+                                {
+                                        write(1, "Error\n", 6);
+                                        return (0);
+                                }
+                        }
+                        i++;
+                }
+                if (count != 16 || i != 31)
+                {
+                        write(1, "Error\n", 6);
+                        return (0);
+                }
+        }
+        else
+        {
+                write(1, "Error\n", 6);
+                return (0);
+        }
+        return (0);
+}
+
+ if (count != 16 || i != 31)----------- to check if we have no more space and no more numbers
