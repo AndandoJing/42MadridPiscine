@@ -65,7 +65,7 @@ int     main(int argc, char **argv)
 {
         int     clues[16];
 
-        if (argc == 2)
+        if (argc == 2) ----------------should delete this part as well
         {
                 if (count != 16 || i != 31)
                 {
@@ -81,3 +81,68 @@ int     main(int argc, char **argv)
         return (0);
 }
 
+---------------------------------
+
+so now the whole one is :
+#include <unistd.h>
+
+int     parse_input(char *str, int *clues)
+{
+        int     i;
+        int     j;
+        int     count;
+
+        i = 0;
+        j = 0;
+        count = 0;
+        while (str[i] != '\0')
+        {
+                if (i % 2 == 0)
+                {
+                        if (str[i] < '1' || str[i] > '4')
+                        {
+                                return (0);
+                        }
+                        count++;
+                        clues[j] = str[i] - '0';
+                        j++;
+                }
+                else
+                {
+                        if (str[i] != ' ')
+                        {
+                                return (0);
+                        }
+                }
+                i++;
+        }
+        if (count != 16 || i != 31)
+        {
+                return (0);
+        }
+        return (1);
+}
+
+int     main(int argc, char **argv)
+{
+        int     clues[16];
+
+        if (argc != 2)
+        {
+                write(1, "Error\n", 6);
+                return (0);
+        }
+        if (parse_input(argv[1], clues) == 0)
+        {
+                write(1, "Error\n", 6);
+                return (0);
+        }
+        return (0);
+}
+
+-----------------------
+still too many lines in a single function, so we can separate the functions here
+parse_input ->
+  1. int check_char(char c, int i);
+  2. int parse_input(char *str, int *clues);
+  3. void print_error(void);
