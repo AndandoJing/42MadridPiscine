@@ -22,13 +22,17 @@ Now with main () we have two questions:
 2. this argument can parse? -> Yes
 both yes then we continue
 ---------
-int parse_input(char *str, int *clues)
+#include <unistd.h>
+
 int     parse_input(char *str, int *clues)
 {
         int     i;
         int     j;
         int     count;
 
+        i = 0;
+        j = 0;
+        count = 0;
         while (str[i] != '\0')
         {
                 if (i % 2 == 0)
@@ -37,7 +41,7 @@ int     parse_input(char *str, int *clues)
                         {
                                 return (0);
                         }
-                        count++; 
+                        count++;
                         clues[j] = str[i] - '0';
                         j++;
                 }
@@ -47,8 +51,33 @@ int     parse_input(char *str, int *clues)
                         {
                                 return (0);
                         }
-                        i++;
+                }
+                i++;
+        }
+        if (count != 16 || i != 31)
+        {
+                return (0);
+        }
+        return (1);
+}
+
+int     main(int argc, char **argv)
+{
+        int     clues[16];
+
+        if (argc == 2)
+        {
+                if (count != 16 || i != 31)
+                {
+                        write(1, "Error\n", 6);
+                        return (0);
                 }
         }
-
+        else
+        {
+                write(1, "Error\n", 6);
+                return (0);
+        }
+        return (0);
 }
+
