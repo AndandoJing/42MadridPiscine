@@ -30,6 +30,36 @@ void  ft_read_clues(char *intput_s, int *clues)
   }
 }
 
+void  ft_init_grid(int grid[4][4])
+{
+  int  i;
+
+  i = 0;
+  while (i < 16)
+    {
+      grid[i / 4][i % 4] = 0;
+      i++;
+    }
+}
+
+void  ft_solve(int g[4][4], int *clues, int pos)
+{
+  int  row;
+  int  col;
+  int  val;
+
+  if (pos == 16)
+  {
+    return (1);
+  row = pos / 4;
+  col = pos % 4;
+  val = 1;
+  while (val <= 4)
+  {
+    if (!ft_repeats(g, row, col, val))
+    {
+      if (ft_solve
+
 int  main(int argc, char **argv)
 {
   int  g[4][4];
@@ -40,7 +70,7 @@ int  main(int argc, char **argv)
     ft_error();
     return (0);
   }
-  ft_clear_grid(g);
+  ft_init_grid(g);
   if (ft_solve(g, clues, 0))
   {
     ft_print_grid(g);
