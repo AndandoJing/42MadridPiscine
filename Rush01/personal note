@@ -75,6 +75,8 @@ int     main(int argc, char **argv) ---------------didn't use argc, the argc sho
         return (0);
 }-----------------------did review all the string, while (argv[1][i] != '\0')
 
+****************************
+
 retry:
 #include <unistd.h>
 
@@ -83,27 +85,58 @@ int     main(int argc, char **argv)
         int     i;
 
         i = 0;
-        while (argc == 2)
+        while (argc == 2) --------------- should be if, with while we are always in the loop
         {       
-                if (i % 2 == 0)
+                if (i % 2 == 0) 
                 {
                         if (argv[1][i] < '1' || argv[1][i] > '4')
                         {
                                 write(1, "error", 5);
                         }
-                        i++;
+                        i++; ------------- if is already wrong with error, dont' need to continue the next if
                 }
-                if (i % 2 == 1)
+                if (i % 2 == 1) ----------- why not else? one number can't be even and odd at the same time
                 {
                         if (argv[1][i] != ' ')
                         {
                                 write(1, "error", 5);
+                        }
+                        i++; -----------just need one i++ then
+                }
+        }
+        return (0);
+}
+************************************
+
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+
+        i = 0;
+        if (argc == 2)
+        {       
+                while (argv[1][i] != '\0')
+                {
+                        if (i % 2 == 0)
+                        {       
+                                if (argv[1][i] < '1' || argv[1][i] > '4')
+                                {       
+                                        write(1, "error", 5);
+                                }
+                        }
+                        else 
+                        {       
+                                if (argv[1][i] != ' ')
+                                {       
+                                        write(1, "error", 5);
+                                }
                         }
                         i++;
                 }
         }
         return (0);
 }
-
 
 
