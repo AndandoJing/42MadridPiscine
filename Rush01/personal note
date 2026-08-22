@@ -1,1 +1,78 @@
+1. input parsing
+2. grid checking
+3. visibility
+4. solver
+5. output
+
+1. input parsing
+since we need to read/receive the string input in the terminal as argument, it should be argc[1], because the argc[0] is the program itself.
+
+#include <unistd.h>
+int  main(int argc, char **argv)
+{
+  int  i;
+
+  i = 0;
+  if (argc == 2)
+  {
+    while (argv[1][i] != '\0')
+    {
+      write(1, &argv[1][i], 1);
+      i++;
+    }
+  }
+  return (0);
+}
+
+Example:
+"4 3 2 1"
+[0] - '4' 
+[1] - ' '
+[2] - '3'
+[3] - ' '
+[4] - '2'
+[5] - ' '
+[6] - '1'
+[7] - '\0'
+
+attention:
+:Stdheadr, it should be added to filename.c, mandatory .c, if not, there will be error
+always remember that index starts from 0, not 1
+
+2. valide the input
+so all even ones should be space ' ', and odd ones should be numbers 1-4
+if (i % 2 == 0)
+should check argv[1][i] >= '1' && argv[1][i] <= '4'
+if (i % 2 == ' ')
+check argv[1][i] == ' '
+
+and we need to output error for all invalid
+
+my try:
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+
+        i = 0;
+        if (i % 2 == 0)
+        {
+                while (argv[1][i] < '1' || argv[1][i] > '4')
+                {
+                        write(1, "error", 5);
+                }
+                i++;
+        }
+        if (i % 2 == ' ')
+        {
+                while (argv[1][i] != ' ')
+                {
+                        write(1, "error", 5);
+                }
+                i++;
+        }
+        return (0);
+}
+
 
