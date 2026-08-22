@@ -66,11 +66,13 @@ so after count++, we already know that it is odd, and is between 1-4, we can sav
 int     main(int argc, char **argv)
 {
         int     i;
+        int     j;
         int     count;
-        int     clues;
+        int     clues[16];
 
         i = 0;
         count = 0;
+        j = 0;
         if (argc == 2)
         {
                 while (argv[1][i] != '\0')
