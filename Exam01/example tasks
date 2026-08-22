@@ -1,0 +1,35 @@
+1. Write a program that displays all the digits in descending order, followed by a newline.
+2. Write a function that takes 2 parameters: first a pointer to an integer and an integer. This function will add the second
+  integer to the first integer pointed by the pointer.
+3. Write a program that displays the alphabet with even letters in uppercase and odd letters in lowercase, followed by a newline.
+4. Write a program that takes a string and display it, replacing each of its letters with the letter 13 spaces ahead in alphabetical order.
+  Like 'z' to 'm', 'Z' to 'M'. The output followed by a newline. If the argument is not 1, write a newline.
+
+Taking example task 4:
+First we should consider:
+1. is a program? Yes -> int main
+2. needs terminal arguments? Yes -> main(int argc, char **argv)
+3. needs exactly one argument? Yes -> if (argc == 2)
+then we can go deeper to
+i = 0;
+while (argv[1][i] != '\0')
+
+I wrote:
+while ((tab[i] <= 'z' && tab[i] >= 'a') || ((tab[i] <= 'Z' && tab[i] >= 'A'))
+it will only review letters, if the character is not a letter, it will jump out, so:
+
+while (str[i] != '\0')
+is mandatory outside
+
+besides, tab[i] = tab[i] - 13 is not suitable for 'a'
+
+about the length, the easiest way is to separate it into helper function:
+example:
+int  ft_is_alpha(char c)
+{
+  if ((c >= 'a' && c <= 'z')
+      || (c >= 'A' && c <= 'Z'))
+      return (1);
+  return (0);
+}
+then if (ft_is alpha(str[i]))
