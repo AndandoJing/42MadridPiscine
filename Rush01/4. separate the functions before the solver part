@@ -1,0 +1,54 @@
+Since norm needs functions of 25 lines as maximum, and each function maximum 5 variables, we need to separate the main part we have already done.
+we have:
+  1. check argc
+  2. parse_input()
+      2.1. check the format
+      2.2. char -> int -> clues[]
+
+----------
+
+We remove all the following from main ()
+i
+j
+count
+while
+check the numbers
+check the spaces
+char -> int
+
+-----------
+Now with main () we have two questions:
+1. do we have only 1 argument? -> Yes
+2. this argument can parse? -> Yes
+both yes then we continue
+---------
+int parse_input(char *str, int *clues)
+int     parse_input(char *str, int *clues)
+{
+        int     i;
+        int     j;
+        int     count;
+
+        while (str[i] != '\0')
+        {
+                if (i % 2 == 0)
+                {
+                        if (str[i] < '1' || str[i] > '4')
+                        {
+                                return (0);
+                        }
+                        count++; 
+                        clues[j] = str[i] - '0';
+                        j++;
+                }
+                else
+                {
+                        if (str[i] != ' ')
+                        {
+                                return (0);
+                        }
+                        i++;
+                }
+        }
+
+}
