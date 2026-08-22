@@ -1,1 +1,111 @@
-Now 
+Now we have 16 digits but in string as characters, we need to convert them into integers.
+
+we already know that argv[x][i] means the exact number inputed in the terminal, now we just want to convert the number into an integer
+and we know the formula is:
+integer = character - '0'
+so let's call the integer as int clues, and sure we have clues[j] (i is taken), because we also have integer number location difference
+
+cluse[j] = argv[x][i] - '0' for example
+then j++ for sure
+
+continue with the previous code finished for the step 2 (validation)
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+        int     count;
+
+        i = 0;
+        count = 0;
+        if (argc == 2)
+        {
+                while (argv[1][i] != '\0')
+                {
+                        if (i % 2 == 0)
+                        {
+                                if (argv[1][i] < '1' || argv[1][i] > '4')
+                                {
+                                        write(1, "Error\n", 6);
+                                        return (0);
+                                }
+                                count++;
+                        }
+                        else
+                        {
+                                if (argv[1][i] != ' ')
+                                {
+                                        write(1, "Error\n", 6);
+                                        return (0);
+                                }
+                        }
+                        i++;
+                }
+                if (count != 16 || i != 31)
+                {
+                        write(1, "Error\n", 6);
+                        return (0);
+                }
+        }
+        else
+        {
+                write(1, "Error\n", 6);
+                return (0);
+        }
+        return (0);
+}
+
+continuing:
+first with argv[1][i]
+int clues;
+since if i changes with i++, we cannot read the correct j, so clues[j] = argv[1][i] - '0' should happen before i++;
+so after count++, we already know that it is odd, and is between 1-4, we can save it 
+
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+        int     count;
+        int     clues;
+
+        i = 0;
+        count = 0;
+        if (argc == 2)
+        {
+                while (argv[1][i] != '\0')
+                {
+                        if (i % 2 == 0)
+                        {
+                                if (argv[1][i] < '1' || argv[1][i] > '4')
+                                {
+                                        write(1, "Error\n", 6);
+                                        return (0);
+                                }
+                                count++;
+                                clues[j] = argv[1][i] - '0';
+                                j++;
+                        }
+                        else
+                        {
+                                if (argv[1][i] != ' ')
+                                {
+                                        write(1, "Error\n", 6);
+                                        return (0);
+                                }
+                        }
+                        i++;
+                }
+                if (count != 16 || i != 31)
+                {
+                        write(1, "Error\n", 6);
+                        return (0);
+                }
+        }
+        else
+        {
+                write(1, "Error\n", 6);
+                return (0);
+        }
+        return (0);
+}
