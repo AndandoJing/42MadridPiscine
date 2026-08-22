@@ -1,0 +1,116 @@
+还没有建立稳定的 C function（函数）“接口模型”：定义函数时写什么、调用函数时写什么、main是什么、
+什么时候需要 argc/argv、variable（变量）和type（类型）到底分别出现在哪里。
+明明已经想出算法，却无法把算法装进一个能编译的C程序。
+
+为什么不能 int main(str)？
+因为C要求parameter（参数）必须有type（类型）。
+
+这一点不仅适用于main，适用于所有function。
+不能：
+ft_example(str)       // ❌ function definition里不能这样
+
+而要：
+
+void	ft_example(char *str)
+
+这里：
+char *     str
+  ↑         ↑
+TYPE      NAME
+类型      名字
+
+同理：
+int	ft_example(int nb)
+是：
+int       nb
+ ↑         ↑
+TYPE      NAME
+*********************************
+RETURN TYPE     FUNCTION NAME        PARAMETERS
+返回类型           函数名               参数
+
+    int           ft_example          (int nb)
+     ↑                 ↑                 ↑   ↑
+返回什么类型          叫什么             类型 名字
+**********************************
+
+
+void	ft_print(char *str)
+这是 function definition（函数定义）。
+
+这里我要告诉compiler：
+“以后别人给我的东西是什么type，我在function内部把它叫什么。”
+
+所以写：
+char *str
+也就是：
+TYPE + NAME
+
+************************************
+
+int	main(void)
+{
+	char	str[] = "Hello";
+
+	ft_print(str);
+	return (0);
+}
+
+注意
+ft_print(str);
+这里是 function call（函数调用）。
+
+调用时绝对不是再声明一次type。
+所以：
+ft_print(char *str);       // ❌
+而是：
+ft_print(str);             // ✅
+
+因为compiler已经通过：
+void	ft_print(char *str)
+知道：
+ft_print需要一个char *。
+
+你调用的时候只需要：
+把实际value（值）/ variable（变量）交给它。
+
+**********************************
+
+定义function：
+void	ft_example(int nb)
+
+相当于发布JD：
+岗位要求：需要一个 int
+入职后内部称呼：nb
+
+调用：
+ft_example(42);
+
+相当于：
+实际送进去：42
+
+你不会再次写：
+ft_example(int 42);       // ❌
+
+************************************
+
+function parameter needs        |           we can give when call
+int nb                          |             42, x
+char c                          |             'A', c
+char *str                       |             str, "Hello"
+int *p                          |             &x
+char **argv                     |             argv
+
+***********************************
+
+x           int
+&x          int *
+
+str[i]      char
+&str[i]     char *
+
+str         char *
+argv[j]     char *
+argv        char **
+
+************************************
