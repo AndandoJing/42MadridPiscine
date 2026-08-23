@@ -1,1 +1,297 @@
+Round 1
 
+only write the function or main line
+
+A
+Write a function that takes an integer as parameter and returns the integer multiplied by two.
+int  ft_double(int i)
+
+B
+Write a function that takes a pointer to an integer and sets the pointed integer to 42.
+void  ft_set(int i) ---------should be void  ft_set(int *i)
+
+C
+Write a function that takes a string and displays it.
+void  ft_putstr(char *str)
+
+D
+Write a program that displays the alphabet in lowercase, followed by a newline.
+int  main(void)
+
+E
+Write a program that takes a string as an argument and displays it.
+int  main(int argc, char **argv)
+
+-------------
+
+Round 2
+
+only write the funcion call, no function or main content
+
+1.
+void	ft_putchar(char c);
+
+char	c;
+
+c = 'A';
+
+How to call the function: ft_putchar(c)
+
+2. 
+void	ft_putstr(char *str);
+char	str[] = "Hello";
+
+How to call the function: ft_putstr("Hello"), or ft_putstr(*str) 
+          ---------"Hello" or str. because n -> int; &n -> int *, 
+                    *str actually is the first character of "Hello", which is "H",
+                    but the function needs a char *, not a char.
+
+3. 
+void	ft_set(int *p);
+
+int	n;
+
+n = 10;
+
+How to call the function: ft_set(*p) ---------- &n
+                    besides, in main, there is no variable called p, p is the parameter name inside the function
+
+
+4. 
+void	ft_add(int *first, int second);
+
+int	a;
+int	b;
+
+a = 10;
+b = 5;
+
+How to call the function: ft_add(*a, b) ----ft_add(&a, b)
+            &a ------ first -> *first -> a
+            b ------- second
+
+5. 
+int	ft_strlen(char *str);
+char	text[] = "Piscine";
+int	len;
+
+Now we want to save the return result of the function to len, how to call the function: 
+len = ft_strlen("Piscine") or len = ft_strlen(*text) ----------- ft_strlen("Piscine") or ft_strlen(text)
+                        *text -> 'P' -> char
+
+6.
+void	ft_putstr(char *str);
+int	main(int argc, char **argv)
+
+Now we want to pass the first argument the user inputs to ft_putstr, how to call the function:
+ft_putstr(2, *str) --------the function only needs one char *, should be ft_putstr(argv[1])
+                          because ft_putstr needs char *, argv[1] is char *
+                          argv -> char **
+                          argv[0] -> char * -> program name
+                          argv[1] -> char * -> first user argument
+                          argv[2] -> char * -> second user argument
+
+
+
+---------------------
+Summary rule:
+Definition: TYPE + NAME
+Call: pass actual value/variable, no type
+
+int n:
+  n -> int
+  &n -> int *
+char c:
+  c -> char
+  &c -> char *
+char *str:
+  str -> char *
+  char * -> str
+char **argv:
+  argv -> char **
+  argv[1] -> char *
+  argv[1][0] -> char
+  &argv[1][0] -> char *
+
+& ----- *
+        &                    &
+int ___________ -> int * _________ -> int **
+    <- ________       <- _________
+          *                    *
+which means: 
+&: one more pointer
+*: one less pointer
+
+int  n;
+n -> int
+&n -> int *
+
+int  *p;
+p -> int *
+*p -> int
+
+--------------------------
+
+Round 3
+
+only tell the thing on the right
+
+A. 
+int  n;
+
+n -> int
+&n -> int *
+
+B.
+int  *p;
+
+p -> int *
+*p -> int
+
+C.
+char  c;
+
+c -> char
+&c -> char *
+
+D.
+char  *str
+
+str -> char *
+*str -> char
+str[0] -> char
+&str[0] -> char *
+
+E. 
+char	**argv;
+
+argv          → char **
+argv[1]       → char *
+argv[1][0]    → char
+&argv[1][0]   → char *
+
+F.
+int	tab[10];
+
+tab       → int *
+tab[0]    → int
+&tab[0]   → int *
+
+------------
+
+Round 4. Function call type matching
+
+1. what type of thing the function needs?
+2. what type are the things that I have on hand?
+3. Find the matched one
+
+A. 
+void	ft_change(int *p);
+
+int	n;
+
+ft_change(&n)
+
+B.
+void	ft_print(char c);
+
+char	*str;
+
+ft_print(str) ---------------ft_print(*str) or ft_print(str[0]), str is a pointer(char *)
+
+str -> char *
+*str -> char
+str[0] -> char
+&str[0] -> char *
+
+C.
+void	ft_print(char *str);
+
+char	**argv;
+I need to pass the second user argument
+argv[0] = program name
+argv[1] = first user argument
+argv[2] = second user argument
+
+ft_print(argv[2])
+
+D.
+void	ft_swap(int *a, int *b);
+
+int	x;
+int	y;
+
+ft_swap(&x, &y)
+
+E. 
+void	ft_add(int *first, int second);
+
+int	tab[5];
+int	n;
+I want the function to modify tab[2] and pass n as the second parameter there.
+
+ft_add(&tab[2], n)
+
+F.
+int	ft_strlen(char *str);
+
+int	main(int argc, char **argv)
+{
+	int	len;
+
+	/* 用户恰好输入一个argument时，
+	   把这个argument的length存进len */
+
+	__________________________;
+
+	return (0);
+}
+
+ft_strlen(argv[1]) ------------- len = ft_strlen(argv[1])
+char * -> str -> char *argv[1] -> argv[1]
+
+
+----------------
+
+int      ft_example(char *str)
+|              |          |
+output        name      input
+|              |          |
+len    =  ft_strlen    (argv[1])
+|              |          |
+void      ft_swap     (int *a, int *b)
+
+-----------------
+
+Formula:
+
+1. on the left: return what?
+void:  don't return value
+int:    return int
+char:    return char
+char *:  return char *
+
+2. inside (): what I should pass?
+int:  int
+int *:    int address
+char:    character
+char *:    string
+
+3. when call the function, don't write the type, but what the type matches
+int  n:      n is int, &n is int *
+char *str:    str is char *, *str is char
+char **argv:      argv[1] is char *
+
+4. if the function is not void, where goes the return value?
+len = ft_strlen(str); ------------in main
+or
+return (ft_strlen(str)); --------- in the function
+
+ft_xxx(...);
+→ Call it
+
+x = ft_xxx(...);
+→ Call it + SAVE its return value
+
+return (ft_xxx(...));
+→ Call it + RETURN its return value again
