@@ -10,3 +10,87 @@ char *ft_strcat(char *dest, char *src);
 
 ************
 
+My try:
+char    *ft_strcat(char *dest, char *src)
+{       
+        int     i;
+        int     j;
+        
+        i = 0;
+        j = 0;
+        while (dest[i] != '\0')
+        {
+                i++;
+        }
+        while ((src[j] != '\0') && (dest[i + j] != '\0')) ------------- the second part is not necesary
+        {
+                dest[i] = src[j];
+                i++;
+                j++;
+        }
+        return (dest);
+} 
+
+-------------
+
+Version 2:
+char    *ft_strcat(char *dest, char *src)
+{       
+        int     i;
+        int     j;
+        
+        i = 0;
+        j = 0;
+        while (dest[i] != '\0')
+        {
+                i++;
+        }
+        while (src[j] != '\0')
+        {
+                dest[i] = src[j];
+                i++;
+                j++;
+        }
+        dest[i] = '\0';
+        return (dest);
+}   
+
+Another solution:
+/*
+char    *ft_strcat(char *dest, char *src)
+{
+        int     i;
+        int     j;
+
+        i = 0;
+        j = 0;
+        while (dest[i] != '\0')
+        {
+                i++;
+        }
+        while (src[j] != '\0')
+        {
+                dest[i + j] = src[j];
+                j++;
+        }
+        dest[i + j] = '\0';
+        return (dest);
+}
+*/
+
+-------------------------------------------------------
+
+Now I want to test it wiht an exam style task:
+
+Write a program that takes exactly two arguments:
+
+the first argument is the source string;
+the second argument is the destination string.
+
+Copy the second argument into a sufficiently large local array, then concatenate the first argument to it using ft_strcat.
+
+Display the final destination string followed by a newline.
+
+If the number of user arguments is not exactly two, display Error followed by a newline.
+
+Allowed function: write.
