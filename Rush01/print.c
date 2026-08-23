@@ -5,7 +5,7 @@ void  ft_putchar(char c)
 
 void  ft_error(void)
 {
-  write(1, "Errror\n", 1);
+  write(2, "Errror\n", 1);
 }
 
 void  ft_print_grid(int grid[4][4])
