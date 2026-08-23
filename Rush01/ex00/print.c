@@ -19,7 +19,7 @@ void	ft_putchar(char c)
 
 void	ft_error(void)
 {
-	write (1, "Error\n", 6);
+	write (2, "Error\n", 6);
 }
 
 void	ft_print_grid(int grid[4][4])
