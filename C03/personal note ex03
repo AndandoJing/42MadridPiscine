@@ -1,0 +1,59 @@
+======== ex03 ========
+ft_strncat
+Turn-in directory: ex03/
+Files to turn in: ft_strncat.c
+Allowed functions: None
+• Reproduce the behavior of the function strncat (man strncat).
+• The function should be prototyped as follows:
+char *ft_strncat(char *dest, char *src, unsigned int nb);
+
+*****************
+My try:
+
+char    *ft_strncat(char *dest, char *src, unsigned int nb)
+{       
+        unsigned int    i;
+        unsigned int    j;
+        
+        i = 0;  
+        j = 0;
+        while (dest[j] != '\0')
+        {       
+                j++;
+        }
+        while (src[i] != '\0' && i < nb)
+        {       
+                dest [j + i] = src [i];
+                i++;
+        }       
+        dest[j + i] = '\0'; 
+        return (dest);
+}       
+
+#include <stdio.h>
+
+int     main(void)
+{       
+        char    dest[] = "Hello";
+        char    src[] = "Cat";
+        
+        printf("Source: %s.\n Destination: %s.\n", src, dest);
+        printf("New: %s.\n", ft_strncat(dest, src); ----------- missing a ), dest[] is not enough to save all new characters
+        return (0);     
+}       
+
+-----------
+
+#include <stdio.h>
+
+int     main(void)
+{       
+        char    dest[20] = "Hello";
+        char    src[] = "Cat";
+        
+        printf("Source: %s.\n Destination: %s.\n", src, dest);
+        printf("New: %s.\n", ft_strncat(dest, src, 2));
+        return (0);     
+}  
+
+
