@@ -94,3 +94,19 @@ Display the final destination string followed by a newline.
 If the number of user arguments is not exactly two, display Error followed by a newline.
 
 Allowed function: write.
+
+My try:
+/*
+#include <stdio.h>
+
+int     main(int argc, char **argv)
+{
+        char    src[] = argv[1];----------not the same type, should be char *src, src = argv[1]
+        char    dest[] = argv[2];
+
+        printf("Source: '%s'\n", argv[1]);
+        printf("Destination: '%s'\n", argv[2]);
+        printf("New destination: '%s'\n", &ft_strcat(&dest, &src)); ------------ actually don't need & anymore here
+        return (0);
+}
+*/
