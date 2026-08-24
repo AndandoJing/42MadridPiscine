@@ -110,3 +110,100 @@ int     main(int argc, char **argv)
         return (0);
 }
 */
+
+Try again:
+#include <stdio.h>
+
+int     ft_strlen(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != [\0])
+        {
+                i++;
+        }
+        return (i);
+}
+
+int     main(int argc, char **argv) ---------- missing argc checking
+{
+        int     src_len;
+        int     dest_len;
+        int     i;
+        char            *dest ----------- missing a ;
+
+        i = 0;
+        src_len = ft_strlen(argv[1]);
+        dest_len = ft_strlen(argv[2]);
+        dest = malloc((src_len + dest_len + 1) *sizeof(char)); ------------malloc needs a header
+        if (dest == [\0]) ------------- here we are checking if it's NULL, not '\0'
+                return (1);
+        while (argv[2][i] != [\0])
+        {
+                dest[i] = argv[2][i];
+                i++;
+        } ----------- missing the '\0' final one
+        printf("%s\n", ft_strcat(dest, src));
+        return (0);
+}
+
+Wrong points:
+1. [\0] ------------ should be '\0'
+2. #include <stdlib.h> ------- header for malloc
+3. NULL vs. '\0'
+        NULL: null pointer (empty), means that this pointer is not pointing to a valid thing
+        '\0': char, means the string is owver
+4. with malloc, we need to use free() at the end.
+
+Try again:
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int     ft_strlen(char *str)
+{
+        int     i;
+
+        i = 0;
+        while (str[i] != '\0')
+        {
+                i++;
+        }
+        return (i);
+}
+
+int     main(int argc, char **argv)
+{
+        int     src_len;
+        int     dest_len;
+        int     i;
+        char            *dest;
+
+        i = 0;
+        if (argc == 3)
+        {       
+                src_len = ft_strlen(argv[1]);
+                dest_len = ft_strlen(argv[2]);
+                dest = malloc((src_len + dest_len + 1) *sizeof(char));
+                if (dest == NULL)
+                        return (1);
+                while (argv[2][i] != '\0')
+                {
+                        dest[i] = argv[2][i];
+                        i++;
+                }
+                dest[i] = '\0';
+                printf("%s\n", ft_strcat(dest, argv[1]));
+                free(dest);
+        }
+        else
+        {
+                write(1, "Error\n", 6);
+        }
+        return (0);
+}
+
+If really only write is allowed, we may:
+1. delete #include <stdio.h>
+2. change printf() to write(1, ft_strcat(dest, argv[1], src_len + dest_len), and another write(1, "\n", 1); then free(dest);
