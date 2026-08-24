@@ -1,0 +1,12 @@
+====== ex04 ======
+
+ft_strstr
+Turn-in directory: ex04/
+Files to turn in: ft_strstr.c
+Allowed functions: None
+• Reproduce the behavior of the function strstr (man strstr).
+• The function should be prototyped as follows:
+char *ft_strstr(char *str, char *to_find);
+
+**************
+
