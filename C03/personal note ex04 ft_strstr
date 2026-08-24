@@ -1,0 +1,41 @@
+====== ex04 ======
+
+ft_strstr
+Turn-in directory: ex04/
+Files to turn in: ft_strstr.c
+Allowed functions: None
+• Reproduce the behavior of the function strstr (man strstr).
+• The function should be prototyped as follows:
+char *ft_strstr(char *str, char *to_find);
+
+**************
+
+char *ft_strstr(char *str, char *to_find)
+{
+  int  i;
+  int  j;
+
+  i = 0;
+  if (str[0] == ' ' || to_find[0] == ' ') ------------------‘ ’are space, not '\0', don't need to judge str[0] at the same time
+                                                        if str = ""; to_fintd = "Cat", can't return (str)
+  {
+    return (str);
+  }
+  while (str[i] != '\0')
+  {
+    j = 0;
+    while (str[i + j] == to_find[j]) ----- if str is exactly the same as to_find, j will jump to '\0', outside. should add to_find[j] != '\0'
+    {
+      j++;
+    }
+    if (to_find[j] == '\0')
+    {
+      return (&str[i]);
+    }
+    else
+    {
+      i++;
+    }
+  }
+  return (str); ---------------------- if we can't find to_find, can't return (str), should be return (NULL), or return (0), but this is char *, so NULL
+}
