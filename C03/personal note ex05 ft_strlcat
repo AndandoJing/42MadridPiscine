@@ -30,3 +30,132 @@ src = "Cat
 size = 3
 the the return value can't be as easy as dest_len + src_len
 
+example:
+dest = "Hello" -----5
+src = "Cat" ---- 3
+size = 7
+new dest = "HelloC", but the return int is 8 (hello 5 + cat 3)
+so size, actual length and the return value can be all different
+
+if size is < original length of the dest, it won't cut the original dest, cat is to add
+
+the caller can check, if (return_vale >= size), to judge if there is a truncation
+
+if size <= dest_len, return = size + src_len, and dest keeps the same
+if size > dest_len, return = dest_len + src_len
+if size = 0, return = 0 + str_len
+
+strlcat:
+1. judge if size <= dest_len, return = size + src_len
+2. judge if size > dest_len, find src_len, return = dest_len + src_len
+3. dest appended src, leaving '\0' at the end
+
+My try:
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (i < size && dest[i] != '\0')
+	{
+		i++;
+	}
+	while (src[j] != '\0')
+	{
+		j++;
+	}
+	if (i >= size) ------ i > size case is considered before
+	{
+		return (size + j);
+	}
+	while (src[k] != '\0' && (i + k < size - 2)) -------------shoulde be i + k < size - 1
+	{
+		dest[i + k] = src[k];
+		k++;
+	}
+	dest[i + k] = '\0';
+	else ---------- syntax error, can't write else here
+	{
+		return (i + j);
+	}
+}
+
+Formula:
+control flow:
+if (special condition)
+  return (...);
+/* if it can continue untill here, it means nothing special happens */
+(common logic:)
+return (...);
+
+If size = 0, since we have size - 1 in the function, what should we do?
+
+unsigned int -> %u
+int -> %d
+
+----------------
+unsigned int    ft_strlcat(char *dest, char *src, unsigned int size)
+{
+        unsigned int    i;
+        unsigned int    j;
+        unsigned int    k;
+
+        i = 0;
+        j = 0;
+        k = 0;
+        while (i < size && dest[i] != '\0')
+                i++;
+        while (src[j] != '\0')
+                j++;
+        if (i == size)
+                return (size + j);
+        while (src[k] != '\0' && (i + k < size - 1))
+        {
+                dest[i + k] = src[k];
+                k++;
+        }
+        dest[i + k] = '\0';
+        return (i + j);
+}
+/*
+#include <stdio.h>
+
+int     main(void)
+{
+        char                            dest1[20] = "Hello";
+        char                            dest2[20] = "Hello";
+        char                            dest3[20] = "Hello";
+        char                            dest4[20] = "Hello";
+        char                            src[] = "Cat";
+        unsigned int            size1;
+        unsigned int            size2;
+        unsigned int            size3;
+        unsigned int            size4;
+        unsigned int            result1;
+        unsigned int            result2;
+        unsigned int            result3;
+        unsigned int            result4;
+
+        size1 = 0;
+        size2 = 3;
+        size3 = 7;
+        size4 = 20;
+        result1 = ft_strlcat(dest1, src, size1);
+        result2 = ft_strlcat(dest2, src, size2);
+        result3 = ft_strlcat(dest3, src, size3);
+        result4 = ft_strlcat(dest4, src, size4);
+        printf("size: %u, return = %u, dest = %s\n",
+                size1, result1, dest1);
+        printf("size: %u, return = %u, dest = %s\n",
+                size2, result2, dest2);
+        printf("size: %u, return = %u, dest = %s\n",
+                size3, result3, dest3);
+        printf("size: %u, return = %u, dest = %s\n",
+                size4, result4, dest4);
+        return (0);
+}
+*/
