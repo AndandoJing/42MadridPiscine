@@ -1,0 +1,32 @@
+==== ex05 ====
+
+ft_strlcat
+Turn-in directory: ex05/
+Files to turn in: ft_strlcat.c
+Allowed functions: None
+• Reproduce the behavior of the function strlcat (man strlcat).
+• The function should be prototyped as follows:
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size);
+
+***********
+strncat
+n = source copy limit（source复制数量限制）
+
+strlcat
+size = destination total buffer size（destination总缓冲区大小）
+
+标准 strlcat 的return value是用来告诉caller（调用者）：
+如果空间完全足够，最终本来想得到的string总长度是多少？
+because possible that return value >= size
+it means return value of strlcat if the theory length of the two strings (excluding '\0')
+with strlcat, the caller knows that there maybe a difference between strlcat and strncat or strcat, due to a truncation.
+
+strlcat is more save string handling then strncat
+
+strlcat most difficult part:
+if the limit is even smaller then the current destination string:
+dest = "Hello"
+src = "Cat
+size = 3
+the the return value can't be as easy as dest_len + src_len
+
