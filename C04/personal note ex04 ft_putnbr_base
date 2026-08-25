@@ -17,9 +17,8 @@ Examples of invalid arguments:
 ◦ The base is empty or has only one character.
 ◦ The base contains duplicate characters.
 ◦ The base contains ‘+’ or ‘-’.
+The function should be prototyped as follows:
+void ft_putnbr_base(int nbr, char *base);
 
 **************
 
-
-• If an invalid argument is provided, nothing should be displayed.
-Examples of invalid arguments:
