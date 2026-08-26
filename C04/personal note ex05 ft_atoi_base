@@ -1,0 +1,35 @@
+==== ex05 ====
+ft_atoi_base
+Turn-in directory: ex05/
+Files to turn in: ft_atoi_base.c
+Allowed functions: None
+• Write a function that converts the initial portion of the string pointed to by str
+into an integer representation.
+• str is in a specific base, given as a second parameter.
+• Except for the base rule, the function should behave exactly like ft_atoi.
+• If an invalid argument is provided, the function should return 0.
+Examples of invalid arguments:
+◦ The base is empty or has only one character.
+◦ The base contains duplicate characters.
+The base contains ‘+’, ‘-’, or whitespace characters.
+• The function should be prototyped as follows:
+int ft_atoi_base(char *str, char *base);
+
+**************
+
+ft_check_base()
+  if the base is valid
+  return base_len, invalid -> 0
+ft_base_index()
+  the current str character will be put in which position of the base
+  if it doesn't exist -> -1 -------because the index starts from 0, so -1 means it doesn't exist
+ft_atoi_base()
+  skip whitespace
+  process signs
+  read base digits
+  calculte result
+return int
+
+-------------------
+
+
