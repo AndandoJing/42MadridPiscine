@@ -1,1 +1,17 @@
+Write a program that takes a string and displays the first a character it encounters, followed by a newline.
+If there is no a in the string, the program simply displays a newline.
+If the number of parameters is not 1, the program displays a followed by a newline.
+Examples:
+./aff_a "abc"
+a
 
+./aff_a "bonjour"
+# only newline
+
+./aff_a "abc" "def"
+a
+
+Allowd function: write
+***************************
+write(1, "z\n", 2);
+write(1, "a\n", 2);
