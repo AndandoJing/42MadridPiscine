@@ -1,0 +1,90 @@
+Checkpoint 1. ft_strstr
+ft_strstr
+Reproduce the behavior of strstr.
+Prototype:
+char	*ft_strstr(char *str, char *to_find);
+***************************************************
+everytime we stopped counting j, we need to restart counting j
+
+Didn't figure out myself:
+Version 1: I wanted to use one while to control everything
+Version 2: I confused the function of i and j
+Version 3: 
+outside i: candidate starting position
+inside j: matching progress
+complete match: &str[i]
+fail: i++
+finish all reviewing: 0
+
+char  *ft_strstr(char *str, char *to_find)
+{
+  int  i;
+  int  j;
+
+  if (to_find[0] == '\0')
+    return (0);
+  i = 0;
+  while (str[i] != '\0')
+  {
+    j = 0;
+    while (to_find[j] != '\0' && str[i + j] == to_find[j])
+      j++;
+    if (to_find[j] == '\0')
+      return (&str[i]);
+    i++;
+  }
+  return (0);
+}
+******************************************
+Checkpoint 2 ft_strlcat
+
+return = min(dest_len, size) + src_len
+
+在dest前size个位置寻找'\0'
+
+找到'\0'
+→ i = dest_len
+→ return dest_len + src_len
+
+找不到'\0'
+→ i = size
+→ return size + src_len
+
+So
+while (i < size && dest[i] != '\0')
+  i++;
+when it's over, i will be min(dest_len, size)
+
+-------------
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+
+1. to judge and count i;
+2. to judge and count j;
+3. to see the special case, when i == size, what to return;
+4. to copy (in a condition);
+5. to add the final '\0';
+6. return the final thing
+
+unsigned int    ft_strlcat(char *dest, char *src, unsigned int size)
+{       
+        unsigned int    i;
+        unsigned int    j;
+        unsigned int    k;
+        
+        i = 0;
+        j = 0;
+        k = 0;
+        while (i < size && dest[i] != '\0')
+                i++;
+        while (src[j] != '\0')
+                j++;
+        if (i == size)
+                return (size + j);
+        while (i + k < size - 1 && src[k] != '\0')
+        {
+                dest[i + k] = src[k]; 
+                k++;
+        }
+        dest[i + k] = '\0'; 
+        return (i + j);
+}
