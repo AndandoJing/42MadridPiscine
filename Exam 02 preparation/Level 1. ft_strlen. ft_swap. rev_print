@@ -1,1 +1,19 @@
+ft_swap( int *a, int *b)
+only need one int temp to save the temporal value
 
+Write a program that takes a string, and displays the string in reverse followed by a newline.
+If the number of parameters is not 1, the program displays a newline.
+void   ft_rev_print(int argc, char **argv)
+{
+  int   i;
+
+  i = 0;
+  while (argv[1][i] != '\0')
+    i++;
+  while (i > 0)
+  {
+    i--;
+    write(1, &argv[1][i], 1);
+  }
+  write(1, "\n", 1);
+}
