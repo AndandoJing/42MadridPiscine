@@ -1,1 +1,88 @@
+Level 3. inter
+同时存在于两个string中的character（字符），按照它们在第一个string中出现的顺序输出，并且每个character只能输出一次。
+./inter "padinton" "paqefwtdjetyiytjneytjoeyjnejeyj"
+output: padinto
+
+问题A：'a'在str2里面吗？
+问题B：'a'以前在str1里面出现过吗？
+
+i → 遍历str1
+j → 遍历str2，检查当前character是否存在
+k → 遍历str1[0 ... i-1]，检查是否duplicate
+
+Duplicate check formula:
+k = 0;
+while (k < i && str1[k] != str1[i])
+	k++;
+
+nested loop非常重要的思维
+outer index（外层索引）固定一个目标，inner index（内层索引）围绕这个目标进行搜索。
+
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{       
+        int     i;
+        int     j;
+        int     k;
+        
+        i = 0;
+        if (argc != 3)
+        {
+                write(1, "\n", 1);
+                return (0);
+        }
+        while (argv[1][i] != '\0')
+        {       
+                j = 0;
+                while (argv[2][j] != '\0' && argv[2][j] != argv[1][i])
+                        j++;
+                k = 0;
+                while (k < i && argv[1][k] != argv[1][i])
+                        k++;    
+                if (argv[2][j] == argv[1][i] && k == i)
+                        write(1, &argv[1][i], 1);
+                i++;
+        }       
+        write(1, "\n", 1);
+        return (0);
+} 
+
+----------------
+Level 3. last_word
+./last_word "   hello wonderful world   "
+output: last word
+example: "world"
+
+void    ft_lastword(int argc, char **argv)
+{       
+        int     i;
+        
+        i = 0;
+        if (argc != 2)
+        {       
+                write(1, "\n", 1);
+                return (0);
+        }       
+        while (argv[1][i] != '\0')
+                i++;
+        i = i - 1;
+        while (argv[1][i] == ' ' || argv[1][i] == '\t')
+                i--;
+        while (i >= 0 && argv[1][i] != ' ' || (argv[1][i] != '\t'))
+                i--;
+        i = i + 1;
+        while (argv[1][i] != ' ' &&  argv[1][i] != '\t'
+                        && argv[1][i] != '\0')
+        {
+                write(1, &argv[1][i], 1);
+                i++;
+        }
+        write(1, "\n", 1);
+        return (0);
+} 
+-----------------
+Level 3. union
+print the characters appear in two strings by order, each character would be printed only once
+
 
