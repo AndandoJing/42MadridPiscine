@@ -8,10 +8,128 @@ allowed function: write
 2. print first word
 3. stop when finds space again
 
-while (str[i] == ' ' || str[i] == '\t')
-	i++;
-while (str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
+void	ft_first_word(char *str)
 {
-	write(1, &str[i], 1);
-	i++;
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	while (str[i] != ' ' && str[i] != '\t' && str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+
+int     main(int argc, char **argv)
+{
+        if (argc != 2)
+        {
+                write(1, "\n", 1);
+                return (0);
+        }
+        ft_first_word(argv[1]);
+        write(1, "\n", 1);
+        return (0);
+}
+---------------
+ft_strrev
+char	*ft_strrev(char *str);
+目标是直接修改原string，把它reverse（反转），然后return str。
+
+char    *ft_strrev(char *str)
+{
+        int             left;
+        int             right;
+        char    temp;
+
+        right = 0;
+        while (str[right] != '\0')
+                right++;
+        left = 0;
+        right = right - 1;
+        while (left < right)
+        {
+                temp = str[left];
+                str[left] = str[right];
+                str[right] = temp;
+                right--;
+                left++;
+        }
+        return (str);
+}
+-----------------
+rot_13
+每个alphabetic character（字母字符）向后移动13位，而且要在自己的大小写范围内循环。
+example
+a → n
+b → o
+m → z
+n → a
+o → b
+z → m
+
+A → N
+N → A
+
+1 → 1
+! → !
+space → space
+
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+
+        i = 0;
+        if (argc != 2)
+        {       
+                write(1, "\n", 1);
+                return (0);
+        }
+        while (argv[1][i] != '\0')
+        {       
+                if (argv[1][i] <= 'z' && argv[1][i] >= 'n')
+                        argv[1][i] = argv[1][i] - 13;
+                else if (argv[1][i] <= 'Z' && argv[1][i] >= 'N')
+                        argv[1][i] = argv[1][i] - 13;
+                else if (argv[1][i] <= 'm' && argv[1][i] >= 'a')
+                        argv[1][i] = argv[1][i] + 13;
+                else if (argv[1][i] <= 'M' && argv[1][i] >= 'A')
+                        argv[1][i] = argv[1][i] + 13;
+                write(1, &argv[1][i], 1);
+                i++;
+        }
+        write(1, "\n", 1);
+        return (0);
+}
+------------------------
+rotone 规则是每个字母只向后移动1位, 只在本字母表内循环，其他character保持不变
+
+#include <unistd.h>
+
+int     main(int argc, char **argv)
+{
+        int     i;
+
+        i = 0;
+        if (argc != 2)
+        {
+                write(1, "\n", 1);
+                return (0);
+        }
+        while (argv[1][i] != '\0')
+        {
+                if (argv[1][i] == 'z' || argv[1][i] == 'Z')
+                        argv[1][i] = argv[1][i] - 25;
+                else if ((argv[1][i] >= 'a' && argv[1][i] <= 'y')
+                        || (argv[1][i] >= 'A' && argv[1][i] <= 'Y'))
+                        argv[1][i] = argv[1][i] + 1;
+                write(1, &argv[1][i], 1);
+                i++;
+        }
+        write(1, "\n", 1);
+        return (0);
 }
