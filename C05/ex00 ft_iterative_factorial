@@ -1,0 +1,37 @@
+==== ex00 ====
+ft_iterative_factorial
+Turn-in directory: ex00/
+Files to turn in: ft_iterative_factorial.c
+Allowed functions: None
+• Create an iterative function that returns a number. This number should be the
+result of a factorial operation based on the given parameter.
+• If the argument is not valid, the function should return 0.
+• Overflows do not need to be handled; the function’s return value will be undefined
+in such cases.
+• The function should be prototyped as follows:
+int ft_iterative_factorial(int nb);
+
+***********
+
+int     ft_iterative_factorial(int nb)
+{       
+        int     result;
+        int     i;
+
+        result = 1;
+        i = 1;
+        if (nb < 0 )
+                return (0);
+        while (i <= nb)
+        {       
+                result = result * i;
+                i++;
+        }       
+        return (result);
+} 
+
+I wrote as well the function to test, but if we need to use the user argument as the parameter, it will be a little bit complicated, because we need to use twice the conversion.
+1. convert the user argument string, separate them and get them into integers. This is the part of ft_atoi.
+2. calculate them with the ft_iterative_factorial. This is the part of ft_iterative_factorial.
+3. when output, we have the integers, and need to convert them into something in the terminal, which is converting them into characters and display. This is the part of ft_putnbr.
+4. Then with the main we call all the functions to work.
