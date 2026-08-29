@@ -1,0 +1,63 @@
+2. fizzbuzz
+write a program that displays 1-100, if it's multiple of 3, display "fizz", if it's multiple of 5, display "buzz", if it's multiple of 3 and 5, display "fizzbuzz", each ouput with a newline.
+first with the ft_putnbr part, then the following:
+
+int	main(void)
+{
+	int	i;
+
+	i = 1;
+	while (i <= 100)
+	{
+		if (i % 3 == 0 && i % 5 == 0)
+			write(1, "fizzbuzz", 8);
+		else if (i % 3 == 0)
+			write(1, "fizz", 4);
+		else if (i % 5 == 0)
+			write(1, "buzz", 4);
+		else
+			ft_putnbr(i);
+		write(1, "\n", 1);
+		i++;
+	}
+	return (0);
+}
+
+3. write a program that displays all even number from 0 to 10 included, following by a newline.
+first with the ft_putnbr part, then the following:
+
+int	main(void)
+{
+	int	i;
+
+	i = 0;
+	while (i <= 10)
+	{
+		ft_putnbr(i);
+		i += 2;
+	}
+	write(1, "\n", 1);
+	return (0);
+}
+
+5. write the function ft_putnbr
+void	ft_putnbr(int nbr)
+{
+	char	result;
+
+	if (nbr = -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (nbr < 0)
+	{
+		nbr = -nbr;
+		write(1, "-", 1);
+	}
+	if (nbr >= 10)
+		ft_putnbr(nbr / 10);
+	result = nbr % 10 + '0';
+	write(1, &result, 1);
+}
+		
