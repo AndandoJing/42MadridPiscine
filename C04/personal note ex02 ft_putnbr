@@ -77,3 +77,55 @@ int     main(void)
         return (0);
 }
 */
+
+-------------
+found the same task during exam02, didn't write it correctly.
+when the next day I wanted to rewrite it, some wrong:
+void    ft_putnbr(int nbr)
+{       
+        char    result;
+
+        if (nbr == -2147483648)
+        {       
+                write(1, "-2147483648", 11);
+                return ;
+        }
+        if (nbr < 0)
+        {       
+                nbr = -nbr;
+                write(1, "-", 1);
+        }       
+        if (nbr >= 10)
+        {       
+                nbr = ft_putnbr(nbr) / 10; ---------------- should be ft_putnbr(nbr / 10)
+                result = nbr % 10 + '0'; ----------- shouldn't be inside
+        }
+        write(1, result, 1); ----------- &result
+}  
+
+if (nbr >= 10)
+        ft_putnbr(nbr / 10);
+result = nbr % 10 + '0';
+write(1, &result, 1);
+
+------------------
+void        ft_putnbr(int nbr)
+{
+        char        result;
+
+        if (nbr == -2147483648)
+        {
+                write(1, "-2147483648", 11);
+                return ;
+        }
+        if (nbr < 0)
+        {
+                nbr = -nbr;
+                write(1, "-", 1);
+        }
+        if (nbr >= 10)
+                ft_putnbr(nbr / 10);
+        result = nbr % 10 + '0';
+        write(1, &result, 1);
+}
+
