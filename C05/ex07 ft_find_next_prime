@@ -1,0 +1,77 @@
+==== ex07 ====
+ft_find_next_prime
+Turn-in directory: ex07/
+Files to turn in: ft_find_next_prime.c
+Allowed functions: None
+• Create a function that returns the next prime number greater than or equal to the
+given number.
+• The function should be prototyped as follows:
+int ft_find_next_prime(int nb);
+***********
+int	ft_is_prime(int nbr)
+{
+	int	i;
+
+	i = 2;
+	if (nbr <= 1)
+		return (0);
+	while (i <= nbr / i)
+	{
+		if (nbr % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_find_next_prime(int nb)
+{
+	while (ft_is_prime(nb) == 0)
+		nb++;
+	return (nb);
+}
+/*
+#include <unistd.h>
+
+void	ft_putnbr(int nb)
+{
+	char	c;
+
+	if (nb == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (nb < 0)
+	{
+		nb = -nb;
+		write(1, "-", 1);
+	}
+	if (nb >= 10)
+		ft_putnbr(nb / 10);
+	c = nb % 10 + '0';
+	write(1, &c, 1);
+}
+
+int	main(void)
+{
+	int	nb1;
+	int	nb2;
+	int	nb3;
+	int	nb4;
+
+	nb1 = 17;
+	nb2 = 6;
+	nb3 = 1;
+	nb4 = -1;
+	ft_putnbr(ft_find_next_prime(nb1));
+	write(1, "\n", 1);
+	ft_putnbr(ft_find_next_prime(nb2));
+	write(1, "\n", 1);
+	ft_putnbr(ft_find_next_prime(nb3));
+	write(1, "\n", 1);
+	ft_putnbr(ft_find_next_prime(nb4));
+	write(1, "\n", 1);
+	return (0);
+}
+*/
