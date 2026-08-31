@@ -1,0 +1,64 @@
+==== ex06 ====
+ft_is_prime
+Turn-in directory: ex06/
+Files to turn in: ft_is_prime.c
+Allowed functions: None
+• Create a function that returns 1 if the given number is a prime number and 0 if it
+is not.
+• The function should be prototyped as follows:
+int ft_is_prime(int nb);
+Tip: 0 and 1 are not prime numbers.
+**********
+int	ft_is_prime(int nb)
+{
+	int	i;
+
+	i = 2;
+	if (nb <= 1)
+		return (0);
+	while (i <= nb / i)
+	{
+		if (nb % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+#include <unistd.h>
+
+void	ft_putnbr(int nbr)
+{
+	char	c;
+
+	if (nbr >= 10)
+		ft_putnbr(nbr / 10);
+	c = nbr % 10 + '0';
+	write(1, &c, 1);
+}
+
+int	main(void)
+{
+	int	nbr1;
+	int	nbr2;
+	int	nbr3;
+	int	nbr4;
+	int	nbr5;
+
+	nbr1 = 1;
+	nbr2 = 100;
+	nbr3 = 7;
+	nbr4 = 15;
+	nbr5 = -1;
+	ft_putnbr(ft_is_prime(nbr1));
+	write(1, "\n", 1);
+	ft_putnbr(ft_is_prime(nbr2));
+	write(1, "\n", 1);
+	ft_putnbr(ft_is_prime(nbr3));
+	write(1, "\n", 1);
+	ft_putnbr(ft_is_prime(nbr4));
+	write(1, "\n", 1);
+	ft_putnbr(ft_is_prime(nbr5));
+	write(1, "\n", 1);
+	return (0);
+}
