@@ -20,3 +20,54 @@ int array
 → 没有 '\0'
 → malloc(number_of_ints)
 
+#include <stdlib.h>
+
+int	*ft_range(int min, int max)
+{
+	int	*range;
+	int	size;
+	int	i;
+
+	if (min >= max)
+		return (0);
+	size = max - min;
+	range = malloc(sizeof(int) * size);
+	if (!range)
+		return (0);
+	i = 0;
+	while (i < size)
+	{
+		range[i] = min + i;
+		i++;
+	}
+	return (range);
+}
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	int	*range;
+	int	min = -3;
+	int	max = 12;
+	int	i;
+	int	size;
+
+	range = ft_range(min, max);
+	if (!range)
+	{
+		printf("NULL\n");
+		return (0);
+	}
+	size = max - min;
+	i = 0;
+	while (i < size)
+	{
+		printf("%d ", range[i]);
+		i++;
+	}
+	printf("\n");
+	free(range);
+	return (0);
+}
+*/
