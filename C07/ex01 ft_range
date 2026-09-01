@@ -1,0 +1,22 @@
+==== ex01 ====
+ft_range
+Turn-in directory: ex01/
+Files to turn in: ft_range.c
+Allowed functions: malloc
+• Create a function ft_range which returns an array of ints. This int array should
+contain all values between min and max.
+• Min included - max excluded.
+• Here is how it should be prototyped :
+int *ft_range(int min, int max);
+• If the value of min is greater than or equal to max, a NULL pointer should be
+returned.
+**************
+
+char string
+→ 通常需要 '\0'
+→ malloc(len + 1)
+
+int array
+→ 没有 '\0'
+→ malloc(number_of_ints)
+
