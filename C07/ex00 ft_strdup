@@ -47,6 +47,24 @@ char	*ft_strdup(char *src)
 	return (copy);
 }
 
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	src[] = "Hello";
+	char	*copy;
+
+	copy = ft_strdup(src);
+	if (!copy)
+		return (1);
+	printf("src: %p\n", (void *)src);
+	printf("copy: %p\n", (void *)copy);
+	printf("content: %s\n", copy);
+	free(copy);
+	return (0);
+}
+*/
 -----------
 src
  ↓
