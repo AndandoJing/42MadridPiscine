@@ -20,6 +20,10 @@ malloc
 Phase 3
 把strs和sep复制进去
 
+i → 现在处理strs里的第几个string
+j → 现在处理这个string里的第几个char
+k → 现在写result里的第几个位置
+
 int  ft_strlen(char *str)
 {
   int  i;
@@ -51,7 +55,7 @@ char  *ft_strjoin(int size, char **strs, char *sep)
     total_len = total_len + ft_strlen(strs[i]);
     i++;
   }
-  total_len = total_len + ft_strlen(sep) * (size - 1);\
+  total_len = total_len + ft_strlen(sep) * (size - 1);
   result = malloc(sizeof(char) * (total_len + 1));
   if (!result)
     return (0);
