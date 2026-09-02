@@ -189,4 +189,18 @@ char    *ft_strjoin(int size, char **strs, char *sep)
         return (result);
 }
 
+we can continue separate the copy part here:
 
+int	ft_copy(char *result, char *src, int k)
+{
+	int	j;
+
+	j = 0;
+	while (src[j] != '\0')
+	{
+		result[k] = src[j];
+		j++;
+		k++;
+	}
+	return (k);
+}
