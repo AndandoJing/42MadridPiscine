@@ -1,0 +1,59 @@
+==== ex03 ====
+Exercise 03: ft_strjoin
+Turn-in directory: ex03/
+Files to turn in: ft_strjoin.c
+Allowed functions: malloc
+• Write a function that concatenates all the strings pointed to by strs, separated by sep.
+• size is the number of strings in strs.
+• If size is 0, you must return an empty string that can be freed using free().
+• Here is how it should be prototyped:
+char	*ft_strjoin(int size, char **strs, char *sep);
+
+************************
+
+Phase 1
+计算需要malloc多少memory
+
+Phase 2
+malloc
+
+Phase 3
+把strs和sep复制进去
+
+int  ft_strlen(char *str)
+{
+  int  i;
+
+  i = 0;
+  while (str[i] != '\0')
+    i++;
+  return (i);
+}
+
+char  *ft_strjoin(int size, char **strs, char *sep)
+{
+  int    i;
+  int    total_len;
+  char  *result;
+
+  if (size == 0)
+  {
+    result = malloc(sizeof(char));
+    if (!result)
+      return (0);
+    result[0] = '\0';
+    return (result);
+  }
+  i = 0;
+  total_len = 0;
+  while (i < size)
+  {
+    total_len = total_len + ft_strlen(strs[i]);
+    i++;
+  }
+  total_len = total_len + ft_strlen(sep) * (size - 1);\
+  result = malloc(sizeof(char) * (total_len + 1));
+  if (!result)
+    return (0);
+    
+  
